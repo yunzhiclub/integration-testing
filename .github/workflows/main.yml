@@ -29,9 +29,10 @@ jobs:
         node-version: 18
     
     - name: change directory
-      run: ls
-    - name: change directory
-      run: cd web
+      run: |
+         pwd
+         cd web
+         pwd
 
     - name: current enviroment
       run: env
