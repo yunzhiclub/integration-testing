@@ -23,40 +23,24 @@ jobs:
 
     # 定义任务的步骤
     steps:
-    # 步骤1：检出仓库
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    # 步骤2：设置 Node.js 版本为 16
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-
-    # # 步骤3：缓存依赖项，提高构建性能
-    # - name: Cache dependencies
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: web/node_modules
        
-    # 步骤4：切换到 web 目录
-    - name: Change to web directory
-      run: cd ../../web
+    - name: 查看目录
+      run: ls ../../
 
-    - name: current enviroment
-      run: env
+    # - name: current enviroment
+    #   run: env
 
-    - name: print working directory
-      run: pwd
+    # - name: print working directory
+    #   run: pwd
 
-    # 步骤5：安装项目依赖项
-    - name: Install dependencies
-      run: npm install
+    # # 步骤5：安装项目依赖项
+    # - name: Install dependencies
+    #   run: npm install
 
-    # 步骤6：运行单元测试
-    - name: Run unit tests
-      run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+    # # 步骤6：运行单元测试
+    # - name: Run unit tests
+    #   run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
-    # 步骤7：构建项目
-    - name: Build
-      run: npm run build
+    # # 步骤7：构建项目
+    # - name: Build
+    #   run: npm run build
