@@ -7,22 +7,13 @@ on:
       - opened
       - labeled
   push:
-#    branches: [ main ]
-#
-#  pull_request:
-#    branches: [ main ]
 
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-#    container:
-#      image: registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
 
     # 定义任务的步骤
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
