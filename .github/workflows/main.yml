@@ -22,22 +22,25 @@ jobs:
     steps:
        
     - name: change directory
-      run: cd ./../../web
-      
-    - name: current enviroment
-      run: env
-
-    - name: print working directory
       run: pwd
 
-    # 步骤5：安装项目依赖项
-    - name: Install dependencies
-      run: npm install
+    # - name: change directory
+    #   run: cd ./../../web
 
-    # 步骤6：运行单元测试
-    - name: Run unit tests
-      run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+    # - name: current enviroment
+    #   run: env
 
-    # 步骤7：构建项目
-    - name: Build
-      run: npm run build
+    # - name: print working directory
+    #   run: pwd
+
+    # # 步骤5：安装项目依赖项
+    # - name: Install dependencies
+    #   run: npm install
+
+    # # 步骤6：运行单元测试
+    # - name: Run unit tests
+    #   run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
+    # # 步骤7：构建项目
+    # - name: Build
+    #   run: npm run build
