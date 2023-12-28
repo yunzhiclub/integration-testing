@@ -33,11 +33,11 @@ jobs:
       with:
         node-version: 18
 
-    # 步骤3：缓存依赖项，提高构建性能
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: web/node_modules
+    # # 步骤3：缓存依赖项，提高构建性能
+    # - name: Cache dependencies
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: web/node_modules
        
     # 步骤4：切换到 web 目录
     - name: Change to web directory
