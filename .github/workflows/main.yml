@@ -7,6 +7,9 @@ on:
       - opened
       - labeled
   push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   unit-test:
@@ -14,15 +17,19 @@ jobs:
 
     # 定义任务的步骤
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: web
-        run: |
-          pwd
-          cd web
+        run: pwd
+
+      -  run: cd web
+      -  run: |
           env
           pwd
           npm install
