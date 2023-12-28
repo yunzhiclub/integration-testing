@@ -19,7 +19,9 @@ jobs:
 
     # 定义任务的步骤
     steps:
-   
+    - name: print working directory
+      run: pwd
+    
     - name: change directory
       run: cd web
 
