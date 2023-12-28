@@ -28,26 +28,12 @@ jobs:
       with:
         node-version: 18
     
-    - name: change directory
+    - name: web
       run: |
          pwd
          cd web
+         env
          pwd
-
-    - name: current enviroment
-      run: env
-
-    - name: print working directory
-      run: pwd
-
-    # 步骤5：安装项目依赖项
-    - name: Install dependencies
-      run: npm install
-
-    # 步骤6：运行单元测试
-    - name: Run unit tests
-      run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-
-    # 步骤7：构建项目
-    - name: Build
-      run: npm run build
+         npm install
+         npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+         npm run build
