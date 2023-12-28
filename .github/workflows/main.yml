@@ -8,26 +8,52 @@ on:
       - labeled
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  # 单元测试
+  # 设置运行环境为 ubuntu-latest
   unit-test:
-  # 运行环境
     runs-on: ubuntu-latest
-    # 设置步骤
+
+    # 使用 Docker 容器，镜像为 registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
+    container:
+      image: registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
+
+    # 定义任务的步骤
     steps:
-      - run: cd web
-      - run: env
-      - run: pwd
-      - run: npm install -dd
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-      - run: npm run build
-      - name: angular-test
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    # 步骤1：检出仓库
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
+    # 步骤2：设置 Node.js 版本为 16
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
 
-    
+    # 步骤3：缓存依赖项，提高构建性能
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: web/node_modules
+       
+    # 步骤4：切换到 web 目录
+    - name: Change to web directory
+      run: cd web
+
+    - name: current enviroment
+      run: env
+
+    - name: print working directory
+      run: pwd
+
+    # 步骤5：安装项目依赖项
+    - name: Install dependencies
+      run: npm install
+
+    # 步骤6：运行单元测试
+    - name: Run unit tests
+      run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
+    # 步骤7：构建项目
+    - name: Build
+      run: npm run build
