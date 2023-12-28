@@ -20,10 +20,18 @@ jobs:
 
     # 定义任务的步骤
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    
     - name: change directory
       run: ls
     - name: change directory
-      run: cd ./web
+      run: cd web
 
     - name: current enviroment
       run: env
