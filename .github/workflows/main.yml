@@ -1,0 +1,31 @@
+name: GitHub Actions
+run-name: intergration-test
+on: 
+  push:
+    branches: [ main ]
+  
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+
+    # 定义任务的步骤
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18.16.0
+    
+    - name: web
+      run: |
+         cd web
+         env
+         pwd
+         npm install
+         npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+         npm run build
