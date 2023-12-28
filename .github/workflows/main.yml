@@ -25,16 +25,16 @@ jobs:
     steps:
        
     - name: change directory
-      run: cd ../../
+      run: cd ../
     
     - name: change directory
       run: ls
 
-    - name: change directory
-      run: cd web
+    # - name: change directory
+    #   run: cd web
     
-     - name: change directory
-      run: ls
+    #  - name: change directory
+    #   run: ls
 
     # - name: current enviroment
     #   run: env
