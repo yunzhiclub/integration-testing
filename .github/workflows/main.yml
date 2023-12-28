@@ -8,7 +8,10 @@ on:
       - labeled
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
+# 定义一个 job（任务）叫做 unit-test
 jobs:
   # 设置运行环境为 ubuntu-latest
   unit-test:
