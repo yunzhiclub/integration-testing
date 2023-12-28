@@ -26,9 +26,9 @@ jobs:
           node-version: 18
 
       - name: web
-        run: pwd
-      -  run: cd web
-      -  run: |
+        run: |
+          pwd
+          cd web
           env
           pwd
           npm install
