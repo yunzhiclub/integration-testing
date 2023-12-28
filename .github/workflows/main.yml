@@ -24,8 +24,11 @@ jobs:
     # 定义任务的步骤
     steps:
        
-    - name: 查看目录
-      run: ls ../../
+    - name: change directory
+      run: cd ../../
+    
+    - name: change directory
+      run: cd web
 
     # - name: current enviroment
     #   run: env
