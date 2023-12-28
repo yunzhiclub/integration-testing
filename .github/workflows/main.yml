@@ -11,13 +11,10 @@ on:
   pull_request:
     branches: [ main ]
 
-# 定义一个 job（任务）叫做 unit-test
 jobs:
-  # 设置运行环境为 ubuntu-latest
   unit-test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
-    # 使用 Docker 容器，镜像为 registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
     container:
       image: registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
 
@@ -25,31 +22,25 @@ jobs:
     steps:
        
     - name: change directory
-      run: cd ../
+      run: cd ./../../web
     
     - name: change directory
       run: ls
 
-    # - name: change directory
-    #   run: cd web
-    
-    #  - name: change directory
-    #   run: ls
+    - name: current enviroment
+      run: env
 
-    # - name: current enviroment
-    #   run: env
+    - name: print working directory
+      run: pwd
 
-    # - name: print working directory
-    #   run: pwd
+    # 步骤5：安装项目依赖项
+    - name: Install dependencies
+      run: npm install
 
-    # # 步骤5：安装项目依赖项
-    # - name: Install dependencies
-    #   run: npm install
+    # 步骤6：运行单元测试
+    - name: Run unit tests
+      run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
-    # # 步骤6：运行单元测试
-    # - name: Run unit tests
-    #   run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-
-    # # 步骤7：构建项目
-    # - name: Build
-    #   run: npm run build
+    # 步骤7：构建项目
+    - name: Build
+      run: npm run build
