@@ -1,32 +1,39 @@
-name: angular
-
+name: GitHub Actions
+run-name: angular
 # workflow触发时机
-on:
+on: 
   issues:
     types:
       - opened
       - labeled
   push:
     branches: [ main ]
+  
   pull_request:
     branches: [ main ]
 
-#设置任务
 jobs:
-  # 单元测试
   unit-test:
-    # 运行环境
     runs-on: ubuntu-latest
-    # 设置步骤
+    container:
+      image: registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
+
+    # 定义任务的步骤
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.16.0'
-      - run: cd ../../web
-      - run: env
-      - run: pwd
-      - name: Install dependencies
-        run: npm install -dd
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-      - run: npm run build
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    
+    - name: web
+      run: |
+         pwd
+         cd web
+         env
+         pwd
+         npm install
+         npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+         npm run build
