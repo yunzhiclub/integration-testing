@@ -1,0 +1,33 @@
+name: GitHub Actions
+run-name: angular
+# workflow触发时机
+on: 
+  issues:
+    types:
+      - opened
+      - labeled
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # 单元测试
+  unit-test:
+  # 运行环境
+    runs-on: ubuntu-latest
+    # 设置步骤
+    steps:
+      - run: cd web
+      - run: env
+      - run: pwd
+      - run: npm install -dd
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - run: npm run build
+      - name: angular-test
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+
+    
