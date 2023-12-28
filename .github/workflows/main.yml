@@ -19,13 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     # 设置步骤
     steps:
+      - run: pwd
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18.16.0'
       - run: cd ../../web
       - run: env
-      - run: pwd
+
       - name: Install dependencies
         run: npm install -dd
       - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
