@@ -1,11 +1,7 @@
 name: GitHub Actions
-run-name: angular
-# workflow触发时机
+run-name: integration-testing
+
 on: 
-  issues:
-    types:
-      - opened
-      - labeled
   push:
     branches: [ main ]
   
@@ -15,8 +11,6 @@ on:
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-    container:
-      image: registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
 
     # 定义任务的步骤
     steps:
@@ -26,9 +20,9 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 18.16.0
     
-    - name: web
+    - name: angular-test
       run: |
          pwd
          cd web
