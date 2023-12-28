@@ -7,9 +7,9 @@ on:
       - opened
       - labeled
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 jobs:
   unit-test:
