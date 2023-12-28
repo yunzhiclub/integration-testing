@@ -7,8 +7,6 @@ on:
       - opened
       - labeled
   push:
-    branches: [ main ]
-  pull_request:
 
 #设置任务
 jobs:
