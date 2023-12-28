@@ -27,7 +27,6 @@ jobs:
 
       - name: web
         run: pwd
-
       -  run: cd web
       -  run: |
           env
