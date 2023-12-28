@@ -41,7 +41,7 @@ jobs:
        
     # 步骤4：切换到 web 目录
     - name: Change to web directory
-      run: cd web
+      run: cd ../../web
 
     - name: current enviroment
       run: env
