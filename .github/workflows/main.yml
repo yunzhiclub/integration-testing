@@ -1,26 +1,32 @@
-name: Node.js CI
+name: angular
 
+# workflow触发时机
 on:
+  issues:
+    types:
+      - opened
+      - labeled
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
+#设置任务
 jobs:
-  build:
+  # 单元测试
+  unit-test:
+    # 运行环境
     runs-on: ubuntu-latest
-
+    # 设置步骤
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18.16.0'
-
+      - run: cd ../../web
+      - run: env
+      - run: pwd
       - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
+        run: npm install -dd
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - run: npm run build
