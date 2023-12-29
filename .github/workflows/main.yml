@@ -14,17 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: set PR_INFO
-        run: |
-          echo PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }') >> $GITHUB_ENV
-          echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-          echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-          echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-
-      # 打印环境变量
-      - name: print env
-        run: printenv
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -40,23 +29,36 @@ jobs:
           npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
           npm run build
 
-      - name: build success
-        uses: fifsky/dingtalk-action@master
+  dingding-error:
+    runs-on: ubuntu-latest
+    needs: [ unit-test ]
+    if: ${{ failure() }}
+    steps:
+      - name: Send dingding notify error
+        uses: zcong1993/actions-ding@master
         with:
-          url: https://oapi.dingtalk.com/robot/send?access_token=8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
-          type: markdown
-          content: |
-            # 💯👨‍💻 Success 🎉🎉🎉
-            > test Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} Success
-            > ^_^ from github action message
+          dingToken: 8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": '[打叉][打叉][打叉]  执行失败\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+              }
+            }
 
-#      - name: build failure
-#        if: ${{ failure() }}
-#        uses: fifsky/dingtalk-action@master
-#        with:
-#          url: https://oapi.dingtalk.com/robot/send?access_token=8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
-#          type: markdown
-#          content: |
-#            # 💤🤷‍♀️ failure 🙅‍♂️💣
-#            > test Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} failure
-#            > ^_^ from github action message
+  dingding-success:
+    runs-on: ubuntu-latest
+    needs: [ unit-test ]
+    if: ${{ success() }}
+    steps:
+      - name: Send dingding notify success
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: 8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": '[微笑][微笑][微笑] 前台未测试 执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+              }
+            }
