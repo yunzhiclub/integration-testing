@@ -40,11 +40,11 @@ jobs:
           dingToken: 8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
           body: |
             {
-               "msgtype": "json",
-               "json": {
-                   "content": '[微笑][微笑][微笑] 前台未测试 执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
-               }
-             }
+              "msgtype": "text",
+              "text": {
+                  "content": '[打叉][打叉][打叉]  执行失败\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+              }
+            }
 
   dingding-success:
     runs-on: ubuntu-latest
@@ -57,8 +57,8 @@ jobs:
           dingToken: 8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
           body: |
             {
-              "msgtype": "json",
-              "json": {
+              "msgtype": "text",
+              "text": {
                   "content": '[微笑][微笑][微笑] 前台未测试 执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
               }
             }
