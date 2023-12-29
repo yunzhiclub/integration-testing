@@ -40,10 +40,11 @@ jobs:
           dingToken: 8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
           body: |
             {
-              "msgtype": "text",
-              "text": {
-                  "content": '[打叉][打叉][打叉]  执行失败\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
-              }
+              "msgtype": "link",
+              "link": {
+              "text": "这个即将发布的新版本，创始人陈航（花名“无招”）称它为“红树林”。而在此之前，每当面临重大升级，产品经理们都会取一个应景的代号，这一次，为什么是“红树林”？",
+              "title": "时代的火车向前开",
+              "picUrl": "",
             }
 
   dingding-success:
@@ -57,8 +58,9 @@ jobs:
           dingToken: 8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
           body: |
             {
-              "msgtype": "text",
-              "text": {
-                  "content": '[微笑][微笑][微笑] 前台未测试 执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
-              }
+              "msgtype": "link",
+              "link": {
+              "text": "这个即将发布的新版本，创始人陈航（花名“无招”）称它为“红树林”。而在此之前，每当面临重大升级，产品经理们都会取一个应景的代号，这一次，为什么是“红树林”？",
+              "title": "时代的火车向前开",
+              "picUrl": "",
             }
