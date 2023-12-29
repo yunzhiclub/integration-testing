@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutComponent } from './layout.component';
+import { HeaderComponent } from './header.component';
 
 
-/**
- * 布局模块
- */
+
 @NgModule({
   declarations: [
-    LayoutComponent
+    HeaderComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule
   ]
 })
-export class LayoutModule { }
+export class HeaderModule { }
