@@ -46,8 +46,8 @@ jobs:
           url: https://oapi.dingtalk.com/robot/send?access_token=8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
           type: markdown
           content: |
-            # 💯👨‍💻 Success 🎉🎉🎉
-            > ^_^ from github action message 
+#            # 💯👨‍💻 Success 🎉🎉🎉
+#            > ^_^ from github action message
 
 #      - name: build failure
 #        if: ${{ failure() }}
