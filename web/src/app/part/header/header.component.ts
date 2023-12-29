@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 /**
  * 头部组件
@@ -8,6 +9,13 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit {
+  environment = environment;
 
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
 }
