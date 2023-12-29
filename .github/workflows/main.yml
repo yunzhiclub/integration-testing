@@ -28,7 +28,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18.16.0
 
       - name: angular-test
         run: |
@@ -47,7 +47,6 @@ jobs:
           type: markdown
           content: |
             # 💯👨‍💻 Success 🎉🎉🎉
-            > test Build of [# ${{ env.PR_TITLE }}](${{ env.PR_URL }}) by ${{ env.PR_USER }} success
             > ^_^ from github action message 
 
 #      - name: build failure
