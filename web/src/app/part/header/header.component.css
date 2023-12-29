@@ -1,0 +1,9 @@
+.header {
+  height: 4rem;
+}
+
+.color-line {
+  height: 0.6rem;
+  background-size: 100% 6px;
+  background: #f7f9fa linear-gradient(to right, #ffb606, #e67e22, #e74c3c, #9b59b6, #34495e) no-repeat 50% 100%;
+}
