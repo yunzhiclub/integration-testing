@@ -43,7 +43,7 @@ jobs:
       - name: build success
         uses: fifsky/dingtalk-action@master
         with:
-          url: https://oapi.dingtalk.com/robot/send?access_token=${{ env.DING_TOKEN}}
+          url: https://oapi.dingtalk.com/robot/send?access_token=8153de07f66891c86efaf01a8af8232d63a4000fc8c1949ecd7ac3091df53252
           type: markdown
           content: |
             # 💯👨‍💻 Success 🎉🎉🎉
