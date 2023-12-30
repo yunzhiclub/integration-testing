@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import {HeaderModule} from "../header/header.module";
+import {MenuModule} from "../menu/menu.module";
+import {RouterOutlet} from "@angular/router";
 
 
 
@@ -15,6 +17,8 @@ import {HeaderModule} from "../header/header.module";
   imports: [
     CommonModule,
     HeaderModule,
+    MenuModule,
+    RouterOutlet
   ]
 })
 export class LayoutModule { }
