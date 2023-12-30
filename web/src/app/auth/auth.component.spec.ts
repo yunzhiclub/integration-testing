@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthComponent } from './auth.component';
 import {LoginComponent} from "./login/login.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
@@ -12,7 +13,8 @@ describe('AuthComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        HttpClientTestingModule
       ],
       declarations: [ AuthComponent, LoginComponent]
     })
