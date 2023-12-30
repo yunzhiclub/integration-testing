@@ -1,0 +1,59 @@
+<div class="row mb-2 mt-2">
+  <div class="col-6">
+    <a class="btn btn-primary" routerLink="../test">返回</a>
+  </div>
+</div>
+
+<div class="row mb-2 mt-2">
+  <div class="col-md-6">
+    <!--    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>-->
+  </div>
+  <div class="col-6 text-right">
+    <a class="btn btn-primary mr-3">克隆</a>
+    <a class="btn btn-primary"><i class="fa fas fa-plus"></i>新增</a>
+  </div>
+</div>
+
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>序号</th>
+    <th>大项-测试用例</th>
+    <th>测试人</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>1</td>
+    <td><a routerLink="../smallItem">测试登录模块</a></td>
+    <td>zhangsan</td>
+    <td>待开始</td>
+    <td>编辑 删除</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><a routerLink="../smallItem">测试用户管理模块</a></td>
+    <td>李四</td>
+    <td>部分完成</td>
+    <td>编辑 删除</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><a routerLink="../smallItem">测试项目管理模块</a></td>
+    <td>王五</td>
+    <td>全部完成</td>
+    <td>编辑 删除</td>
+  </tr>
+  </tbody>
+</table>
+<!--<yz-page [size]="pageData?.size"-->
+<!--         [page]="pageData?.number"-->
+<!--         [totalElements]="pageData?.totalElements"-->
+<!--         (changePage)="onChangePage($event)"></yz-page>-->
+<!--<router-outlet></router-outlet>-->
+
+
+
+
