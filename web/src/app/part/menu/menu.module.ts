@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
+import {RouterLink} from "@angular/router";
 
 
 /**
@@ -11,7 +12,8 @@ import { MenuComponent } from './menu.component';
     MenuComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   exports: [
     MenuComponent
