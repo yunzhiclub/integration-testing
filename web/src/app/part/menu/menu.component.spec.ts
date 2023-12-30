@@ -1,28 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayoutComponent } from './layout.component';
-import {HeaderModule} from "../header/header.module";
-import {MenuModule} from "../menu/menu.module";
+import { MenuComponent } from './menu.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ReactiveFormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
 
-describe('LayoutComponent', () => {
-  let component: LayoutComponent;
-  let fixture: ComponentFixture<LayoutComponent>;
+describe('MenuComponent', () => {
+  let component: MenuComponent;
+  let fixture: ComponentFixture<MenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [ MenuComponent ],
       imports: [
-        HeaderModule,
-        MenuModule,
         HttpClientTestingModule,
         RouterTestingModule
-      ],
-      declarations: [ LayoutComponent ]
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LayoutComponent);
+    fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
