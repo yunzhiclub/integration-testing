@@ -64,7 +64,7 @@ jobs:
     needs: [ unit-test, spring-boot-test ]
     if: ${{ failure() }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Send dingding notify error
         uses: zcong1993/actions-ding@master
         with:
@@ -82,7 +82,7 @@ jobs:
     needs: [ unit-test, spring-boot-test ]
     if: ${{ success() }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Send dingding notify success
         uses: zcong1993/actions-ding@master
         with:
