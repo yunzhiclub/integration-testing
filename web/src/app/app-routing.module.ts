@@ -13,8 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: '',
-    component: LayoutComponent
+    path: 'dashboard',
+    component: LayoutComponent,
+    children: [
+
+    ]
   }
 ]
 
