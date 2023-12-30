@@ -39,6 +39,7 @@ jobs:
         run: |
           docker pull mysql:5.7
           docker run -p 3312:3306 -e MYSQL_ROOT_PASSWORD=yunzhi -e MYSQL_DATABASE=integrationTesting -d mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
       - name: Set up JDK17
         uses: actions/setup-java@v3
         with:
@@ -48,12 +49,14 @@ jobs:
 
       - name: springboot-test
         run: |
-          mvn install
+          pwd
           cd api
           env
+          pwd
+          mvn install
           mvn -v
           mvn test
-          mvn --batch-mode package
+          
 
   dingding-error:
     runs-on: ubuntu-latest
