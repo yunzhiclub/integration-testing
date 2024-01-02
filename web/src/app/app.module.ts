@@ -6,6 +6,7 @@ import {LayoutModule} from "./part/layout/layout.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {ApiDemoModule} from "../api/api.demo.module";
+import {ApiProModule} from "../api/api-pro-module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {ApiDemoModule} from "../api/api.demo.module";
     LayoutModule,
     AppRoutingModule,
     HttpClientModule,
-    ApiDemoModule
+    // ApiDemoModule,
+    ApiProModule
   ],
   providers: [],
   bootstrap: [AppComponent]
