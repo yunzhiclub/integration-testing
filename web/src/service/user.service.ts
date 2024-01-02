@@ -40,7 +40,9 @@ export class UserService extends Store<UserState>{
       'Basic ' + btoa(user.username + ':' + encodeURIComponent(user.password)));
     // 发起get请求并返回
     return this.httpClient.get<User>(`/user/login`, {headers})
-      .pipe(tap(data => this.setCurrentLoginUser(data)));
+      .pipe(tap(data => {
+        this.setCurrentLoginUser(data);
+      }));
   }
 
   /**
