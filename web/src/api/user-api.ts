@@ -11,6 +11,13 @@ import {HttpErrorResponse} from "@yunzhi/ng-common";
 export class UserApi implements MockApiInterface {
   private sessionKey = 'currentLoginUser';
 
+  static currentLoginUser = {
+    id: randomNumber(1),
+    name: randomString('name'),
+    username: randomString('username'),
+    dirtyContactPhone: '1390****234',
+  } as User;
+
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -37,7 +44,7 @@ export class UserApi implements MockApiInterface {
             //设定为用户名不为null 密码为yunzhi 可登录
             if (username !== null && password === 'yunzhi') {
               const user = {
-                id: randomNumber(),
+                id: randomNumber(100),
                 username,
                 password,
               } as User;
@@ -59,14 +66,38 @@ export class UserApi implements MockApiInterface {
         url: '/user/currentLoginUser',
         description: '获取当前登录用户',
         result: () => {
-          return {
-            id: randomNumber(20),
-            name: randomString(),
-            username: randomString()
-          } as User
+          return UserApi.currentLoginUser;
+        }
+      },
+      {
+        method: 'GET',
+        url: `/user/logout`,
+        description: '退出当前登录',
+        result: () => {
+          if (this.getCurrentLoginUser() !== null) {
+            this.clearCurrentLoginUser();
+            return null;
+          } else {
+            return new Observable<HttpErrorResponse>(subscriber => {
+              subscriber.next(new HttpErrorResponse({status: 401}));
+              subscriber.complete();
+            });
+          }
         }
       },
     ];
+  }
+
+  /**
+   * 清除当前登录用户
+   */
+  private clearCurrentLoginUser(): void {
+    localStorage.removeItem(this.sessionKey);
+    console.log('1', localStorage.getItem(this.sessionKey))
+  }
+
+  getCurrentLoginUser(): User {
+    return UserApi.currentLoginUser;
   }
 
   /**
@@ -76,4 +107,6 @@ export class UserApi implements MockApiInterface {
   private setCurrentLoginUser(user: User): void {
     localStorage.setItem(this.sessionKey, JSON.stringify(user));
   }
+
+
 }
