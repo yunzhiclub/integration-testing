@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../entity/user";
 import {Action, Store} from '@tethys/store';
-import {Observable, ReplaySubject, tap} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
  * 用户状态管理
  */
 interface UserState extends Store<User> {
-
+  currentUser: User;
 }
 
 /**
@@ -18,19 +18,28 @@ interface UserState extends Store<User> {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends Store<UserState>{
-  // public currentLoginUser: User;
-  private currentLoginUser$ = new ReplaySubject<User>(1);
+export class UserService extends Store<UserState> {
+
+  static user(state: UserState): User {
+    return state.currentUser;
+  }
 
   constructor(protected httpClient: HttpClient,
               protected router: Router) {
-    super({});
+    super({
+      currentUser: {} as User
+    });
 
     if (!this.router.url.startsWith(`/login`)) {
       this.initCurrentLoginUser();
     }
   }
 
+  /**
+   * 用户名密码进行登录 basic加密用户名和密码
+   * @param user
+   */
+  @Action()
   login(user: { username: string; password: string }): Observable<User> {
     user = user as User;
     let headers = new HttpHeaders();
@@ -46,9 +55,20 @@ export class UserService extends Store<UserState>{
   }
 
   /**
-   * 请求当前登录用户
+   * 退出系统
+   */
+  @Action()
+  logout(): Observable<void> {
+    return this.httpClient.get<void>(`/user/logout`).pipe(map(() => {
+      this.setCurrentLoginUser(null);
+    }));
+  }
+
+  /**
+   * 初始化当前登录的用户
    * @param callback
    */
+  @Action()
   initCurrentLoginUser(callback?: () => void) {
     setTimeout(() => {
       this.httpClient.get<User>('/user/currentLoginUser')
@@ -66,12 +86,19 @@ export class UserService extends Store<UserState>{
     });
   }
 
-  getCurrentLoginUser$(): Observable<User> {
-    return this.currentLoginUser$;
+  /**
+   * 获取当前登录的用户
+   */
+  getCurrentLoginUser(): User {
+    const state = this.getState();
+    return state.currentUser;
   }
 
-  setCurrentLoginUser(user: User): void {
-    // this.currentLoginUser = user;
-    this.currentLoginUser$.next(user);
+  setCurrentLoginUser(user: User | null): void {
+    const state = this.getState();
+    if (user) {
+      state.currentUser = user;
+    }
+    this.next(state);
   }
 }
