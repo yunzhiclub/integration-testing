@@ -28,8 +28,8 @@ const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
       },
       {
-        path: 'projects',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        path: 'project',
+        loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
       },
       {
         path: 'users',

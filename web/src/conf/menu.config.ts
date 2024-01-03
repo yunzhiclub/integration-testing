@@ -12,7 +12,7 @@ export const menus: Array<BaseMenu> = [
   },
   {
     name: '项目管理',
-    url: 'projects',
+    url: 'project',
     icon: '',
     defaultShow: true,
   },
