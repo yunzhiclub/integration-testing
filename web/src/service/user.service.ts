@@ -20,7 +20,7 @@ interface UserState extends Store<User> {
 })
 export class UserService extends Store<UserState> {
 
-  static user(state: UserState): User {
+  static user(state: UserState): User{
     return state.currentUser;
   }
 
@@ -31,7 +31,7 @@ export class UserService extends Store<UserState> {
     });
 
     if (!this.router.url.startsWith(`/login`)) {
-      this.initCurrentLoginUser();
+     this.initCurrentLoginUser();
     }
   }
 
@@ -59,42 +59,32 @@ export class UserService extends Store<UserState> {
    */
   @Action()
   logout(): Observable<void> {
-    return this.httpClient.get<void>(`/user/logout`).pipe(map(() => {
-      this.setCurrentLoginUser(null);
-    }));
+    return this.httpClient.get<void>(`/user/logout`);
   }
 
   /**
    * 初始化当前登录的用户
-   * @param callback
+   *
    */
   @Action()
-  initCurrentLoginUser(callback?: () => void) {
-    setTimeout(() => {
-      this.httpClient.get<User>('/user/currentLoginUser')
-        .subscribe({
-          next: (user: User) => {
-            this.setCurrentLoginUser(user);
-          }, error: () => {
-            this.router.navigateByUrl('/login').then();
-          }, complete: () => {
-            if (callback) {
-              callback();
-            }
-          }
-        });
-    });
+  initCurrentLoginUser():Observable<void>{
+    return this.httpClient.get<User>('/user/currentLoginUser').pipe(map( data => {
+      /*存在当前登录的用户，更新状态 否则跳转登录界面*/
+      if (data) {
+        const state = this.getState();
+        state.currentUser = data as User;
+        this.next(state);
+      } else {
+        this.router.navigateByUrl('login').then();
+      }
+    }));
   }
 
   /**
    * 获取当前登录的用户
    */
-  getCurrentLoginUser(): User {
-    const state = this.getState();
-    return state.currentUser;
-  }
 
-  setCurrentLoginUser(user: User | null): void {
+  setCurrentLoginUser(user: User): void {
     const state = this.getState();
     if (user) {
       state.currentUser = user;

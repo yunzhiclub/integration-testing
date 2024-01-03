@@ -4,6 +4,7 @@ import {User} from "../entity/user";
 import {HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {HttpErrorResponse} from "@yunzhi/ng-common";
+import {Mock} from "protractor/built/driverProviders";
 
 /**
  * 用户Mock数据
@@ -66,7 +67,7 @@ export class UserApi implements MockApiInterface {
         url: '/user/currentLoginUser',
         description: '获取当前登录用户',
         result: () => {
-          return UserApi.currentLoginUser;
+          return this.getCurrentLoginUser();
         }
       },
       {
@@ -93,11 +94,13 @@ export class UserApi implements MockApiInterface {
    */
   private clearCurrentLoginUser(): void {
     localStorage.removeItem(this.sessionKey);
-    console.log('1', localStorage.getItem(this.sessionKey))
   }
 
-  getCurrentLoginUser(): User {
-    return UserApi.currentLoginUser;
+  getCurrentLoginUser(): User | undefined {
+    if(localStorage.getItem(this.sessionKey)) {
+      return  UserApi.currentLoginUser;
+    }
+    return undefined;
   }
 
   /**

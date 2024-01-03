@@ -18,8 +18,8 @@ import {ApiProModule} from "../api/api-pro-module";
     LayoutModule,
     AppRoutingModule,
     HttpClientModule,
-    // ApiDemoModule,
-    ApiProModule
+    ApiDemoModule,
+    // ApiProModule
   ],
   providers: [],
   bootstrap: [AppComponent]
