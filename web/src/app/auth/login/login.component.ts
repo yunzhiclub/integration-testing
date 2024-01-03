@@ -47,9 +47,7 @@ export class LoginComponent implements OnInit{
     this.userService.login(user)
       .subscribe({
         next: () => {
-          this.userService.initCurrentLoginUser(() => {
-            this.router.navigateByUrl('dashboard').then();
-          });
+          this.router.navigateByUrl('dashboard').then();
         }, error: (err) => {
           console.log('发生错误', err);
           this.errorInfo = '登录失败，请检查您填写的信息是否正确';
