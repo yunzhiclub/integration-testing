@@ -4,12 +4,16 @@ import {Action, Store} from '@tethys/store';
 import {map, Observable, tap} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {Page} from "@yunzhi/ng-common";
+import {Assert} from "@yunzhi/utils";
 
 /**
  * 用户状态管理
  */
 interface UserState extends Store<User> {
   currentUser: User;
+  pageData: Page<User>;
+  httpParams: {page: number, size: number, name?: string};
 }
 
 /**
@@ -24,15 +28,40 @@ export class UserService extends Store<UserState> {
     return state.currentUser;
   }
 
+  static pageData(state: UserState): Page<User> {
+    return state.pageData;
+  }
   constructor(protected httpClient: HttpClient,
               protected router: Router) {
     super({
-      currentUser: {} as User
+      currentUser: {} as User,
+      pageData: new Page<User>(),
+      httpParams: {page: 0, size: 0, name: ''}
     });
 
     if (!this.router.url.startsWith(`/login`)) {
      this.initCurrentLoginUser();
     }
+  }
+
+  /**
+   * 分页数据
+   */
+  @Action()
+  pageAction(payload: {page: number, size: number, name?: string}): Observable<Page<User>> {
+    Assert.isNumber(payload.page, 'page不能为空');
+    Assert.isNumber(payload.size, 'size不能为空');
+    console.log('payload', payload)
+    //获取state快照
+    const state = this.snapshot;
+    state.httpParams = payload;
+    return this.httpClient.get<Page<User>>('/user/page', {params: payload})
+      .pipe(
+        tap(data => {
+          state.pageData = data as Page<User>;
+          this.next(state);
+        }),
+      );
   }
 
   /**

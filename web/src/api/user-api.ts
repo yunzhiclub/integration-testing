@@ -1,16 +1,19 @@
-import {ApiInjector, MockApiInterface} from "@yunzhi/ng-mock-api";
-import {randomNumber, randomString} from "@yunzhi/utils";
+import {ApiInjector, MockApiInterface, RequestOptions} from "@yunzhi/ng-mock-api";
+import {Assert, randomNumber, randomString} from "@yunzhi/utils";
 import {User} from "../entity/user";
-import {HttpHeaders} from "@angular/common/http";
+import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {HttpErrorResponse} from "@yunzhi/ng-common";
-import {Mock} from "protractor/built/driverProviders";
+import {generatePage, HttpErrorResponse} from "@yunzhi/ng-common";
 
 /**
  * 用户Mock数据
  */
 export class UserApi implements MockApiInterface {
   private sessionKey = 'currentLoginUser';
+
+  private names = [
+    "张三", "李四", "李白", "杜甫"
+  ]
 
   static currentLoginUser = {
     id: randomNumber(1),
@@ -84,6 +87,31 @@ export class UserApi implements MockApiInterface {
               subscriber.complete();
             });
           }
+        }
+      },
+      {
+        method: 'GET',
+        url: '/user/page',
+        result: (urlMatcher: any, options: RequestOptions) => {
+          const params = options.params as HttpParams;
+          // Assert.isNotNullOrUndefined(params, '参数不能为空或未定义')
+          // console.log("111", params)
+          // const page = +params.get('page');
+          // const size = +params.get('size');
+          const page = 0;
+          const size = 10;
+          const name = params.get('name') ? params.get('name') : ""
+
+          return generatePage<User>(page, size, index => {
+            return {
+              id: randomNumber(100),
+              name: name ? randomString(name, 2) : randomString(this.names[Math.floor(Math.random() * this.names.length)]),
+              contactPhone: randomString('18100000000'),
+              dirtyContactPhone: randomString('181****0000'),
+              username: randomString('0304210123'),
+              password: randomString('yunzhi'),
+            } as User;
+          });
         }
       },
     ];
