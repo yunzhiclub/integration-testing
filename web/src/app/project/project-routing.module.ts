@@ -4,6 +4,7 @@ import {ProjectComponent} from "./project/project.component";
 import {LargeItemComponent} from "./large-item/large-item.component";
 import {SmallItemComponent} from "./small-item/small-item.component";
 import {TestComponent} from "./test/test.component";
+import {DialogEntryComponent} from "../../common/dialog-entry/dialog-entry-component";
 
 const routes: Routes = [
   {

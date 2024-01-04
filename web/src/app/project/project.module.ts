@@ -7,7 +7,6 @@ import { LargeItemComponent } from './large-item/large-item.component';
 import { SmallItemComponent } from './small-item/small-item.component';
 
 
-
 @NgModule({
   declarations: [
     ProjectComponent,
@@ -17,7 +16,7 @@ import { SmallItemComponent } from './small-item/small-item.component';
   ],
   imports: [
     CommonModule,
-    ProjectRoutingModule
+    ProjectRoutingModule,
   ]
 })
 export class ProjectModule { }

@@ -7,6 +7,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {ApiDemoModule} from "../api/api.demo.module";
 import {ApiProModule} from "../api/api-pro-module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ApiProModule} from "../api/api-pro-module";
     AppRoutingModule,
     HttpClientModule,
     ApiDemoModule,
+    BrowserAnimationsModule,
     // ApiProModule
   ],
   providers: [],
