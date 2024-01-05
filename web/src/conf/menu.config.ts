@@ -18,7 +18,7 @@ export const menus: Array<BaseMenu> = [
   },
   {
     name: '用户管理',
-    url: 'users',
+    url: 'user',
     icon: '',
     defaultShow: true,
   },

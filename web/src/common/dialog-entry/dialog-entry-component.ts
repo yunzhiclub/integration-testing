@@ -2,17 +2,17 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
 
-
 @Component({
   template: ''
 })
-export class DialogEntryComponent implements OnInit, OnDestroy{
+export class DialogEntryComponent implements OnDestroy, OnInit {
 
   private dialogRef: MatDialogRef<unknown, any>;
 
   constructor(public dialog: MatDialog,
               private route: ActivatedRoute) {
   }
+
   ngOnInit(): void {
     this.dialogRef = this.dialog.open(this.route.snapshot.data['component'], {
       width: this.route.snapshot.data?.['width'] ? this.route.snapshot.data?.['width'] : '800px',
