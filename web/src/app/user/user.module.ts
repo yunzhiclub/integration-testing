@@ -6,12 +6,16 @@ import { IndexComponent } from './index/index.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {ApiDemoModule} from "../../api/api.demo.module";
+import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
+import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 
 
 @NgModule({
   declarations: [
-    IndexComponent
+    IndexComponent,
+    AddComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,8 @@ import {ApiDemoModule} from "../../api/api.demo.module";
     YzSizeModule,
     YzPageModule,
     ReactiveFormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    DialogEntryModule
   ]
 })
 export class UserModule { }
