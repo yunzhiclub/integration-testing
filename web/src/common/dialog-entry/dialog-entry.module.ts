@@ -4,6 +4,7 @@ import {DialogEntryComponent} from './dialog-entry-component';
 
 
 
+
 @NgModule({
   declarations: [DialogEntryComponent],
   imports: [

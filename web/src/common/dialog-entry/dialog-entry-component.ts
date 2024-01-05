@@ -1,10 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
+
 @Component({
   template: ''
 })
 export class DialogEntryComponent implements OnDestroy, OnInit {
+
   private dialogRef: MatDialogRef<unknown, any>;
 
   constructor(public dialog: MatDialog,
@@ -17,8 +19,7 @@ export class DialogEntryComponent implements OnDestroy, OnInit {
       closeOnNavigation: true,
       disableClose: true
     });
-    
-    // 手动注入ActivatedRoute
+
     const component = this.dialogRef.componentInstance as any;
     for (const key in component) {
       if (component[key] && component[key] instanceof ActivatedRoute) {
