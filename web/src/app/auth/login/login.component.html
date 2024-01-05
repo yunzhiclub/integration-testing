@@ -5,7 +5,7 @@
   <div class="form-container sign-in-container">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <h1 style="margin-bottom: 5px;">集成测试系统</h1>
-      <input type="email" formControlName="username" name="username" placeholder="用户名" />
+      <input type="text" formControlName="username" name="username" placeholder="用户名" />
       <input type="password" formControlName="password" name="password" placeholder="密码" />
       <ng-template [ngIf]="errorInfo">
         <hr>
