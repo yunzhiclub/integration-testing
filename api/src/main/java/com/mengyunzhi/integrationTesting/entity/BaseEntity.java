@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * 抽离共用字段
+ */
 @MappedSuperclass
 @Data
 public class BaseEntity<ID extends Serializable> {
