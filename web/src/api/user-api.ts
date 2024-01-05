@@ -94,12 +94,12 @@ export class UserApi implements MockApiInterface {
         url: '/user/page',
         result: (urlMatcher: any, options: RequestOptions) => {
           const params = options.params as HttpParams;
-          // Assert.isNotNullOrUndefined(params, '参数不能为空或未定义')
-          // console.log("111", params)
-          // const page = +params.get('page');
-          // const size = +params.get('size');
-          const page = 0;
-          const size = 10;
+
+          console.log("111", params)
+          const page = +params.get('page');
+          const size = +params.get('size');
+          // const page = 0;
+          // const size = 10;
           const name = params.get('name') ? params.get('name') : ""
 
           return generatePage<User>(page, size, index => {

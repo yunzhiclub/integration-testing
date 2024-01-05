@@ -29,7 +29,7 @@
     <td>{{user?.username}}</td>
     <td>{{user?.dirtyContactPhone}}</td>
     <td>
-      <a class="text-primary mr-3" matTooltip="编辑"><i class="fa fas fa-pen"></i></a>
+      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/${{user.id}}"><i class="fa fas fa-pen"></i></a>
       <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
     </td>
   </tr>
