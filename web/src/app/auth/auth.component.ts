@@ -25,10 +25,6 @@ export class AuthComponent implements OnInit {
     this.checkBrowsers();
   }
 
-  onChangeToLogin(): void {
-    this.mode = 'login';
-  }
-
   /**
    * 判断是不是需要升级的浏览器
    */
