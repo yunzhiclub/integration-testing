@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(value = "com.mengyunzhi.integrationTesting",
-repositoryBaseClass = SoftDeleteRepositoryFactoryBean.class)
+		repositoryFactoryBeanClass = SoftDeleteRepositoryFactoryBean.class)
 public class integrationTestingApplication {
 
 	public static void main(String[] args) {
