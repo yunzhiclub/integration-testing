@@ -29,8 +29,9 @@
     <td>{{user?.username}}</td>
     <td>{{user?.dirtyContactPhone}}</td>
     <td>
-      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/${{user.id}}"><i class="fa fas fa-pen"></i></a>
-      <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
+      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{user.id}}"><i class="fa fas fa-pen"></i></a>
+      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(user.name, user.id)" ><i class="fa fas fa-trash"></i></a>
+      <a class="text-dark mr-3" (click)="resetPassword(user.id)" matTooltip="重置密码"><i class="bi bi-arrow-repeat"></i></a>
     </td>
   </tr>
   </tbody>
