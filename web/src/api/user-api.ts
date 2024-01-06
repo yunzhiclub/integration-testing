@@ -114,6 +114,50 @@ export class UserApi implements MockApiInterface {
           });
         }
       },
+      {
+        method: 'POST',
+        url: '/user',
+        result: (urlMatcher: any, options: {body: {name: string, username: string, contactPhone: string}}) => {
+          const user = options.body as User;
+          return {
+            id: randomNumber(10),
+            name: user.name,
+            username: user.username,
+            dirtyContactPhone: '181****0000',
+          } as User
+        }
+      },
+      {
+        url: '/user/(\\d+)',
+        method: 'GET',
+        result: (urlMatcher: any) => {
+          const id = urlMatcher['id'] ? +urlMatcher['id'] : randomNumber(10);
+          return this.getOneUserById(id);
+        }
+      },
+      {
+        url: '/user/(\\d+)',
+        method:  'PUT',
+        result: (urlMatcher: string[], options: {body: {name: string, username: string, contactPhone: string}}) => {
+          const user = options.body as User;
+          const id = +urlMatcher[1];
+          return {
+            id,
+            name: user.name,
+            username: user.username,
+            dirtyContactPhone: '181****0000',
+          } as User
+        }
+      },
+      {
+        url: '/user/(\\d+)',
+        method: 'DELETE',
+      },
+      {
+        url: '/user/resetPassword/(\\d+)',
+        method: 'PUT',
+        result: randomString('', 6)
+      },
     ];
   }
 
@@ -139,5 +183,14 @@ export class UserApi implements MockApiInterface {
     localStorage.setItem(this.sessionKey, JSON.stringify(user));
   }
 
+  getOneUserById(id: number): User {
+    return {
+      id,
+      username: randomString('username', 4),
+      name: randomString('name', 4),
+      contactPhone: '13800138000',
+      dirtyContactPhone: '13800138000'
+    } as User;
+  }
 
 }

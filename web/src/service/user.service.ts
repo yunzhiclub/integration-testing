@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Page} from "@yunzhi/ng-common";
 import {Assert} from "@yunzhi/utils";
+import * as _ from "lodash";
 
 /**
  * 用户状态管理
@@ -14,6 +15,7 @@ interface UserState extends Store<User> {
   currentUser: User;
   pageData: Page<User>;
   httpParams: {page: number, size: number, name?: string};
+  getById: User;
 }
 
 /**
@@ -26,6 +28,10 @@ export class UserService extends Store<UserState> {
 
   static user(state: UserState): User{
     return state.currentUser;
+  }
+
+  static getById(status: UserState): User {
+    return status.getById;
   }
 
   static pageData(state: UserState): Page<User> {
@@ -42,6 +48,69 @@ export class UserService extends Store<UserState> {
     if (!this.router.url.startsWith(`/login`)) {
      this.initCurrentLoginUser();
     }
+  }
+
+  @Action()
+  addAction(user: {name: string, username: string, contactPhone: string}): Observable<User> {
+    Assert.isNotNullOrUndefined(user.name);
+    Assert.isNotNullOrUndefined(user.username);
+    Assert.isNotNullOrUndefined(user.contactPhone);
+
+    user = user as User;
+    return this.httpClient.post<User>('/user', user).pipe(tap(value => {
+      const state = this.getState();
+      state.pageData.content.unshift(value as User);
+
+      this.next(state);
+    }));
+  }
+
+  @Action()
+  deleteAction(id: number): Observable<void> {
+    Assert.isNumber(id, 'id类型不正确');
+    return this.httpClient.delete<void>(`/user/${id}`).pipe(tap(() => {
+      const state = this.getState();
+      state.pageData.content = state.pageData.content.filter(user => user.id !== id);
+      this.next(state);
+
+      this.pageAction(state.httpParams);
+    }));
+  }
+
+  @Action()
+  getById(id: number): Observable<User> {
+    Assert.isNumber(id, 'id类型不正确');
+    return this.httpClient.get<User>(`/user/${id}`).pipe(tap(data => {
+      const state = this.getState();
+      state.getById = data as User;
+      this.next(state);
+    }))
+  }
+
+  @Action()
+  resetPassword(id: number): Observable<string> {
+    Assert.isNumber(id, 'id类型不正确');
+    return this.httpClient.put<string>(`/user/resetPassword/${id}`, {})
+  }
+  @Action()
+  updateAction(id: number, user: {name: string, username: string, contactPhone: string}): Observable<User> {
+    Assert.isNumber(id, 'id类型不正确');
+    Assert.isNotNullOrUndefined(user.name);
+    Assert.isNotNullOrUndefined(user.username);
+    Assert.isNotNullOrUndefined(user.contactPhone);
+
+    user = user as User;
+    return this.httpClient.put<User>(`/user/${id}`, user).pipe(tap(value => {
+      const state = this.getState();
+      user = _.find(state.pageData.content, {id}) as User;
+      if (user) {
+        user.name = value.name;
+        user.name = value.name;
+      }
+
+      this.next(state);
+      this.pageAction(state.httpParams);
+    }));
   }
 
   /**
