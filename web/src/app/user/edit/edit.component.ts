@@ -21,7 +21,8 @@ export class EditComponent extends BaseComponent implements OnInit{
     name: 'name',
     username: 'username',
     contactPhone: 'contactPhone',
-    dirtyContactPhone: 'dirtyContactPhone'
+    dirtyContactPhone: 'dirtyContactPhone',
+    role: 'role'
   }
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -65,7 +66,8 @@ export class EditComponent extends BaseComponent implements OnInit{
       name: new FormControl<string>(''),
       username: new FormControl<string>(''),
       contactPhone: new FormControl<string>(''),
-      dirtyContactPhone: new FormControl<string>('')
+      dirtyContactPhone: new FormControl<string>(''),
+      role: new FormControl<string>('user')
     });
   }
 
@@ -84,5 +86,6 @@ export class EditComponent extends BaseComponent implements OnInit{
     this.formGroup.get(this.key.username).setValue(this.user?.username);
     this.formGroup.get(this.key.contactPhone).setValue(this.user?.contactPhone);
     this.formGroup.get(this.key.dirtyContactPhone).setValue(this.user?.dirtyContactPhone);
+    this.formGroup.get(this.key.role).setValue(this.user?.role);
   }
 }

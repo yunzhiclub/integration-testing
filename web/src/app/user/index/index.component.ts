@@ -29,7 +29,6 @@ export class IndexComponent extends BaseComponent implements OnInit{
     super();
   }
   ngOnInit(): void {
-    console.log(this.param)
     this.userService.select(UserService.pageData).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe({
         next: (data) => {
@@ -52,7 +51,6 @@ export class IndexComponent extends BaseComponent implements OnInit{
   }
 
   reload(): void {
-    console.log('reload', this.param)
     this.userService.pageAction(this.param);
   }
 
