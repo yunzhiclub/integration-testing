@@ -211,4 +211,9 @@ input {
   width: 40px;
 }
 
-
+.color-line {
+  background: #FF416C;
+  background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  height: 2px; width: 90px
+}

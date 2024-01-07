@@ -2,7 +2,8 @@
 <div class="container" id="container">
   <div class="form-container sign-in-container">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <h1 style="margin-bottom: 5px;">集成测试系统</h1>
+      <h1>欢迎登陆</h1>
+      <div class="color-line mb-3"></div>
       <input type="text" formControlName="username" name="username" placeholder="用户名" />
       <input type="password" formControlName="password" name="password" placeholder="密码" />
       <ng-template [ngIf]="errorInfo">
@@ -15,9 +16,9 @@
   <div class="overlay-container">
     <div class="overlay">
       <div class="overlay-panel overlay-right">
-        <h1>欢迎您</h1>
-        <p>A system to test for the team</p>
-      </div>
+        <h1>Integrated test system</h1>
+        <h1 class="mt-2">集成测试系统</h1>
+        <img src="/assets/images/login.png" height="259" width="302"/></div>
     </div>
   </div>
 </div>
