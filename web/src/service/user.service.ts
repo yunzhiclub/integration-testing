@@ -26,7 +26,7 @@ interface UserState extends Store<User> {
 })
 export class UserService extends Store<UserState> {
 
-  static user(state: UserState): User{
+  static currentUser(state: UserState): User{
     return state.currentUser;
   }
 
@@ -51,7 +51,7 @@ export class UserService extends Store<UserState> {
   }
 
   @Action()
-  addAction(user: {name: string, username: string, contactPhone: string}): Observable<User> {
+  addAction(user: {name: string, username: string, contactPhone: string, role: string}): Observable<User> {
     Assert.isNotNullOrUndefined(user.name);
     Assert.isNotNullOrUndefined(user.username);
     Assert.isNotNullOrUndefined(user.contactPhone);
@@ -120,7 +120,7 @@ export class UserService extends Store<UserState> {
   pageAction(payload: {page: number, size: number, name?: string}): Observable<Page<User>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
-    console.log('payload', payload)
+
     //获取state快照
     const state = this.snapshot;
     state.httpParams = payload;

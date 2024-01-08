@@ -12,6 +12,7 @@ import {CommonService} from "../../../service/common-service";
 })
 export class AddComponent implements OnInit{
   formGroup: FormGroup;
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private userService: UserService,
@@ -22,8 +23,10 @@ export class AddComponent implements OnInit{
     this.formGroup = new FormGroup({
       name: new FormControl<string>(''),
       username: new FormControl<string>(''),
-      contactPhone: new FormControl<string>('')
+      contactPhone: new FormControl<string>(''),
+      role: new FormControl<string>('user'),
     });
+
   }
 
   onSubmit() {

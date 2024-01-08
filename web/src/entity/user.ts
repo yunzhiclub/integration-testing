@@ -12,4 +12,6 @@ export interface User {
   contactPhone: string;
   /** 加密后的电话号码 */
   dirtyContactPhone: string;
+  /**角色*/
+  role: string;
 }

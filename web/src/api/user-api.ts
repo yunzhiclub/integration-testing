@@ -11,15 +11,14 @@ import {generatePage, HttpErrorResponse} from "@yunzhi/ng-common";
 export class UserApi implements MockApiInterface {
   private sessionKey = 'currentLoginUser';
 
-  private names = [
-    "张三", "李四", "李白", "杜甫"
-  ]
+  private names = ["张三", "李四", "李白", "杜甫"];
 
   static currentLoginUser = {
     id: randomNumber(1),
     name: randomString('name'),
     username: randomString('username'),
     dirtyContactPhone: '1390****234',
+    role: 'admin'
   } as User;
 
   getInjectors(): ApiInjector[] {
@@ -95,7 +94,6 @@ export class UserApi implements MockApiInterface {
         result: (urlMatcher: any, options: RequestOptions) => {
           const params = options.params as HttpParams;
 
-          console.log("111", params)
           const page = +params.get('page');
           const size = +params.get('size');
           // const page = 0;
@@ -110,6 +108,7 @@ export class UserApi implements MockApiInterface {
               dirtyContactPhone: randomString('181****0000'),
               username: randomString('0304210123'),
               password: randomString('yunzhi'),
+              role: 'user'
             } as User;
           });
         }
@@ -117,13 +116,14 @@ export class UserApi implements MockApiInterface {
       {
         method: 'POST',
         url: '/user',
-        result: (urlMatcher: any, options: {body: {name: string, username: string, contactPhone: string}}) => {
+        result: (urlMatcher: any, options: {body: {name: string, username: string, contactPhone: string, role: string}}) => {
           const user = options.body as User;
           return {
             id: randomNumber(10),
             name: user.name,
             username: user.username,
             dirtyContactPhone: '181****0000',
+            role: user.role
           } as User
         }
       },
@@ -146,6 +146,7 @@ export class UserApi implements MockApiInterface {
             name: user.name,
             username: user.username,
             dirtyContactPhone: '181****0000',
+            role: 'user'
           } as User
         }
       },
@@ -189,7 +190,8 @@ export class UserApi implements MockApiInterface {
       username: randomString('username', 4),
       name: randomString('name', 4),
       contactPhone: '13800138000',
-      dirtyContactPhone: '13800138000'
+      dirtyContactPhone: '13800138000',
+      role: 'user'
     } as User;
   }
 

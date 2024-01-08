@@ -11,15 +11,18 @@ import {HttpClientModule} from "@angular/common/http";
  * 认证模块
  */
 @NgModule({
-  declarations: [
-    AuthComponent,
-    LoginComponent
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ]
+    declarations: [
+        AuthComponent,
+        LoginComponent
+    ],
+    exports: [
+        AuthComponent
+    ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule
+    ]
 })
 export class AuthModule { }

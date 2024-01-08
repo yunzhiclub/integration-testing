@@ -16,7 +16,7 @@ export class IndexComponent extends BaseComponent implements OnInit{
     super();
   }
   ngOnInit(): void {
-    this.userService.select(UserService.user).pipe(takeUntil(this.ngOnDestroy$))
+    this.userService.select(UserService.currentUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
         this.user = data;
       });

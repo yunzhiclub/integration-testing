@@ -22,7 +22,7 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   constructor(private userService: UserService,
               private router: Router) {
     super();
-    this.userService.select(UserService.user).pipe(takeUntil(this.ngOnDestroy$))
+    this.userService.select(UserService.currentUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(user => {
         if (user !== null) {
           this.currentUser = user;

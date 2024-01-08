@@ -4,6 +4,9 @@ import { AddComponent } from './add.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RoleSelectComponent} from "../role-select/role-select.component";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('AddComponent', () => {
   let component: AddComponent;
@@ -11,12 +14,14 @@ describe('AddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddComponent ],
+      declarations: [ AddComponent, RoleSelectComponent ],
       imports: [
         FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
+        NzSelectModule,
+        BrowserAnimationsModule
       ]
     })
     .compileComponents();

@@ -1,31 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { UserRoutingModule } from './user-routing.module';
 import { IndexComponent } from './index/index.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
+import {RoleSelectComponent} from "./role-select/role-select.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzSelectModule} from "ng-zorro-antd/select";
+
 
 
 @NgModule({
   declarations: [
     IndexComponent,
     AddComponent,
-    EditComponent
+    EditComponent,
+    RoleSelectComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    FormsModule,
-    YzSizeModule,
-    YzPageModule,
-    ReactiveFormsModule,
-    MatTooltipModule,
-    DialogEntryModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        YzSizeModule,
+        YzPageModule,
+        ReactiveFormsModule,
+        MatTooltipModule,
+        DialogEntryModule,
+        NzSelectModule
+    ]
 })
 export class UserModule { }

@@ -9,6 +9,12 @@ import {ApiDemoModule} from "../api/api.demo.module";
 import {ApiProModule} from "../api/api-pro-module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { FormsModule } from '@angular/forms';
+
+registerLocaleData(en);
+
 @NgModule({
   declarations: [
     AppComponent
@@ -21,9 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ApiDemoModule,
     BrowserAnimationsModule,
+    FormsModule,
     // ApiProModule
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
