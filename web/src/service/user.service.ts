@@ -92,6 +92,7 @@ export class UserService extends Store<UserState> {
     Assert.isNumber(id, 'id类型不正确');
     return this.httpClient.put<string>(`/user/resetPassword/${id}`, {})
   }
+
   @Action()
   updateAction(id: number, user: {name: string, username: string, contactPhone: string}): Observable<User> {
     Assert.isNumber(id, 'id类型不正确');

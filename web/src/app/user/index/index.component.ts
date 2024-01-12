@@ -77,7 +77,7 @@ export class IndexComponent extends BaseComponent implements OnInit{
   }
 
   onQuery() {
-    this.param.name = "";
+    this.param.name = this.name.value;
     this.reload();
   }
 }

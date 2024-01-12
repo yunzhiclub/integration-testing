@@ -33,7 +33,6 @@ import {XAuthTokenInterceptor} from "../interceptor/xauth-token.interceptor";
       useClass: XAuthTokenInterceptor
     }
   ]
-  
 })
 
 export class ApiProModule {

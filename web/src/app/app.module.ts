@@ -25,10 +25,10 @@ registerLocaleData(en);
     LayoutModule,
     AppRoutingModule,
     HttpClientModule,
-    ApiDemoModule,
+   // ApiDemoModule,
     BrowserAnimationsModule,
     FormsModule,
-    // ApiProModule
+    ApiProModule
   ],
 
   bootstrap: [AppComponent]
