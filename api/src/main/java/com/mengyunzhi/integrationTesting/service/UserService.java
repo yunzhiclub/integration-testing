@@ -7,6 +7,9 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
+/**
+ * @author kexiaobin
+ */
 public interface UserService {
 
     User findByUsername(String username);
@@ -22,4 +25,6 @@ public interface UserService {
     User findById(Long id);
 
     String resetPassword(Long id);
+
+    void delete(Long id);
 }

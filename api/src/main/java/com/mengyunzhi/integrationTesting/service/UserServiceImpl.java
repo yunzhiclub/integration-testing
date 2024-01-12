@@ -115,4 +115,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         this.userRepository.save(user);
         return password;
     }
+
+    @Override
+    public void delete(Long id) {
+        this.userRepository.deleteById(id);
+    }
 }

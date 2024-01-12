@@ -70,9 +70,14 @@ public class UserController {
         return this.userService.findByUsername(user.getName());
     }
 
-    @PutMapping("/resetPassword/{id}")
+    @PutMapping("resetPassword/{id}")
     public String resetPassword(@PathVariable Long id) {
         return this.userService.resetPassword(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
+        this.userService.delete(id);
     }
 
     @GetMapping("logout")
