@@ -2,82 +2,61 @@ package com.mengyunzhi.integrationTesting.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.Getter;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.*;
 
+/**
+ * @author kexiaobin
+ */
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"username", "deleteAt"})
+        }
+)
 @Entity
-public class User implements UserDetails {
+@SQLDelete(sql = "update `user` set deleted = 1, delete_at = UNIX_TIMESTAMP() where id = ?")
+public class User extends BaseEntity<Long> implements UserDetails {
+    public static String ROLE_ADMIN = "role_admin";
+    public static String ROLE_USER = "role_user";
+    public static String PASSWORD = "yunzhi";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @JsonView(User.NameJsonView.class)
+    @Getter
     private String name;
 
-    @JsonView(User.UsernameJsonView.class)
+    @Getter
     private String username;
 
-    @JsonView(User.PasswordJsonView.class)
+    @Getter
+    @JsonView(PasswordJsonView.class)
     private String password;
 
-    /**
-     * 密码加密
-     */
+    @Getter
     private static PasswordEncoder passwordEncoder;
 
-    @Override
-    public String getUsername() {
-        return username;
+    @Getter
+    private String role;
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @Getter
+    @JsonView(ContactPhoneJsonView.class)
+    private String contactPhone;
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        if (User.passwordEncoder == null) {
-            throw new RuntimeException("未设置User实体的passwordEncoder，请调用set方法设置");
-        }
-        this.password = User.passwordEncoder.encode(password);
-    }
-
-    public static PasswordEncoder getPasswordEncoder() {
-        return passwordEncoder;
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     public static void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         User.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -100,15 +79,43 @@ public class User implements UserDetails {
         return true;
     }
 
-    public interface PasswordJsonView {
-
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public interface UsernameJsonView {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = null;
 
+        if (null != this.role) {
+            authority = new SimpleGrantedAuthority(this.role);
+        }
+        return Collections.singleton(authority);
     }
 
-    public interface NameJsonView {
-
+    public void setPassword(String password) {
+        if (User.passwordEncoder == null) {
+            throw new RuntimeException("未设置User实体的passwordEncoder，请调用set方法设置");
+        }
+        this.password = User.passwordEncoder.encode(password);
     }
+
+
+    public String getDirtyContactPhone() {
+        if (null == this.contactPhone || "".equals(this.contactPhone)) {
+            return "";
+        } else {
+            return this.contactPhone.replaceAll("(\\d{3})\\d{4}(\\d{3})", "$1****$2");
+        }
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private interface PasswordJsonView {}
+
+    public static interface ContactPhoneJsonView {}
+
 }
+
