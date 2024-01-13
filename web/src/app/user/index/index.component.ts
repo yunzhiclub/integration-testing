@@ -10,7 +10,7 @@ import {CommonService} from "../../../service/common-service";
 
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-project',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })

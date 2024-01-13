@@ -1,7 +1,7 @@
 /**
  * 项目实体
  */
-interface Project{
+export interface Project{
   id: number;
   name: string;
   /*项目测试环境地址*/
@@ -12,5 +12,5 @@ interface Project{
   describe: string;
   /*项目测试计划*/
   testPlane: [];
-  createTime: string;
+  createTime: number;
 }

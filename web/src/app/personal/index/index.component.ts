@@ -5,7 +5,7 @@ import {takeUntil} from "rxjs";
 import {BaseComponent} from "../../share/base-component";
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-project',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })

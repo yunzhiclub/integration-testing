@@ -1,14 +1,14 @@
-<form class="form-inline">
-  <input type="text" class="form-control mr-2 mt-3"  placeholder="名称">
+<form class="form-inline" (ngSubmit)="onQuery()">
+  <input type="text" class="form-control mr-2 mt-3" [formControl]="name" placeholder="名称">
   <button type="submit" class="btn btn-info mt-3"><i class="fa fas fa-search"></i>查询</button>
 </form>
 
 <div class="row mb-2 mt-2">
   <div class="col-md-6">
-<!--    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>-->
+    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>
   </div>
   <div class="col-6 text-right">
-    <a class="btn btn-primary"><i class="fa fas fa-plus"></i>新增</a>
+    <a class="btn btn-primary" routerLink="add"><i class="fa fas fa-plus"></i>新增</a>
   </div>
 </div>
 
@@ -24,27 +24,28 @@
   </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td><a routerLink="test">周汇报系统</a></td>
-      <td>http:</td>
-      <td>http:</td>
-      <td>2023.12,10</td>
-      <td>编辑 删除</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td><a routerLink="test">牙科系统</a></td>
-      <td>http:</td>
-      <td>http:</td>
-      <td>2023.12.30</td>
-      <td>编辑 删除</td>
-    </tr>
+  <tr *ngFor="let project of pageData?.content; index as i">
+    <td>{{i + 1}}</td>
+    <td><a routerLink="testPlan">{{project?.name}}</a></td>
+    <td class="text-pack">
+      <a href="{{project?.projectUrl}}">{{project?.projectUrl}}</a>
+    </td>
+    <td class="text-pack">
+      <a href="{{project?.repositoryUrl}}">{{project?.repositoryUrl}}</a>
+    </td>
+    <td>{{project?.createTime | date:'yyyy-MM-dd'}}</td>
+    <td>
+      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{project?.id}}"><i class="fa fas fa-pen"></i></a>
+      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(project?.id)" ><i class="fa fas fa-trash"></i></a>
+    </td>
+  </tr>
   </tbody>
 </table>
-<!--<yz-page [size]="pageData?.size"-->
-<!--         [page]="pageData?.number"-->
-<!--         [totalElements]="pageData?.totalElements"-->
-<!--         (changePage)="onChangePage($event)"></yz-page>-->
-<!--<router-outlet></router-outlet>-->
+
+<yz-page [size]="pageData.size"
+         [page]="pageData.number"
+         [totalElements]="pageData.totalElements"
+         (changePage)="onChangePage($event)"></yz-page>
+<router-outlet></router-outlet>
+
 

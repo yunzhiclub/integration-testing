@@ -1,0 +1,9 @@
+.td {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.text-pack {
+  max-width: 200px;
+  word-wrap: break-word;
+}
