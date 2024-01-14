@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
-import {User} from "../../../entity/user";
-import {UserService} from "../../../service/user.service";
+import {Project} from "../../../entity/project";
+import {ProjectService} from "../../../service/project.service";
 import {CommonService} from "../../../service/common-service";
 
 @Component({
@@ -13,25 +13,27 @@ import {CommonService} from "../../../service/common-service";
 export class AddComponent implements OnInit{
   formGroup: FormGroup;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private userService: UserService,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private projectService: ProjectService,
               private commonService: CommonService) {
   }
-
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       name: new FormControl<string>(''),
-      username: new FormControl<string>(''),
-      contactPhone: new FormControl<string>(''),
-      role: new FormControl<string>('user'),
-    });
+      projectUrl: new FormControl<string>(''),
+      repositoryUrl: new FormControl<string>('')
+    })
+  }
+
+  onClose() {
+    this.router.navigate(['../'], {relativeTo: this.route})
   }
 
   onSubmit() {
-    const user = this.formGroup.value as User;
+    const project = this.formGroup.value as Project;
 
-    this.userService.addAction(user).subscribe({
+    this.projectService.addAction(project).subscribe({
       next: () => {
         this.commonService.success(() => {
           this.onClose();
@@ -43,10 +45,4 @@ export class AddComponent implements OnInit{
       }
     });
   }
-
-  onClose() {
-    this.router.navigate(['../'], {relativeTo: this.route})
-  }
-
-
 }
