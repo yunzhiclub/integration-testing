@@ -2,9 +2,11 @@ import {NgModule} from "@angular/core";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {MockApiInterceptor} from "@yunzhi/ng-mock-api";
 import {UserApi} from "./user-api";
+import {ProjectApi} from "./projectApi";
 
  const apis = [
-  UserApi
+    UserApi,
+    ProjectApi
 ]
 /**
  * 用于脱离后台跑demo

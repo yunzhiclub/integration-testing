@@ -16,3 +16,8 @@ div.mat-mdc-dialog-surface.mdc-dialog__surface {
   pointer-events: auto;
   overflow-y: unset;
 }
+
+.td {
+  word-wrap: break-word;
+  word-break: break-all;
+}
