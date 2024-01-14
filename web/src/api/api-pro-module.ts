@@ -6,7 +6,7 @@ import {
   NullOrUndefinedOrEmptyInterceptor,
   Prevent401Popup,
 } from "@yunzhi/ng-common";
-import {XAuthTokenInterceptor} from "../interceptor/xauth-token.interceptor";
+import {XauthTokenIntercepor} from "../intercepor/xauth-token.intercepor";
 /**
  *  启动后台使用
  */
@@ -30,7 +30,7 @@ import {XAuthTokenInterceptor} from "../interceptor/xauth-token.interceptor";
     {
       multi: true,
       provide: HTTP_INTERCEPTORS,
-      useClass: XAuthTokenInterceptor
+      useClass: XauthTokenIntercepor
     }
   ]
 })
