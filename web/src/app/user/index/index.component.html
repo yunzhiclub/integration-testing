@@ -29,10 +29,7 @@
     <td>{{user?.name}}</td>
     <td>{{user?.username}}</td>
     <td>{{user?.dirtyContactPhone}}</td>
-    <td>
-      <ng-container *ngIf="user?.role === 'admin'">管理员</ng-container>
-      <ng-container *ngIf="user?.role === 'user'">普通用户</ng-container>
-    </td>
+    <td>{{user?.role | role}}</td>
     <td>
       <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{user.id}}"><i class="fa fas fa-pen"></i></a>
       <a class="text-danger mr-3" matTooltip="删除" (click)="delete(user.name, user.id)" ><i class="fa fas fa-trash"></i></a>

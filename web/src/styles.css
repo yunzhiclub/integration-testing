@@ -21,3 +21,7 @@ div.mat-mdc-dialog-surface.mdc-dialog__surface {
   word-wrap: break-word;
   word-break: break-all;
 }
+
+.jasmine-results > .jasmine-summary {
+  display: none;
+}

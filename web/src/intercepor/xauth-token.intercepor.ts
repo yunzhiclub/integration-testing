@@ -6,13 +6,13 @@ import {catchError, Observable, tap, throwError} from 'rxjs';
  * token 拦截器
  */
 @Injectable()
-export class XAuthTokenInterceptor implements HttpInterceptor {
-  
+export class XauthTokenIntercepor implements HttpInterceptor {
+
   private static token = window.sessionStorage.getItem('x-auth-token');
-  
+
   constructor() {
   }
-  
+
   /**
    * 设置token，如果没有什么都不做
    *
@@ -24,7 +24,7 @@ export class XAuthTokenInterceptor implements HttpInterceptor {
       window.sessionStorage.setItem('x-auth-token', xAuthToken);
     }
   }
-  
+
   /**
    * 清除token
    */
@@ -32,28 +32,28 @@ export class XAuthTokenInterceptor implements HttpInterceptor {
     this.token = null;
     window.sessionStorage.removeItem('x-auth-token');
   }
-  
+
   /**
    * 获取当前token
    */
   public static getToken(): string | number | null {
-    return XAuthTokenInterceptor.token;
+    return XauthTokenIntercepor.token;
   }
-  
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (XAuthTokenInterceptor.token !== null) {
-      request = request.clone({setHeaders: {'x-auth-token': XAuthTokenInterceptor.token}});
+    if (XauthTokenIntercepor.token !== null) {
+      request = request.clone({setHeaders: {'x-auth-token': XauthTokenIntercepor.token}});
     }
-    
+
     return next.handle(request).pipe(catchError((err: any) => {
       return throwError(err);
     },), tap(input => {
       if (input instanceof HttpResponseBase) {
         const httpHeader = input.headers;
         const xAuthToken = httpHeader.get('x-auth-token');
-        
+
         if (xAuthToken !== null) {
-          XAuthTokenInterceptor.setToken(xAuthToken);
+          XauthTokenIntercepor.setToken(xAuthToken);
         }
       }
     }));

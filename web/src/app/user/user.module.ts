@@ -10,16 +10,18 @@ import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {RoleSelectComponent} from "./role-select/role-select.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {RolePipe} from "../../pipe/role.pipe";
 
 
 
 @NgModule({
-  declarations: [
-    IndexComponent,
-    AddComponent,
-    EditComponent,
-    RoleSelectComponent
-  ],
+    declarations: [
+        IndexComponent,
+        AddComponent,
+        EditComponent,
+        RoleSelectComponent,
+        RolePipe
+    ],
     imports: [
         CommonModule,
         UserRoutingModule,
