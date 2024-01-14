@@ -65,8 +65,6 @@ jobs:
 
   angular-build: 
     runs-on: self-hosted
-    needs: [ unit-test, spring-boot-test ]
-
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v4 
@@ -83,29 +81,29 @@ jobs:
          npm run build
          mv dist/* ../dist
   
-  spring-boot-build:
-    runs-on: self-hosted
-    needs: [ unit-test, spring-boot-test ]
+  # spring-boot-build:
+  #   runs-on: self-hosted
+  #   needs: [ unit-test, spring-boot-test ]
 
-    steps: 
-      - name: Checkout repository
-        uses: actions/checkout@v4 
+  #   steps: 
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4 
       
-      - name: Set up JDK17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-      - name: spring-boot-build
-        run: |
-          cd api
-          env
-          node -v 
-          npm -v
-          mvn -v
-          mvn package -Dmaven.test.skip=true
-          mv target/*.jar ../app.jar
+  #     - name: Set up JDK17
+  #       uses: actions/setup-java@v3
+  #       with:
+  #         java-version: '17'
+  #         distribution: 'temurin'
+  #         cache: maven
+  #     - name: spring-boot-build
+  #       run: |
+  #         cd api
+  #         env
+  #         node -v 
+  #         npm -v
+  #         mvn -v
+  #         mvn package -Dmaven.test.skip=true
+  #         mv target/*.jar ../app.jar
         
   dingding-error:
     runs-on: ubuntu-latest
