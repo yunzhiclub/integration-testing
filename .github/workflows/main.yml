@@ -64,7 +64,7 @@ jobs:
           mvn --batch-mode package
 
   angular-build: 
-    runs-on: self-hosted
+    runs-on: github-cd
     needs: [ unit-test, spring-boot-test ]
 
     steps: 
@@ -84,7 +84,7 @@ jobs:
          mv dist/* ../dist
   
   spring-boot-build:
-    runs-on: self-hosted
+    runs-on: github-cd
     needs: [ unit-test, spring-boot-test ]
 
     steps: 
