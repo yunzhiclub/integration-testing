@@ -1,16 +1,34 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {ProjectComponent} from "./project/project.component";
 import {LargeItemComponent} from "./large-item/large-item.component";
 import {SmallItemComponent} from "./small-item/small-item.component";
 import {TestComponent} from "./test/test.component";
-import {AddComponent} from "./project/add/add.component";
-import {EditComponent} from "./project/edit/edit.component";
+import {IndexComponent} from "./index/index.component";
+import {AddComponent} from "./add/add.component";
+import {EditComponent} from "./edit/edit.component";
+import {DialogEntryComponent} from "../../common/dialog-entry/dialog-entry-component";
+
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectComponent
+    component: IndexComponent,
+    children: [
+      {
+        path: 'add',
+        component: DialogEntryComponent,
+        data: {
+          component: AddComponent
+        }
+      },
+      {
+        path: 'edit/:id',
+        component: DialogEntryComponent,
+        data: {
+          component: EditComponent
+        }
+      }
+    ]
   },
   {
     path: 'testPlan',

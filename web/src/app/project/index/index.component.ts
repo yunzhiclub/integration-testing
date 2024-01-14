@@ -1,18 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseComponent} from "../../share/base-component";
 import {FormControl} from "@angular/forms";
 import {Page} from "@yunzhi/ng-common";
-import {environment} from "../../../environments/environment";
 import {Project} from "../../../entity/project";
-import {takeUntil} from "rxjs";
+import {environment} from "../../../environments/environment";
 import {ProjectService} from "../../../service/project.service";
+import {takeUntil} from "rxjs";
+import {BaseComponent} from "../../share/base-component";
+import {CommonService} from "../../../service/common-service";
 
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.css']
+  selector: 'app-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.css']
 })
-export class ProjectComponent extends BaseComponent implements OnInit{
+export class IndexComponent extends BaseComponent implements OnInit{
   name = new FormControl<string>('');
   pageData = new Page<Project>();
 
@@ -22,7 +23,8 @@ export class ProjectComponent extends BaseComponent implements OnInit{
     name: ''
   };
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService,
+              private commonService: CommonService) {
     super();
   }
 
@@ -56,7 +58,15 @@ export class ProjectComponent extends BaseComponent implements OnInit{
     this.reload();
   }
 
-  delete(id: number) {
-
+  delete(name: string, id: number) {
+    this.commonService.confirm(() => {
+      this.projectService.deleteAction(id).subscribe(() => {
+        this.commonService.success(() => {
+        }, '删除成功');
+      }, error => {
+        this.commonService.error(() => {
+        }, '删除失败' + error)
+      });
+    }, '是否删除' + name);
   }
 }
