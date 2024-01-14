@@ -1,6 +1,14 @@
 name: GitHub Actions
 run-name: integration-testing
 
+env:
+  DB_NAME: "integration-testing"
+  DB_USER: "integrationTesting"
+  DB_PASSWORD: "integrationTesting"
+  DB_ROOT_PASSWORD: "yunzhi.club"
+  HTTP_EXPORT_PORT: 17142
+  DB_EXPORT_PORT: 17142 
+
 on:
   pull_request:
     branches: [ main ]
@@ -31,7 +39,6 @@ jobs:
 
   spring-boot-test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -57,8 +64,51 @@ jobs:
           mvn -v
           mvn test
           mvn --batch-mode package
-          
 
+  angular-build: 
+    runs-on: self-hosted
+    needs: [ unit-test, spring-boot-test ]
+
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+    
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.16.0
+      - name: angular-build
+        run: |
+         cd web
+         env
+         npm install -dd
+         npm run build
+         mv dist/* ../dist
+  
+  spring-boot-build:
+    runs-on: self-hosted
+    needs: [ unit-test, spring-boot-test ]
+
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4 
+      
+      - name: Set up JDK17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: spring-boot-build
+        run: |
+          cd api
+          env
+          node -v 
+          npm -v
+          mvn -v
+          mvn package -Dmaven.test.skip=true
+          mv target/*.jar ../app.jar
+        
   dingding-error:
     runs-on: ubuntu-latest
     needs: [ unit-test, spring-boot-test ]
@@ -76,6 +126,7 @@ jobs:
                   "content": '[打叉][打叉][打叉]  执行失败\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
               }
             }
+     
 
   dingding-success:
     runs-on: ubuntu-latest
