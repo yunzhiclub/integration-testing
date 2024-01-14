@@ -18,7 +18,7 @@ export class UserApi implements MockApiInterface {
     name: randomString('name'),
     username: randomString('username'),
     dirtyContactPhone: '1390****234',
-    role: 'admin'
+    role: 'role_admin'
   } as User;
 
   getInjectors(): ApiInjector[] {
@@ -108,7 +108,7 @@ export class UserApi implements MockApiInterface {
               dirtyContactPhone: randomString('181****0000'),
               username: randomString('0304210123'),
               password: randomString('yunzhi'),
-              role: 'user'
+              role: 'role_user'
             } as User;
           });
         }
@@ -146,7 +146,7 @@ export class UserApi implements MockApiInterface {
             name: user.name,
             username: user.username,
             dirtyContactPhone: '181****0000',
-            role: 'user'
+            role: 'role_user'
           } as User
         }
       },
@@ -191,7 +191,7 @@ export class UserApi implements MockApiInterface {
       name: randomString('name', 4),
       contactPhone: '13800138000',
       dirtyContactPhone: '13800138000',
-      role: 'user'
+      role: 'role_user'
     } as User;
   }
 

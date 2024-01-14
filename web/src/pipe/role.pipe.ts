@@ -11,10 +11,10 @@ export class RolePipe implements PipeTransform {
   transform(value: string): string {
     let result: string = '';
     switch (value) {
-      case 'admin':
+      case 'role_admin':
         result = "管理员";
         break;
-      case 'user':
+      case 'role_user':
         result = "普通成员";
         break;
     }
