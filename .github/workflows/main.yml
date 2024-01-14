@@ -64,7 +64,7 @@ jobs:
           mvn --batch-mode package
 
   angular-build: 
-    runs-on: self-hosted
+    runs-on: github-cd
     steps: 
       - name: Checkout repository
         uses: actions/checkout@v4 
