@@ -9,17 +9,17 @@ import {BaseComponent} from "../../share/base-component";
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent extends BaseComponent implements OnInit{
+export class IndexComponent extends BaseComponent implements OnInit {
   user: User | undefined;
 
   constructor(private userService: UserService) {
     super();
   }
+
   ngOnInit(): void {
     this.userService.select(UserService.currentUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
         this.user = data;
       });
   }
-
 }
