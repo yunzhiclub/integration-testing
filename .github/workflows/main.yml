@@ -6,8 +6,6 @@ env:
   DB_USER: "integrationTesting"
   DB_PASSWORD: "integrationTesting"
   DB_ROOT_PASSWORD: "yunzhi.club"
-  HTTP_EXPORT_PORT: 17142
-  DB_EXPORT_PORT: 17142 
 
 on:
   pull_request:
