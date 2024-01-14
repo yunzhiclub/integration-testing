@@ -4,14 +4,12 @@ import com.mengyunzhi.integrationTesting.dto.UserDto;
 import com.mengyunzhi.integrationTesting.entity.User;
 import com.mengyunzhi.integrationTesting.service.UserService;
 import net.bytebuddy.utility.RandomString;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
