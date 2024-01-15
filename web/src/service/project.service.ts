@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Action, Store} from '@tethys/store';
 import {Page} from "@yunzhi/ng-common";
 import {Assert} from "@yunzhi/utils";
 import {Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Project} from "../entity/project";
-import {User} from "../entity/user";
 import * as _ from "lodash";
+import {TestPlan} from "../entity/testPlan";
 
 /**
  * 项目的状态管理
@@ -14,7 +14,10 @@ import * as _ from "lodash";
 interface ProjectState extends Store<Project>{
   pageData: Page<Project>;
   httpParams: {page: number, size: number, name?: string};
-  getById: Project
+  getById: Project,
+  projectId: number,
+  testPlanPageData: Page<TestPlan>;
+  testPlanParam: {page: number, size: number, name?: string};
 }
 @Injectable({
   providedIn: 'root'
@@ -25,6 +28,11 @@ export class ProjectService extends Store<ProjectState>{
     return state.pageData;
   }
 
+  static testPlanPageData(state: ProjectState): Page<TestPlan> {
+    return state.testPlanPageData;
+  }
+
+
   static getById(state: ProjectState): Project {
     return state.getById;
   }
@@ -33,7 +41,8 @@ export class ProjectService extends Store<ProjectState>{
     super( {
       pageData: new Page<Project>({}),
       httpParams: {page: 0, size: 0, name: ''},
-      getById: null
+      getById: null,
+      testPlanParam: {page: 0, size: 0, name: ''},
     });
   }
 
@@ -114,6 +123,35 @@ export class ProjectService extends Store<ProjectState>{
 
       this.pageAction(state.httpParams);
     }));
+  }
+
+  @Action()
+  deleteTestPlanAction(id: number): Observable<void> {
+    Assert.isNumber(id, 'id类型不正确');
+    return this.httpClient.delete<void>(`/project/testPlan/${id}`).pipe(tap(() => {
+      const state = this.getState();
+      state.pageData.content = state.pageData.content.filter(testPlan => testPlan.id !== id);
+      this.next(state);
+
+      this.pageAction(state.httpParams);
+    }));
+  }
+
+  @Action()
+  testPlanPageAction(id: number, payload: {page: number; size: number; name?: string}): Observable<Page<TestPlan>> {
+    Assert.isNumber(payload.page, 'page不能为空');
+    Assert.isNumber(payload.size, 'size不能为空');
+
+    //获取state快照
+    const state = this.snapshot;
+    state.testPlanParam = payload;
+    state.projectId = id;
+    return this.httpClient.get<Page<TestPlan>>(`/project/getTestPlanPage/${id}`, {params: payload}).pipe(
+      tap(data => {
+        state.testPlanPageData = new Page<TestPlan>(data);
+        this.next(state);
+      }),
+    );
   }
 
 }

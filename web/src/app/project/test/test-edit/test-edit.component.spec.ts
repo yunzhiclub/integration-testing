@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestComponent } from './test.component';
+import { TestEditComponent } from './test-edit.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ReactiveFormsModule} from "@angular/forms";
 
-describe('TestComponent', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+describe('TestEditComponent', () => {
+  let component: TestEditComponent;
+  let fixture: ComponentFixture<TestEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestComponent ],
+      declarations: [ TestEditComponent ],
       imports: [
         HttpClientTestingModule,
         YzSizeModule,
@@ -23,7 +23,7 @@ describe('TestComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
+    fixture = TestBed.createComponent(TestEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
