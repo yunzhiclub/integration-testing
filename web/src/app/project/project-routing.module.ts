@@ -7,6 +7,8 @@ import {IndexComponent} from "./index/index.component";
 import {AddComponent} from "./add/add.component";
 import {EditComponent} from "./edit/edit.component";
 import {DialogEntryComponent} from "../../common/dialog-entry/dialog-entry-component";
+import {TestAddComponent} from "./test/test-add/test-add.component";
+import {TestEditComponent} from "./test/test-edit/test-edit.component";
 
 
 const routes: Routes = [
@@ -31,8 +33,24 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'testPlan',
-    component: TestComponent
+    path: 'testPlan/:id',
+    component: TestComponent,
+    children: [
+      {
+        path: 'add',
+        component: DialogEntryComponent,
+        data: {
+          component: TestAddComponent
+        }
+      },
+      {
+        path: 'edit/:id',
+        component: DialogEntryComponent,
+        data: {
+          component: TestEditComponent
+        }
+      }
+    ]
   },
   {
     path: 'largeItem',

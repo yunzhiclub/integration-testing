@@ -1,9 +1,9 @@
 import {ApiInjector, MockApiInterface, RequestOptions} from "@yunzhi/ng-mock-api";
 import {HttpParams} from "@angular/common/http";
 import {generatePage} from "@yunzhi/ng-common";
-import {User} from "../entity/user";
-import {randomNumber, randomString} from "@yunzhi/utils";
+import {Assert, randomNumber, randomString} from "@yunzhi/utils";
 import {Project} from "../entity/project";
+import {TestPlan} from "../entity/testPlan";
 
 export class ProjectApi implements MockApiInterface {
   getInjectors(): ApiInjector[] {
@@ -76,6 +76,37 @@ export class ProjectApi implements MockApiInterface {
       {
         url: '/project/(\\d+)',
         method: 'DELETE',
+      },
+      {
+        url: '/project/testPlan/(\\d+)',
+        method: 'DELETE',
+      },
+      {
+        url: '/project/getTestPlanPage/(\\d+)',
+        method: 'GET',
+        result: (urlMatcher: string[], options: RequestOptions) => {
+          let projectId: number;
+          const params = options.params as HttpParams;
+          const page = +params.get('page');
+          const size = +params.get('size');
+          const name = params.get('name') ? params.get('name') : '';
+
+          Assert.isInteger(page, 'page类型不存在');
+          Assert.isInteger(size, 'size类型不存在');
+
+          if (urlMatcher) {
+            projectId = +urlMatcher[1];
+          }
+          return generatePage<TestPlan>(page, size, index => {
+              return {
+                id: index + 1,
+                title: randomString('12'),
+                describe: randomString('测试'),
+                createTime: new Date().getTime()
+              } as TestPlan;
+            }
+          );
+        }
       },
     ];
   }
