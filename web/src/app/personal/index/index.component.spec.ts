@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IndexComponent } from './index.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
+import {UserModule} from "../../user/user.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('personal->IndexComponent', () => {
   let component: IndexComponent;
@@ -13,7 +15,10 @@ describe('personal->IndexComponent', () => {
       declarations: [ IndexComponent ],
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        UserModule,
+        FormsModule,
+        ReactiveFormsModule
       ]
     })
     .compileComponents();
