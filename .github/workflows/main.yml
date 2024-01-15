@@ -70,6 +70,7 @@ jobs:
       - name: angular-build
         run: |
          docker pull registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
+         docker run registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
          docker ps
          cd web
          env
