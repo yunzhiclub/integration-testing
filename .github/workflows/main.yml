@@ -69,7 +69,7 @@ jobs:
       #     node-version: 18.16.0
       - name: angular-build
         run: |
-         docker pull registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0
+         docker pull registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0 
          docker run -it registry.cn-beijing.aliyuncs.com/mengyunzhi/node-chrome:18.16.0 bash
          docker ps
          cd web
