@@ -60,7 +60,13 @@ jobs:
   angular-build: 
     runs-on: self-hosted
     steps: 
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.16.0
       - name: angular-build
         run: |
          docker ps
