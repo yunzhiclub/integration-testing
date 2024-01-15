@@ -94,7 +94,7 @@ jobs:
          env
          mvn -v
          mvn package -Dmaven.test.skip
-         mv target/*.jar ../api.jar
+         
   
         
   dingding-error:
