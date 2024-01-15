@@ -160,6 +160,22 @@ export class UserApi implements MockApiInterface {
         method: 'PUT',
         result: randomString('', 6)
       },
+      {
+        method: 'GET',
+        url: '/user/checkPasswordIsRight',
+        description: '验证密码是否正确',
+        result: (urlMatches: any, options: RequestOptions) => {
+          const param = options.params as HttpParams;
+          const oldPassword = param.get('oldPassword');
+          Assert.isString(oldPassword, 'oldPassword 不能为空');
+          return oldPassword === 'yunzhi';
+        }
+      },
+      {
+        method: 'PUT',
+        url: '/user/updatePassword',
+        description: '修改密码'
+      },
     ];
   }
 
