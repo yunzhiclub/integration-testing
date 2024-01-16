@@ -156,12 +156,12 @@ jobs:
           rm -f /home/app/${{ env.PROJECT_NAME }}/application.yml
           rm -rf /home/app/${{ env.PROJECT_NAME }}/web
   
-      - name: Copy Files
-        run: |
-            cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar \
-            /home/app/${{ env.PROJECT_NAME }}/app.jar
-            cp -r /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/dist \
-            /home/app/${{ env.PROJECT_NAME }}/web
+      - name: Copy app.jar to target directory
+        run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+      
+      - name: Copy dist directory to target directory
+        run: cp -r /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/dist /home/app/${{ env.PROJECT_NAME }}/web
+        
   
       - name: Update Nginx Configuration
         run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
