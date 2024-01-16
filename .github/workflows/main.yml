@@ -158,138 +158,135 @@ jobs:
       - name: Copy dist directory to target directory
         run: cp -r /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/dist /home/app/${{ env.PROJECT_NAME }}/web
           
-  
       - name: Copy app.jar to target directory
-        run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
-      
-      
+        run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
       
   
-      # - name: Update Nginx Configuration
-      #   run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
+      - name: Update Nginx Configuration
+        run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
   
-      # - name: Update Application Configuration
-      #   run: |
-      #     sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" cd/application.yml | \
-      #     sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
-      #     sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
-      #     sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
+      - name: Update Application Configuration
+        run: |
+          sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" cd/application.yml | \
+          sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
+          sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
+          sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
     
-      # - name: Display Nginx Configuration
-      #   run: cat cd/nginx.conf
+      - name: Display Nginx Configuration
+        run: cat cd/nginx.conf
   
-      # - name: Copy Nginx Configuration
-      #   run: cp cd/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+      - name: Copy Nginx Configuration
+        run: cp cd/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
   
-      # - name: Stop Existing Containers
-      #   run: |
-      #     if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
-      #     docker stop ${{ env.PROJECT_NAME }}-api
-      #     fi
-      #     if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
-      #       docker stop ${{ env.PROJECT_NAME }}-nginx
-      #     fi
-      #     if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
-      #       docker stop ${{ env.PROJECT_NAME }}-db
-      #     fi
+      - name: Stop Existing Containers
+        run: |
+          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+          docker stop ${{ env.PROJECT_NAME }}-api
+          fi
+          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
+            docker stop ${{ env.PROJECT_NAME }}-nginx
+          fi
+          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
+            docker stop ${{ env.PROJECT_NAME }}-db
+          fi
   
-      # - name: Remove API Container if ResetAPI Tag
-      #   run: |
-      #     if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == *"refs/tags/#resetapi"* ]]; then
-      #       if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
-      #         echo 'remove api container' && docker rm ${{ env.PROJECT_NAME }}-api
-      #       fi
-      #     fi
+      - name: Remove API Container if ResetAPI Tag
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == *"refs/tags/#resetapi"* ]]; then
+            if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+              echo 'remove api container' && docker rm ${{ env.PROJECT_NAME }}-api
+            fi
+          fi
   
-      # - name: Backup Database if BackDB Tag
-      #   run: |
-      #     if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == *"refs/tags/#backdb"* ]]; then
-      #       echo 'backup db'
-      #       NOW=$(date +"%Y-%m-%d-%H-%M-%S")
-      #       tar czf /home/app/${{ env.PROJECT_NAME }}/backups/dbbackup-$NOW.tar.gz /home/app/${{ env.PROJECT_NAME }}/db
-      #     fi
+      - name: Backup Database if BackDB Tag
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == *"refs/tags/#backdb"* ]]; then
+            echo 'backup db'
+            NOW=$(date +"%Y-%m-%d-%H-%M-%S")
+            tar czf /home/app/${{ env.PROJECT_NAME }}/backups/dbbackup-$NOW.tar.gz /home/app/${{ env.PROJECT_NAME }}/db
+          fi
   
-      # - name: Reset Database if ResetDB Tag
-      #   run: |
-      #     if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == *"refs/tags/#resetdb"* ]]; then
-      #       if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" != *"refs/tags/#backdb"* ]]; then
-      #         echo 'backup db'
-      #         NOW=$(date +"%Y-%m-%d-%H-%M-%S")
-      #         tar czf /home/app/${{ env.PROJECT_NAME }}/backups/dbbackup-$NOW.tar.gz /home/app/${{ env.PROJECT_NAME }}/db
-      #       fi
-      #       if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
-      #         echo 'remove db container' && docker rm ${{ env.PROJECT_NAME }}-db && rm -rf /home/app/${{ env.PROJECT_NAME }}/db
-      #       fi
-      #     if
+      - name: Reset Database if ResetDB Tag
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == *"refs/tags/#resetdb"* ]]; then
+            if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" != *"refs/tags/#backdb"* ]]; then
+              echo 'backup db'
+              NOW=$(date +"%Y-%m-%d-%H-%M-%S")
+              tar czf /home/app/${{ env.PROJECT_NAME }}/backups/dbbackup-$NOW.tar.gz /home/app/${{ env.PROJECT_NAME }}/db
+            fi
+            if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
+              echo 'remove db container' && docker rm ${{ env.PROJECT_NAME }}-db && rm -rf /home/app/${{ env.PROJECT_NAME }}/db
+            fi
+          if
   
-      # - name: Reset Nginx or Web if ResetNginx or ResetWeb Tag
-      #   run: |
-      #     if [[ "${{ github.event_name }}" == "push" && ( "${{ github.ref }}" == *"refs/tags/#resetnginx"* || "${{ github.ref }}" == *"refs/tags/#resetweb"* ) ]]; then
-      #       if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
-      #         echo 'remove nginx container' && docker rm ${{ env.PROJECT_NAME }}-nginx
-      #       fi
-      #     fi
+      - name: Reset Nginx or Web if ResetNginx or ResetWeb Tag
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && ( "${{ github.ref }}" == *"refs/tags/#resetnginx"* || "${{ github.ref }}" == *"refs/tags/#resetweb"* ) ]]; then
+            if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
+              echo 'remove nginx container' && docker rm ${{ env.PROJECT_NAME }}-nginx
+            fi
+          fi
   
-      # - name: Create Docker Network if Not Exist
-      #   run: |
-      #     docker network inspect ${{ env.PROJECT_NAME }}-network >/dev/null 2>&1 || \
-      #     docker network create --driver bridge ${{ env.PROJECT_NAME }}-network
+      - name: Create Docker Network if Not Exist
+        run: |
+          docker network inspect ${{ env.PROJECT_NAME }}-network >/dev/null 2>&1 || \
+          docker network create --driver bridge ${{ env.PROJECT_NAME }}-network
   
-      # - name: Create or Check Nginx Container
-      #   run: |
-      #     if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
-      #     echo "${{ env.PROJECT_NAME }}-nginx exist"
-      #     else
-      #       echo "create ${{ env.PROJECT_NAME }}-nginx"
-      #       docker create -p ${{ env.HTTP_EXPORT_PORT }}:80 --cpus=1 --memory=1G --name=${{ env.PROJECT_NAME }}-nginx \
-      #       --network=${{ env.PROJECT_NAME }}-network \
-      #       -v /home/app/${{ env.PROJECT_NAME }}/web:/usr/share/nginx/html:ro \
-      #       -v /home/app/${{ env.PROJECT_NAME }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
-      #       nginx
-      #     fi
+      - name: Create or Check Nginx Container
+        run: |
+          if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
+          echo "${{ env.PROJECT_NAME }}-nginx exist"
+          else
+            echo "create ${{ env.PROJECT_NAME }}-nginx"
+            docker create -p ${{ env.HTTP_EXPORT_PORT }}:80 --cpus=1 --memory=1G --name=${{ env.PROJECT_NAME }}-nginx \
+            --network=${{ env.PROJECT_NAME }}-network \
+            -v /home/app/${{ env.PROJECT_NAME }}/web:/usr/share/nginx/html:ro \
+            -v /home/app/${{ env.PROJECT_NAME }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+            nginx
+          fi
   
-      # - name: Create or Check Database Container
-      #   run: |
-      #     if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
-      #       echo "${{ env.PROJECT_NAME }}-db exist"
-      #     else
-      #       echo "create ${{ env.PROJECT_NAME }}-db"
-      #       docker create --cpus=1 --memory=2G --name=${{ env.PROJECT_NAME }}-db \
-      #       -p ${{ env.DB_EXPORT_PORT }}:3306 \
-      #       --network=${{ env.PROJECT_NAME }}-network \
-      #       -e MYSQL_ROOT_PASSWORD=${{ env.DB_ROOT_PASSWORD }} -e MYSQL_DATABASE=${{ env.DB_NAME }} \
-      #       -e MYSQL_USER=${{ env.DB_USER }} -e MYSQL_PASSWORD=${{ env.DB_PASSWORD }} \
-      #       -v /home/app/${{ env.PROJECT_NAME }}/db:/var/lib/mysql \
-      #       mysql:5.7 \
-      #       --character-set-server=utf8mb4 \
-      #       --collation-server=utf8mb4_unicode_ci
-      #     fi
+      - name: Create or Check Database Container
+        run: |
+          if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
+            echo "${{ env.PROJECT_NAME }}-db exist"
+          else
+            echo "create ${{ env.PROJECT_NAME }}-db"
+            docker create --cpus=1 --memory=2G --name=${{ env.PROJECT_NAME }}-db \
+            -p ${{ env.DB_EXPORT_PORT }}:3306 \
+            --network=${{ env.PROJECT_NAME }}-network \
+            -e MYSQL_ROOT_PASSWORD=${{ env.DB_ROOT_PASSWORD }} -e MYSQL_DATABASE=${{ env.DB_NAME }} \
+            -e MYSQL_USER=${{ env.DB_USER }} -e MYSQL_PASSWORD=${{ env.DB_PASSWORD }} \
+            -v /home/app/${{ env.PROJECT_NAME }}/db:/var/lib/mysql \
+            mysql:5.7 \
+            --character-set-server=utf8mb4 \
+            --collation-server=utf8mb4_unicode_ci
+          fi
 
-      # - name: Create or Check API Container
-      #   run: |
-      #     if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
-      #       echo "${{ env.PROJECT_NAME }}-api exist"
-      #     else
-      #       echo "create ${{ env.PROJECT_NAME }}-api"
-      #       docker create --cpus=2 --memory=4G --name=${{ env.PROJECT_NAME }}-api \
-      #       --network=${{ env.PROJECT_NAME }}-network \
-      #       --workdir=/opt/app \
-      #       -v /home/app/${{ env.PROJECT_NAME }}:/opt/app \
-      #       adoptopenjdk/openjdk8:jre8u282-b08-debian \
-      #       java -jar app.jar \
-      #       --spring.config.location=/opt/app/
-      #     fi
+      - name: Create or Check API Container
+        run: |
+          if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+            echo "${{ env.PROJECT_NAME }}-api exist"
+          else
+            echo "create ${{ env.PROJECT_NAME }}-api"
+            docker create --cpus=2 --memory=4G --name=${{ env.PROJECT_NAME }}-api \
+            --network=${{ env.PROJECT_NAME }}-network \
+            --workdir=/opt/app \
+            -v /home/app/${{ env.PROJECT_NAME }}:/opt/app \
+            adoptopenjdk/openjdk8:jre8u282-b08-debian \
+            java -jar app.jar \
+            --spring.config.location=/opt/app/
+          fi
 
-      # - name: Start Containers
-      #   run: |
-      #     docker start ${{ env.PROJECT_NAME }}-db
-      #     sleep 1m
-      #     docker start ${{ env.PROJECT_NAME }}-api
-      #     docker start ${{ env.PROJECT_NAME }}-nginx
-      #     sleep 1m
+      - name: Start Containers
+        run: |
+          docker start ${{ env.PROJECT_NAME }}-db
+          sleep 1m
+          docker start ${{ env.PROJECT_NAME }}-api
+          docker start ${{ env.PROJECT_NAME }}-nginx
+          sleep 1m
 
-      # - name: Display Running Containers
-      #   run: docker ps
+      - name: Display Running Containers
+        run: docker ps
   
           
   # dingding-error:
