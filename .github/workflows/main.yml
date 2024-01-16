@@ -228,10 +228,6 @@
               fi
             fi
     
-        - name: Create Docker Network if Not Exist
-          run: |
-            docker network inspect ${{ env.PROJECT_NAME }}-network >/dev/null 2>&1 || \
-            docker network create --driver bridge ${{ env.PROJECT_NAME }}-network
     
         - name: Create or Check Nginx Container
           run: |
