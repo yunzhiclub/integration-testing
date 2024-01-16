@@ -18,6 +18,7 @@ export class ProjectSelectComponent implements OnInit, ControlValueAccessor {
   searchOnChange = new BehaviorSubject<string>('');
   
   constructor(private projectService: ProjectService) {
+  
   }
   
   ngOnInit(): void {
@@ -29,7 +30,7 @@ export class ProjectSelectComponent implements OnInit, ControlValueAccessor {
     });
   }
   
-  registerOnChange(fn: (patient: Project) => void): void {
+  registerOnChange(fn: (project: Project) => void): void {
     this.projectSelect.valueChanges.subscribe((data => {
       fn(data);
     }));
@@ -41,12 +42,12 @@ export class ProjectSelectComponent implements OnInit, ControlValueAccessor {
   setDisabledState(isDisabled: boolean): void {
   }
   
-  writeValue(patient: Project): void {
-    if (patient === null) {
+  writeValue(project: Project): void {
+    if (project === null) {
       return;
     }
     
-    this.projectSelect.setValue(patient);
+    this.projectSelect.setValue(project);
   }
   
   /**
