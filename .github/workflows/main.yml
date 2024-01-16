@@ -85,6 +85,7 @@ jobs:
          npm install --no-audit
          npm run build
          mv dist/* ../dist
+         ls -l ../
       - name: Upload API Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -115,7 +116,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-jar
-          path: app-jar 
+          path: ../app.jar 
   
   # deploy: 
   #   runs-on: self-hosted
