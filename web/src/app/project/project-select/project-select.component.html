@@ -1,0 +1,5 @@
+<nz-select nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="请选择项目"  [compareWith]="compareFn" [formControl]="projectSelect" (nzOnSearch)="onSearch($event)">
+  <nz-option nzCustomContent *ngFor="let project of projects" [nzLabel]="project.name" [nzValue]="project">
+    {{project?.name}}
+  </nz-option>
+</nz-select>

@@ -153,5 +153,13 @@ export class ProjectService extends Store<ProjectState>{
       }),
     );
   }
+  
+  /**
+   * 获取全部项目
+   * @param name 项目名称
+   */
+  getAll(name?: string): Observable<Project[]> {
+    return this.httpClient.get<Project[]>('/project/getAll', {params: {name}});
+  }
 
 }

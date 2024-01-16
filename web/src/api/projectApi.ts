@@ -60,6 +60,15 @@ export class ProjectApi implements MockApiInterface {
         }
       },
       {
+        url: '/project/getAll',
+        method: 'GET',
+        result: (urlMatch: string[], options: RequestOptions) => {
+          const param = options.params as HttpParams;
+          const name = param.get('name') ? param.get('name') : '';
+          return this.getProjects(randomNumber(20), name);
+        }
+      },
+      {
         url: '/project/(\\d+)',
         method:  'PUT',
         result: (urlMatcher: string[], options: {body: {name: string, projectUrl: string, repositoryUrl: string}}) => {
@@ -109,6 +118,21 @@ export class ProjectApi implements MockApiInterface {
         }
       },
     ];
+  }
+  
+  getProjects(size: number, name?: string): Project[] {
+    const patients = new Array<Project>();
+    
+    for (let i = 0; i < size; i++) {
+      const patient = {
+        id: i,
+        name: name ? name : '牙科管理系统',
+        projectUrl: ' http://app.mengyunzhi.com:17121',
+        repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry'
+      } as Project;
+      patients.push(patient);
+    }
+    return patients;
   }
 
 }
