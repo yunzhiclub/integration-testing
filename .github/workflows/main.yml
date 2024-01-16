@@ -159,8 +159,9 @@ jobs:
         run: cp -r /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/dist /home/app/${{ env.PROJECT_NAME }}/web
           
   
-      # - name: Copy app.jar to target directory
-      #   run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+      - name: Copy app.jar to target directory
+        run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+      
       
       
   
