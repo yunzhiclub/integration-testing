@@ -198,7 +198,7 @@ jobs:
           
   dingding-error:
     runs-on: ubuntu-latest
-    needs: [angular-build ]
+    needs: [angular-build, api-build]
     if: ${{ failure() }}
     steps:
       - uses: actions/checkout@v4
@@ -217,7 +217,7 @@ jobs:
 
   dingding-success:
     runs-on: ubuntu-latest
-    needs: [ angular-build ]
+    needs: [ angular-build, api-build ]
     if: ${{ success() }}
     steps:
       - uses: actions/checkout@v4
