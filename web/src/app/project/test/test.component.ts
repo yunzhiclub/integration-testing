@@ -33,7 +33,6 @@ export class TestComponent extends BaseComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log('1', this.param)
     this.route.params.pipe(
       filter(params => params.hasOwnProperty('id')))
       .subscribe(params => {
