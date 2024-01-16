@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { PersonalRoutingModule } from './personal-routing.module';
 import { IndexComponent } from './index/index.component';
+import {UserModule} from "../user/user.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { IndexComponent } from './index/index.component';
   ],
   imports: [
     CommonModule,
-    PersonalRoutingModule
+    PersonalRoutingModule,
+    UserModule,
+    ReactiveFormsModule
   ]
 })
 export class PersonalModule { }

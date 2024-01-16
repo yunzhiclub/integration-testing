@@ -4,6 +4,7 @@ import {User} from "../entity/user";
 import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {generatePage, HttpErrorResponse} from "@yunzhi/ng-common";
+import {TestPlan} from "../entity/testPlan";
 
 /**
  * 用户Mock数据
@@ -18,7 +19,7 @@ export class UserApi implements MockApiInterface {
     name: randomString('name'),
     username: randomString('username'),
     dirtyContactPhone: '1390****234',
-    role: 'admin'
+    role: 'role_admin'
   } as User;
 
   getInjectors(): ApiInjector[] {
@@ -108,7 +109,7 @@ export class UserApi implements MockApiInterface {
               dirtyContactPhone: randomString('181****0000'),
               username: randomString('0304210123'),
               password: randomString('yunzhi'),
-              role: 'user'
+              role: 'role_user'
             } as User;
           });
         }
@@ -146,7 +147,7 @@ export class UserApi implements MockApiInterface {
             name: user.name,
             username: user.username,
             dirtyContactPhone: '181****0000',
-            role: 'user'
+            role: 'role_user'
           } as User
         }
       },
@@ -158,6 +159,22 @@ export class UserApi implements MockApiInterface {
         url: '/user/resetPassword/(\\d+)',
         method: 'PUT',
         result: randomString('', 6)
+      },
+      {
+        method: 'GET',
+        url: '/user/checkPasswordIsRight',
+        description: '验证密码是否正确',
+        result: (urlMatches: any, options: RequestOptions) => {
+          const param = options.params as HttpParams;
+          const oldPassword = param.get('oldPassword');
+          Assert.isString(oldPassword, 'oldPassword 不能为空');
+          return oldPassword === 'yunzhi';
+        }
+      },
+      {
+        method: 'PUT',
+        url: '/user/updatePassword',
+        description: '修改密码'
       },
     ];
   }
@@ -191,7 +208,7 @@ export class UserApi implements MockApiInterface {
       name: randomString('name', 4),
       contactPhone: '13800138000',
       dirtyContactPhone: '13800138000',
-      role: 'user'
+      role: 'role_user'
     } as User;
   }
 

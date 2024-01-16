@@ -22,6 +22,9 @@ import {RolePipe} from "../../pipe/role.pipe";
         RoleSelectComponent,
         RolePipe
     ],
+    exports: [
+        RolePipe
+    ],
     imports: [
         CommonModule,
         UserRoutingModule,

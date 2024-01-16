@@ -1,7 +1,7 @@
 .menu {
   margin: 0;
   padding: 0;
-  background-color: #F7F8FA;
+  background-color: white;
   height: calc(100vh - 78px);
   overflow-y: auto;
 }

@@ -190,4 +190,12 @@ export class UserService extends Store<UserState> {
     }
     this.next(state);
   }
+
+  updatePassword(oldPassword: string, newPassword: string): Observable<void> {
+    return this.httpClient.put<void>('/user/updatePassword', {oldPassword, newPassword})
+  }
+
+  checkPasswordIsRight(password: string): Observable<boolean> {
+    return this.httpClient.get<boolean>("/user/checkPasswordIsRight", {params: {oldPassword: password}})
+  }
 }

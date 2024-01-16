@@ -26,7 +26,7 @@
   <tbody>
   <tr *ngFor="let project of pageData?.content; index as i">
     <td>{{i + 1}}</td>
-    <td><a routerLink="testPlan">{{project?.name}}</a></td>
+    <td>{{project?.name}}</td>
     <td class="text-pack">
       <a href="{{project?.projectUrl}}">{{project?.projectUrl}}</a>
     </td>
@@ -35,8 +35,9 @@
     </td>
     <td>{{project?.createTime | date:'yyyy-MM-dd'}}</td>
     <td>
+      <a class="text-info mr-3" matTooltip="查看" routerLink="testPlan/{{project?.id}}"><i class="fa fa-eye"></i></a>
       <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{project?.id}}"><i class="fa fas fa-pen"></i></a>
-      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(project?.id)" ><i class="fa fas fa-trash"></i></a>
+      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(project?.name, project?.id)" ><i class="fa fas fa-trash"></i></a>
     </td>
   </tr>
   </tbody>

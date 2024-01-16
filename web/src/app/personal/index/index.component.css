@@ -1,0 +1,13 @@
+.color-line {
+  background: #007BFF;
+  height: 30px; width: 4px;
+  display: inline-block
+}
+
+.title {
+  display: inline-block;
+}
+
+.bg {
+  background-color: white; padding: 10px
+}
