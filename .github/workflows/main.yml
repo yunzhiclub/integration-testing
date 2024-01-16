@@ -117,131 +117,131 @@ jobs:
           name: app-jar
           path: app-jar 
   
-  deploy: 
-    runs-on: self-hosted
-    needs: [api-build, angular-build]
-    env:
-      https_proxy: http://192.168.10.5:7890
-      http_proxy: http://192.168.10.5:7890
-      all_proxy: socks5://192.168.10.5:7891
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Download Angular Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist  # 指定下载到的路径
+  # deploy: 
+  #   runs-on: self-hosted
+  #   needs: [api-build, angular-build]
+  #   env:
+  #     https_proxy: http://192.168.10.5:7890
+  #     http_proxy: http://192.168.10.5:7890
+  #     all_proxy: socks5://192.168.10.5:7891
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
+  #     - name: Download Angular Artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: dist
+  #         path: dist  # 指定下载到的路径
   
-      # 下载 Spring Boot 项目构建产物
-      - name: Download API Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: app-jar
-          path: app-jar  # 指定下载到的路径
+  #     # 下载 Spring Boot 项目构建产物
+  #     - name: Download API Artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: app-jar
+  #         path: app-jar  # 指定下载到的路径
 
-      - name: Create Directories
-        run: |
-          ls -a -l
-          mkdir -p /home/app/${{ env.PROJECT_NAME }}
-          mkdir -p /home/app/${{ env.PROJECT_NAME }}/db
-          mkdir -p /home/app/${{ env.PROJECT_NAME }}/backups
+  #     - name: Create Directories
+  #       run: |
+  #         ls -a -l
+  #         mkdir -p /home/app/${{ env.PROJECT_NAME }}
+  #         mkdir -p /home/app/${{ env.PROJECT_NAME }}/db
+  #         mkdir -p /home/app/${{ env.PROJECT_NAME }}/backups
 
-      - name: Clean Previous Configurations
-        run: |
-          rm -f /home/app/${{ env.PROJECT_NAME }}/nginx.conf
-          rm -f /home/app/${{ env.PROJECT_NAME }}/app.jar
-          rm -f /home/app/${{ env.PROJECT_NAME }}/application.yml
-          rm -rf /home/app/${{ env.PROJECT_NAME }}/web
+  #     - name: Clean Previous Configurations
+  #       run: |
+  #         rm -f /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+  #         rm -f /home/app/${{ env.PROJECT_NAME }}/app.jar
+  #         rm -f /home/app/${{ env.PROJECT_NAME }}/application.yml
+  #         rm -rf /home/app/${{ env.PROJECT_NAME }}/web
 
-      - name: Copy Files
-        run: |
-          cp app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
-          cp -r dist /home/app/${{ env.PROJECT_NAME }}/web
+  #     - name: Copy Files
+  #       run: |
+  #         cp app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+  #         cp -r dist /home/app/${{ env.PROJECT_NAME }}/web
 
-      - name: Update Nginx Configuration
-        run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
+  #     - name: Update Nginx Configuration
+  #       run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
 
-      - name: Update Application Configuration
-        run: |
-          sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" cd/application.yml | \
-          sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
-          sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
-          sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
+  #     - name: Update Application Configuration
+  #       run: |
+  #         sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" cd/application.yml | \
+  #         sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
+  #         sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
+  #         sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
 
-      - name: Display Nginx Configuration
-        run: cat cd/nginx.conf
+  #     - name: Display Nginx Configuration
+  #       run: cat cd/nginx.conf
 
-      - name: Copy Nginx Configuration
-        run: cp cd/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+  #     - name: Copy Nginx Configuration
+  #       run: cp cd/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
 
-      - name: Stop Existing Containers
-        run: |
-          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
-            docker stop ${{ env.PROJECT_NAME }}-api
-          fi
-          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
-            docker stop ${{ env.PROJECT_NAME }}-nginx
-          fi
-          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
-            docker stop ${{ env.PROJECT_NAME }}-db
-          fi
+  #     - name: Stop Existing Containers
+  #       run: |
+  #         if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+  #           docker stop ${{ env.PROJECT_NAME }}-api
+  #         fi
+  #         if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
+  #           docker stop ${{ env.PROJECT_NAME }}-nginx
+  #         fi
+  #         if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
+  #           docker stop ${{ env.PROJECT_NAME }}-db
+  #         fi
 
-      - name: Remove API Container if ResetAPI Tag
-        run: |
-          if [[ $CI_COMMIT_TAG == *"#resetapi"* ]]; then
-            if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
-              echo 'remove api container' && docker rm ${{ env.PROJECT_NAME }}-api
-            fi
-          fi
+  #     - name: Remove API Container if ResetAPI Tag
+  #       run: |
+  #         if [[ $CI_COMMIT_TAG == *"#resetapi"* ]]; then
+  #           if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+  #             echo 'remove api container' && docker rm ${{ env.PROJECT_NAME }}-api
+  #           fi
+  #         fi
 
-      # ... Add other steps for backup, resetdb, resetnginx, network setup, and container creation ...
+  #     # ... Add other steps for backup, resetdb, resetnginx, network setup, and container creation ...
 
-      - name: Start Containers
-        run: |
-          docker start ${{ env.PROJECT_NAME }}-db
-          sleep 1m
-          docker start ${{ env.PROJECT_NAME }}-api
-          docker start ${{ env.PROJECT_NAME }}-nginx
-          sleep 1m
+  #     - name: Start Containers
+  #       run: |
+  #         docker start ${{ env.PROJECT_NAME }}-db
+  #         sleep 1m
+  #         docker start ${{ env.PROJECT_NAME }}-api
+  #         docker start ${{ env.PROJECT_NAME }}-nginx
+  #         sleep 1m
 
-      - name: Display Running Containers
-        run: docker ps
+  #     - name: Display Running Containers
+  #       run: docker ps
   
           
-  dingding-error:
-    runs-on: ubuntu-latest
-    needs: [deploy]
-    if: ${{ failure() }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Send dingding notify error
-        uses: zcong1993/actions-ding@master
-        with:
-          dingToken: bef0c36558d1788bca4364a9b19c8bf72a6e8c72365e22fe1ce9656b34b1a2ca
-          body: |
-            {
-              "msgtype": "text",
-              "text": {
-                  "content": '[打叉][打叉][打叉]  执行失败\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
-              }
-            }
+  # dingding-error:
+  #   runs-on: ubuntu-latest
+  #   needs: [deploy]
+  #   if: ${{ failure() }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Send dingding notify error
+  #       uses: zcong1993/actions-ding@master
+  #       with:
+  #         dingToken: bef0c36558d1788bca4364a9b19c8bf72a6e8c72365e22fe1ce9656b34b1a2ca
+  #         body: |
+  #           {
+  #             "msgtype": "text",
+  #             "text": {
+  #                 "content": '[打叉][打叉][打叉]  执行失败\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+  #             }
+  #           }
      
 
-  dingding-success:
-    runs-on: ubuntu-latest
-    needs: [deploy]
-    if: ${{ success() }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Send dingding notify success
-        uses: zcong1993/actions-ding@master
-        with:
-          dingToken: bef0c36558d1788bca4364a9b19c8bf72a6e8c72365e22fe1ce9656b34b1a2ca
-          body: |
-            {
-             "msgtype": "text",
-             "text": {
-                 "content": '[微笑][微笑][微笑]  执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
-             }
-            }
+  # dingding-success:
+  #   runs-on: ubuntu-latest
+  #   needs: [deploy]
+  #   if: ${{ success() }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Send dingding notify success
+  #       uses: zcong1993/actions-ding@master
+  #       with:
+  #         dingToken: bef0c36558d1788bca4364a9b19c8bf72a6e8c72365e22fe1ce9656b34b1a2ca
+  #         body: |
+  #           {
+  #            "msgtype": "text",
+  #            "text": {
+  #                "content": '[微笑][微笑][微笑]  执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+  #            }
+  #           }
