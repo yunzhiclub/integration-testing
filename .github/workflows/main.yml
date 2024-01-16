@@ -163,20 +163,20 @@
         
     
         - name: Update Nginx Configuration
-          run: sed -i "s#\\api-server#yunzhiclub/integration-testing-api#g" cd/nginx.conf
+          run: sed -i "s#\\api-server#yunzhiclub/integration-testing-api#g" nginx.conf
     
         - name: Update Application Configuration
           run: |
-            sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" cd/application.yml | \
+            sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" application.yml | \
             sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
             sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
             sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
       
         - name: Display Nginx Configuration
-          run: cat cd/nginx.conf
+          run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf/nginx.conf
     
         - name: Copy Nginx Configuration
-          run: cp cd/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+          run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
     
         - name: Stop Existing Containers
           run: |
