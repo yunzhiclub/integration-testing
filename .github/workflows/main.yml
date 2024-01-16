@@ -156,8 +156,8 @@ jobs:
 
       - name: Copy Files
         run: |
-          cp app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
-          cp -r dist /home/app/${{ env.PROJECT_NAME }}/web
+          cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+          cp -r /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/dist /home/app/${{ env.PROJECT_NAME }}/web
 
       - name: Update Nginx Configuration
         run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
