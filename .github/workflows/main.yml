@@ -163,7 +163,7 @@
         
     
         - name: Update Nginx Configuration
-          run: sed -i "s/\api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
+          run: sed -i "s#\\api-server#yunzhiclub/integration-testing-api#g" cd/nginx.conf
     
         - name: Update Application Configuration
           run: |
