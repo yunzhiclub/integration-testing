@@ -126,7 +126,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+      - name: Download Angular Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist  # 指定下载到的路径
+  
+      # 下载 Spring Boot 项目构建产物
+      - name: Download API Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app-jar
+          path: app-jar  # 指定下载到的路径
+          
       - name: Create Directories
         run: |
           ls -a -l
