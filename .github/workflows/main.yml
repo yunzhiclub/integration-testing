@@ -217,7 +217,8 @@
               if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
                 echo 'remove db container' && docker rm ${{ env.PROJECT_NAME }}-db && rm -rf /home/app/${{ env.PROJECT_NAME }}/db
               fi
-            if
+            fi
+        
     
         - name: Reset Nginx or Web if ResetNginx or ResetWeb Tag
           run: |
