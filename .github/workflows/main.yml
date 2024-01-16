@@ -1,6 +1,15 @@
 name: GitHub Actions
 run-name: integration-testing
 
+env: 
+  PROJECT_NAME: ${{ github.repository }}
+  DB_NAME: "intergation-testing"
+  DB_USER: "intergation-testing"
+  DB_PASSWORD: "intergation-testing"
+  DB_ROOT_PASSWORD: "yunzhi.club"
+  HTTP_EXPORT_PORT: 17133
+  DB_EXPORT_PORT: 17134
+
 on:
   pull_request:
     branches: [ main ]
@@ -56,7 +65,8 @@ jobs:
           mvn -v
           mvn test
           mvn --batch-mode package
-
+          
+          
   angular-build: 
     runs-on: ubuntu-latest
     needs: [unit-test, spring-boot-test]
@@ -75,6 +85,11 @@ jobs:
          npm install --no-audit
          npm run build
          mv dist/* ../dist
+      - name: Upload API Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
 
   api-build:
     runs-on: ubuntu-latest
@@ -95,9 +110,92 @@ jobs:
          mvn -v
          mvn package -Dmaven.test.skip
          mv target/*.jar ../app.jar
-         
+      - name: Upload API Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-jar
+          path: app-jar 
   
-        
+  deploy: 
+    runs-on: self-hosted
+    needs: [api-build, angular-build]
+    env:
+      https_proxy: http://192.168.10.5:7890
+      http_proxy: http://192.168.10.5:7890
+      all_proxy: socks5://192.168.10.5:7891
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Directories
+        run: |
+          ls -a -l
+          mkdir -p /home/app/${{ env.PROJECT_NAME }}
+          mkdir -p /home/app/${{ env.PROJECT_NAME }}/db
+          mkdir -p /home/app/${{ env.PROJECT_NAME }}/backups
+
+      - name: Clean Previous Configurations
+        run: |
+          rm -f /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+          rm -f /home/app/${{ env.PROJECT_NAME }}/app.jar
+          rm -f /home/app/${{ env.PROJECT_NAME }}/application.yml
+          rm -rf /home/app/${{ env.PROJECT_NAME }}/web
+
+      - name: Copy Files
+        run: |
+          cp app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+          cp -r dist /home/app/${{ env.PROJECT_NAME }}/web
+
+      - name: Update Nginx Configuration
+        run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" cd/nginx.conf
+
+      - name: Update Application Configuration
+        run: |
+          sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" cd/application.yml | \
+          sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
+          sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
+          sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
+
+      - name: Display Nginx Configuration
+        run: cat cd/nginx.conf
+
+      - name: Copy Nginx Configuration
+        run: cp cd/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+
+      - name: Stop Existing Containers
+        run: |
+          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+            docker stop ${{ env.PROJECT_NAME }}-api
+          fi
+          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
+            docker stop ${{ env.PROJECT_NAME }}-nginx
+          fi
+          if [ "$(docker ps -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
+            docker stop ${{ env.PROJECT_NAME }}-db
+          fi
+
+      - name: Remove API Container if ResetAPI Tag
+        run: |
+          if [[ $CI_COMMIT_TAG == *"#resetapi"* ]]; then
+            if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
+              echo 'remove api container' && docker rm ${{ env.PROJECT_NAME }}-api
+            fi
+          fi
+
+      # ... Add other steps for backup, resetdb, resetnginx, network setup, and container creation ...
+
+      - name: Start Containers
+        run: |
+          docker start ${{ env.PROJECT_NAME }}-db
+          sleep 1m
+          docker start ${{ env.PROJECT_NAME }}-api
+          docker start ${{ env.PROJECT_NAME }}-nginx
+          sleep 1m
+
+      - name: Display Running Containers
+        run: docker ps
+  
+          
   dingding-error:
     runs-on: ubuntu-latest
     needs: [angular-build ]
