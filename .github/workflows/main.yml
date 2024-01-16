@@ -173,7 +173,7 @@
             sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
       
         - name: Display Nginx Configuration
-          run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf/nginx.conf
+          run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf
     
         - name: Copy Nginx Configuration
           run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
