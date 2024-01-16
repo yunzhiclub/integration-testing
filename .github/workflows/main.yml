@@ -160,7 +160,7 @@ jobs:
           
   
       - name: Copy app.jar to target directory
-        run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
+        run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
       
       
       
