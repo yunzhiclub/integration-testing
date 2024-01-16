@@ -131,14 +131,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist
-          path: .
+          path: dist
   
       # 下载 Spring Boot 项目构建产物
       - name: Download API Artifact
         uses: actions/download-artifact@v4
         with:
           name: app-jar
-          path: .
+          path: dish
 
       - name: Create Directories
         run: |
