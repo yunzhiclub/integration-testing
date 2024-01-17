@@ -7,6 +7,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
 import {forwardRef} from "@angular/core";
 import {ProjectSelectComponent} from "../../project/project-select/project-select.component";
+import {ProjectModule} from "../../project/project.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('testPlan->IndexComponent', () => {
   let component: IndexComponent;
@@ -21,7 +23,9 @@ describe('testPlan->IndexComponent', () => {
         YzPageModule,
         RouterTestingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ProjectModule,
+        BrowserAnimationsModule
       ],
     })
     .compileComponents();

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Project} from "../../../entity/project";
 
 @Component({
   selector: 'app-clone',
@@ -7,10 +9,13 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./clone.component.css']
 })
 export class CloneComponent {
-  formGroup: any;
+  formGroup = new FormGroup({
+    testCase: new FormControl<Project>(null)
+  });
   constructor(private router: Router,
               private route: ActivatedRoute) {
   }
+
 
   onSubmit() {
 
