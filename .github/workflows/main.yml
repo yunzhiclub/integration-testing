@@ -7,7 +7,7 @@
     DB_USER: "intergationTesting"
     DB_PASSWORD: "intergationTesting"
     DB_ROOT_PASSWORD: "yunzhi.club"
-    HTTP_EXPORT_PORT: 17133
+    HTTP_EXPORT_PORT: 801
     DB_EXPORT_PORT: 17134
 
   on:
