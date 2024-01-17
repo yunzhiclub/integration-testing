@@ -3,9 +3,9 @@
 
   env: 
     PROJECT_NAME: ${{ github.repository }}
-    DB_NAME: "intergation-testing"
-    DB_USER: "intergation-testing"
-    DB_PASSWORD: "intergation-testing"
+    DB_NAME: "intergationTesting"
+    DB_USER: "intergationTesting"
+    DB_PASSWORD: "intergationTesting"
     DB_ROOT_PASSWORD: "yunzhi.club"
     HTTP_EXPORT_PORT: 17133
     DB_EXPORT_PORT: 17134
