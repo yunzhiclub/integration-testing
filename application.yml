@@ -7,5 +7,10 @@ spring:
     password: "yunzhi.club"
 
   jpa:
-    hibernate:
-      ddl-auto: update
+    generate-ddl: true
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.MySQL57Dialect"
+        hibernate:
+          ddl-auto: "create"
