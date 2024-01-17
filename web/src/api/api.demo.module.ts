@@ -5,7 +5,7 @@ import {UserApi} from "./user-api";
 import {ProjectApi} from "./projectApi";
 import {TestPlanApi} from "./testPlan-api";
 
- const apis = [
+export const apis = [
     UserApi,
     ProjectApi,
     TestPlanApi
