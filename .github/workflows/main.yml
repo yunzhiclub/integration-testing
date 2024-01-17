@@ -271,7 +271,7 @@
               --network=${{ env.PROJECT_NAME }}-network \
               --workdir=/opt/app \
               -v /home/app/${{ env.PROJECT_NAME }}:/opt/app \
-              adoptopenjdk/openjdk8:jre8u282-b08-debian \
+              chenyingzhou/jdk17-mvn-git  \
               java -jar app.jar \
               --spring.config.location=/opt/app/
             fi
