@@ -341,3 +341,39 @@
                    "content": '[微笑][微笑][微笑]  执行成功\n提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
                }
               }
+
+    dingding-deploy-success:
+      runs-on: ubuntu-latest
+      if: ${{ success() }} 
+      needs: [deploy]
+      steps:
+        - uses: actions/checkout@v4
+        - name: Send dingding notify success
+          uses: zcong1993/actions-ding@master
+          with:
+            dingToken: bef0c36558d1788bca4364a9b19c8bf72a6e8c72365e22fe1ce9656b34b1a2ca
+            body: |
+              {
+              "msgtype": "text",
+              "text": {
+                  "content": '[微笑][微笑][微笑]  ${{ env.PROJECT_NAME }}构建成功，提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+              }
+              }  
+
+    dingding-deploy-error:
+      runs-on: ubuntu-latest
+      if: ${{ failure() }}
+      needs: [deploy]
+      steps:
+        - uses: actions/checkout@v4
+        - name: Send dingding notify error
+          uses: zcong1993/actions-ding@master
+          with:
+            dingToken: bef0c36558d1788bca4364a9b19c8bf72a6e8c72365e22fe1ce9656b34b1a2ca
+            body: |
+              {
+                "msgtype": "text",
+                "text": {
+                    "content": '[打叉][打叉][打叉]  ${{ env.PROJECT_NAME }} 构建失败，提交者: ${{ github.triggering_actor }}\n任务: '
+                }
+              }
