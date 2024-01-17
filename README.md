@@ -1,6 +1,8 @@
 # integration-testing
 集成测试
 
+## CD
+web CD地址http://nas.yunzhi.club:801/
 
 ## 一、web目录
 
