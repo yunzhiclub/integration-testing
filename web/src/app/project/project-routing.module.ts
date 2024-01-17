@@ -57,7 +57,7 @@ const routes: Routes = [
     component: LargeItemComponent
   },
   {
-    path: 'small-item',
+    path: 'smallItem',
     component: SmallItemComponent
   }
 ];
