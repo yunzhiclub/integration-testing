@@ -24,24 +24,28 @@ const routes: Routes = [
         }
       },
       {
-        path: 'personal',
-        loadChildren: () => import('./personal/personal.module').then(m => m.PersonalModule),
-      },
-      {
         path: 'project',
         loadChildren: () => import('./project/project.module').then(m => m.ProjectModule),
-      },
-      {
-        path: 'testPlan',
-        loadChildren: () => import('./test-plan/test-plan.module').then(m => m.TestPlanModule),
       },
       {
         path: 'testCase',
         loadChildren: () => import('./test-case/test-case.module').then(m => m.TestCaseModule),
       },
       {
+        path: 'testPlan',
+        loadChildren: () => import('./test-plan/test-plan.module').then(m => m.TestPlanModule),
+      },
+      {
+        path: 'test',
+        loadChildren: () => import('./test/test.module').then(m => m.TestModule),
+      },
+      {
         path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+      },
+      {
+        path: 'personal',
+        loadChildren: () => import('./personal/personal.module').then(m => m.PersonalModule),
       },
     ]
   }

@@ -17,8 +17,20 @@ export const menus: Array<BaseMenu> = [
     defaultShow: true,
   },
   {
-    name: '测试管理',
+    name: '测试用例',
+    url: 'testCase',
+    icon: '',
+    defaultShow: true,
+  },
+  {
+    name: '测试计划',
     url: 'testPlan',
+    icon: '',
+    defaultShow: true,
+  },
+  {
+    name: '测试管理',
+    url: 'test',
     icon: '',
     defaultShow: true,
   },

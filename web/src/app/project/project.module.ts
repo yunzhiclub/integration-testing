@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ProjectRoutingModule} from "./project-routing.module";
-import { LargeItemComponent } from './large-item/large-item.component';
-import { SmallItemComponent } from './small-item/small-item.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
@@ -20,8 +18,6 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 @NgModule({
   declarations: [
     TestComponent,
-    LargeItemComponent,
-    SmallItemComponent,
     AddComponent,
     EditComponent,
     IndexComponent,
