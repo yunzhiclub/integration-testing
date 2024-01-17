@@ -7,6 +7,9 @@ import {
   Prevent401Popup,
 } from "@yunzhi/ng-common";
 import {XauthTokenIntercepor} from "../intercepor/xauth-token.intercepor";
+import {MockApiInterceptor} from "@yunzhi/ng-mock-api";
+import {apis} from "./api.demo.module";
+import {MiddlewareInterceptor} from "../intercepor/middleward.interceptor";
 /**
  *  启动后台使用
  */
@@ -31,10 +34,14 @@ import {XauthTokenIntercepor} from "../intercepor/xauth-token.intercepor";
       multi: true,
       provide: HTTP_INTERCEPTORS,
       useClass: XauthTokenIntercepor
-    }
+    },
+    {
+      multi: true,
+      provide: HTTP_INTERCEPTORS,
+      useClass: MiddlewareInterceptor
+    },
+    MockApiInterceptor.forRoot(apis)
   ]
 })
-
 export class ApiProModule {
-
 }
