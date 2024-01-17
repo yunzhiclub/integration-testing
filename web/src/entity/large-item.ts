@@ -8,4 +8,6 @@ export interface largeItem{
   title: string;
   testUser: User;
   status: number;
+  /*所属测试计划的Id*/
+  testPlanId: number;
 }

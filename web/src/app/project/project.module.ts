@@ -13,6 +13,8 @@ import {EditComponent} from "./edit/edit.component";
 import {TestComponent} from "./test/test.component";
 import { TestAddComponent } from './test/test-add/test-add.component';
 import { TestEditComponent } from './test/test-edit/test-edit.component';
+import { ProjectSelectComponent } from './project-select/project-select.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -24,17 +26,22 @@ import { TestEditComponent } from './test/test-edit/test-edit.component';
     EditComponent,
     IndexComponent,
     TestAddComponent,
-    TestEditComponent
+    TestEditComponent,
+    ProjectSelectComponent
   ],
-    imports: [
-      CommonModule,
-      ProjectRoutingModule,
-      FormsModule,
-      MatTooltipModule,
-      ReactiveFormsModule,
-      YzPageModule,
-      YzSizeModule,
-      DialogEntryModule
-    ]
+  exports: [
+    ProjectSelectComponent
+  ],
+  imports: [
+    CommonModule,
+    ProjectRoutingModule,
+    FormsModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+    YzPageModule,
+    YzSizeModule,
+    DialogEntryModule,
+    NzSelectModule
+  ]
 })
 export class ProjectModule { }

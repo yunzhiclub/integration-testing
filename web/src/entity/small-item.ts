@@ -12,4 +12,6 @@ export interface smallItem{
   bugInfo: string;
   /*失败后的issue地址*/
   issueUrl: string;
+  /*所属大项测试用例Id*/
+  largeItemId: number
 }
