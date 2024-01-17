@@ -25,3 +25,11 @@ div.mat-mdc-dialog-surface.mdc-dialog__surface {
 .jasmine-results > .jasmine-summary {
   display: none;
 }
+
+i.bi {
+  margin-right: 0.5em;
+}
+
+.wide-input {
+  width: 450px;
+}

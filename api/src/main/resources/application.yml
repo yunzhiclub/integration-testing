@@ -3,13 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:17134/intergationTesting?useUnicode=true&characterEncoding=utf-8
-    username: intergationTesting
-    password: intergationTesting
-#    生成环境下
-    # url: "jdbc:mysql://localhost:3312/dentistry?characterEncoding=utf-8"
-    # username: "root"
-    # password: "yunzhi"
+     url: "jdbc:mysql://localhost:3312/integrationTesting?characterEncoding=utf-8"
+     username: "root"
+     password: "yunzhi"
   jpa:
     generate-ddl: true
     show-sql: false
