@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     #    提交机器人测试，数据库
-   url: "jdbc:mysql://mysql/integrationTesting?characterEncoding=utf-8"
-   username: "root"
-   password: "root"
+    url: "jdbc:mysql://intergationTesting-db/intergationTesting?useUnicode=true&characterEncoding=utf-8"
+    username: "intergationTesting"
+    password: "yunzhi.club"
 #    生成环境下
     # url: "jdbc:mysql://localhost:3312/dentistry?characterEncoding=utf-8"
     # username: "root"
