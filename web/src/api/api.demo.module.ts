@@ -4,9 +4,9 @@ import {MockApiInterceptor} from "@yunzhi/ng-mock-api";
 import {UserApi} from "./user-api";
 import {ProjectApi} from "./projectApi";
 
- const apis = [
-    UserApi,
-    ProjectApi
+export const apis = [
+  UserApi,
+  ProjectApi
 ]
 /**
  * 用于脱离后台跑demo
