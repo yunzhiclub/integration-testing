@@ -3,15 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { TestRoutingModule } from './test-routing.module';
 import { IndexComponent } from './index/index.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { TestItemComponent } from './test-item/test-item.component';
 
 
 @NgModule({
   declarations: [
-    IndexComponent
+    IndexComponent,
+    TestItemComponent
   ],
   imports: [
     CommonModule,
-    TestRoutingModule
+    TestRoutingModule,
+    FormsModule,
+    MatTooltipModule,
+    ReactiveFormsModule
   ]
 })
 export class TestModule { }
