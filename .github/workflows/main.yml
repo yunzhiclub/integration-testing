@@ -165,14 +165,21 @@
             docker network inspect ${{ env.PROJECT_NAME }}-network >/dev/null 2>&1 || \
             docker network create --driver bridge ${{ env.PROJECT_NAME }}-network --subnet=172.16.0.0/24
     
+        
         - name: Update Nginx Configuration
           run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf
-    
+  
+        - name: Copy Nginx Configuration
+          run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+ 
+        - name: Copy application Configuration
+          run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/application.yml /home/app/${{ env.PROJECT_NAME }}/application.yml
+
         - name: Update Application Configuration
           run: |
-              sed "s/\$DB_PASSWORD/$DB_PASSWORD/g" /home/app/${{ env.PROJECT_NAME }}/application.yml | \
-              sed "s/\$PROJECT_NAME/$PROJECT_NAME/g" | \
-              sed "s/\$DB_NAME/$DB_NAME/g" | \
+              sed "s/\$DB_PASSWORD/$DB_PASSWORD/g" /home/app/${{ env.DB_PASSWORD }}/application.yml | \
+              sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
+              sed "s/\$DB_NAME/${{env.DB_NAME}}/g" | \
               sed "s/\$DB_USER/$DB_USER/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
       
         - name: Display Nginx Configuration
@@ -180,11 +187,11 @@
         
         - name: Display application Configuration
           run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/application.yml
+
+        - name: Display application Configuration
+          run: cat /home/app/${{ env.PROJECT_NAME }}/application.yml
     
-        - name: Copy Nginx Configuration
-          run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
-        - name: Copy Nginx Configuration
-          run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/application.yml /home/app/${{ env.PROJECT_NAME }}/application.yml
+      
     
         - name: Stop Existing Containers
           run: |
