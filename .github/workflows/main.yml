@@ -160,7 +160,10 @@
             
         - name: Copy app.jar to target directory
           run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/app.jar/app.jar /home/app/${{ env.PROJECT_NAME }}/app.jar
-        
+        - name: Create Docker Network
+          run: |
+            docker network inspect ${PROJECT_NAME}-network >/dev/null 2>&1 || \
+            docker network create --driver bridge ${PROJECT_NAME}-network --subnet=172.16.0.0/24
     
         - name: Update Nginx Configuration
           run: sed -i "s#\\api-server#yunzhiclub/integration-testing-api#g" nginx.conf
