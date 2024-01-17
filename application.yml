@@ -5,16 +5,7 @@ spring:
     url: "jdbc:mysql://$PROJECT_NAME-db/$DB_NAME?useUnicode=true&characterEncoding=utf-8"
     username: "$DB_USER"
     password: "$DB_PASSWORD"
+
   jpa:
     hibernate:
       ddl-auto: update
-  flyway:
-    enabled: true
-  # 上传文件大小限制
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 20MB
-      max-request-size: 20MB
-
-
