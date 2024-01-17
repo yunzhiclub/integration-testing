@@ -166,14 +166,14 @@
             docker network create --driver bridge ${{ env.PROJECT_NAME }}-network --subnet=172.16.0.0/24
     
         - name: Update Nginx Configuration
-          run: sed -i "s#\\api-server#yunzhiclub/${{ env.PROJECT_NAME }}-api#g" nginx.conf
+          run: sed -i "s/api-server/${{ env.PROJECT_NAME }}-api/g" /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf
     
         - name: Update Application Configuration
           run: |
-            sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" application.yml | \
-            sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
-            sed "s/\$DB_NAME/${{ env.DB_NAME }}/g" | \
-            sed "s/\$DB_USER/${{ env.DB_USER }}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
+              sed "s/\$DB_PASSWORD/$DB_PASSWORD/g" /home/app/${{ env.PROJECT_NAME }}/application.yml | \
+              sed "s/\$PROJECT_NAME/$PROJECT_NAME/g" | \
+              sed "s/\$DB_NAME/$DB_NAME/g" | \
+              sed "s/\$DB_USER/$DB_USER/g" > /home/app/${PROJECT_NAME}/application.yml
       
         - name: Display Nginx Configuration
           run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf
@@ -264,16 +264,16 @@
         - name: Create or Check API Container
           run: |
             if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-api)" ]; then
-              echo "${{ env.PROJECT_NAME }}-api exist"
+                echo "${{ env.PROJECT_NAME }}-api exist"
             else
               echo "create ${{ env.PROJECT_NAME }}-api"
-              docker create --cpus=2 --memory=4G --name=${{ env.PROJECT_NAME }}-api \
-              --network=${{ env.PROJECT_NAME }}-network \
-              --workdir=/opt/app \
-              -v /home/app/${{ env.PROJECT_NAME }}:/opt/app \
-              chenyingzhou/jdk17-mvn-git  \
-              java -jar app.jar \
-              --spring.config.location=/opt/app/
+                docker create --cpus=2 --memory=4G --name=${{ env.PROJECT_NAME }}-api \
+                --network=${{ env.PROJECT_NAME }}-network \
+                --workdir=/opt/app \
+                -v /home/app/${{ env.PROJECT_NAME }}:/opt/app \
+                chenyingzhou/jdk17-mvn-git  \
+                java -jar app.jar \
+                --spring.config.location=/opt/app/
             fi
 
         - name: Start Containers
