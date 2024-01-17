@@ -245,6 +245,7 @@
     
         - name: Create or Check Nginx Container
           run: |
+            docker rm ${{ env.PROJECT_NAME }}-nginx
             if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-nginx)" ]; then
             echo "${{ env.PROJECT_NAME }}-nginx exist"
             else
