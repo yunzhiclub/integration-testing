@@ -33,7 +33,7 @@
     <td class="text-pack">
       <a href="{{project?.repositoryUrl}}">{{project?.repositoryUrl}}</a>
     </td>
-    <td>{{project?.createTime | date:'yyyy-MM-dd'}}</td>
+    <td>{{project?.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
     <td>
       <a class="text-info mr-3" matTooltip="查看" routerLink="testPlan/{{project?.id}}"><i class="fa fa-eye"></i></a>
       <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{project?.id}}"><i class="fa fas fa-pen"></i></a>
