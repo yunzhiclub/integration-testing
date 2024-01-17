@@ -177,9 +177,14 @@
       
         - name: Display Nginx Configuration
           run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf
+        
+        - name: Display application Configuration
+          run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/application.yml
     
         - name: Copy Nginx Configuration
           run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf /home/app/${{ env.PROJECT_NAME }}/nginx.conf
+        - name: Copy Nginx Configuration
+          run: cp /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/application.yml /home/app/${{ env.PROJECT_NAME }}/application.yml
     
         - name: Stop Existing Containers
           run: |
