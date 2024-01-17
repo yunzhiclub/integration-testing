@@ -1,8 +1,8 @@
   name: GitHub Actions
-  run-name: integration-testing
+  run-name: intergationTesting
 
   env: 
-    PROJECT_NAME: ${{ github.repository }}
+    PROJECT_NAME: intergationTesting
     DB_NAME: "intergationTesting"
     DB_USER: "intergationTesting"
     DB_PASSWORD: "intergationTesting"
