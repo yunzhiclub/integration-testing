@@ -1,0 +1,17 @@
+.bg {
+  background-color: white;
+  height: 600px;
+}
+
+.large-text {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.m-top {
+  margin-top: 100px;
+}
+
+.h-top {
+  margin-top: 30px;
+}
