@@ -262,6 +262,7 @@
     
         - name: Create or Check Database Container
           run: |
+            docker rm ${{ env.PROJECT_NAME }}-db
             if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
               echo "${{ env.PROJECT_NAME }}-db exist"
             else
@@ -272,7 +273,7 @@
               -e MYSQL_ROOT_PASSWORD=${{ env.DB_ROOT_PASSWORD }} -e MYSQL_DATABASE=${{ env.DB_NAME }} \
               -e MYSQL_USER=${{ env.DB_USER }} -e MYSQL_PASSWORD=${{ env.DB_PASSWORD }} \
               -v /home/app/${{ env.PROJECT_NAME }}/db:/var/lib/mysql \
-              mysql:5.7 \
+              mysql:8.0 \
               --character-set-server=utf8mb4 \
               --collation-server=utf8mb4_unicode_ci
             fi

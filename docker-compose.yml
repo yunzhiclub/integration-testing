@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  integrationTesting_mysql:
+    image: mysql:8.0
+    hostname: mysql8
+    ports:
+      - "3307:3306"
+    command:
+      [
+        '--character-set-server=utf8mb4', #设置数据库表的数据集
+        '--collation-server=utf8mb4_general_ci'
+      ] #设置数据库表的数据集
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yunzhi
+      MYSQL_DATABASE: integrationTesting
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - net
+
+  integrationTesting_java:
+    image: chenyingzhou/jdk17-mvn-git
+
+networks:
+  net:
