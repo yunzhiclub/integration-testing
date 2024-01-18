@@ -18,9 +18,9 @@ web CD地址http://nas.yunzhi.club:801/
 node: V18.16.0 <br/>
 npm: 9.5.1 <br/>
 Angular CLI: 15.2.8 <br/>
-BootStrap: 4.6.0
-jdk：17
-mysql: 8.0
+BootStrap: 4.6.0  <br/>
+jdk：17  <br/>
+mysql: 8.0  <br/>
 状态管理库：@tethys/store。 [官方文档](https://worktile.github.io/store/guides/getting-started)
 
 ## 二、根目录
