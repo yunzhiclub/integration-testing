@@ -182,11 +182,11 @@
 
         - name: Update Application Configuration
           run: |
-              sed "s/\$DB_PASSWORD/$DB_PASSWORD/g" /home/app/${{ env.DB_PASSWORD }}/application.yml | \
+              sed "s/\$DB_PASSWORD/${{ env.DB_PASSWORD }}/g" /home/app/${{ env.PROJECT_NAME }}/application.yml | \
               sed "s/\$PROJECT_NAME/${{ env.PROJECT_NAME }}/g" | \
               sed "s/\$DB_NAME/${{env.DB_NAME}}/g" | \
-              sed "s/\$DB_USER/$DB_USER/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
-      
+              sed "s/\$DB_USER/${{env.DB_USER}}/g" > /home/app/${{ env.PROJECT_NAME }}/application.yml
+
         - name: Display Nginx Configuration
           run: cat /home/yunzhi/actions-runner/_work/integration-testing/integration-testing/nginx.conf
         
