@@ -5,6 +5,9 @@ import {CommonService} from "../../../service/common-service";
 import {TestPlanService} from "../../../service/test-plan.service";
 import {TestPlan} from "../../../entity/testPlan";
 
+/**
+ * 测试计划add组件
+ */
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',

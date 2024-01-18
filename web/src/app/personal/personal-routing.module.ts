@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {IndexComponent} from "./index/index.component";
 
+/**
+ * 个人中心模块的路由
+ */
 const routes: Routes = [
   {
     path: '',

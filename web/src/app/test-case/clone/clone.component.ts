@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Project} from "../../../entity/project";
 
+/**
+ * 克隆测试用例至其他项目组件
+ */
 @Component({
   selector: 'app-clone',
   templateUrl: './clone.component.html',
