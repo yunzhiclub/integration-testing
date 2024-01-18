@@ -10,7 +10,9 @@ import { CloneComponent } from './clone/clone.component';
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
 
-
+/**
+ * 测试用例模块
+ */
 @NgModule({
   declarations: [
     IndexComponent,

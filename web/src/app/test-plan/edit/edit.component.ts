@@ -5,6 +5,9 @@ import {TestPlanService} from "../../../service/test-plan.service";
 import {CommonService} from "../../../service/common-service";
 import {TestPlan} from "../../../entity/testPlan";
 
+/**
+ * 测试计划edit组件
+ */
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',

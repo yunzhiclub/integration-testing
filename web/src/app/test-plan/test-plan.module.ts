@@ -11,7 +11,9 @@ import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
 
-
+/**
+ * 测试计划模块
+ */
 @NgModule({
   declarations: [
     IndexComponent,

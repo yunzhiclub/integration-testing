@@ -6,7 +6,9 @@ import { IndexComponent } from './index/index.component';
 import {UserModule} from "../user/user.module";
 import {ReactiveFormsModule} from "@angular/forms";
 
-
+/**
+ * 个人中心模块
+ */
 @NgModule({
   declarations: [
     IndexComponent

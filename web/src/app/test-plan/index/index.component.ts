@@ -8,6 +8,9 @@ import {TestPlanService} from "../../../service/test-plan.service";
 import {TestPlan} from "../../../entity/testPlan";
 import {CommonService} from "../../../service/common-service";
 
+/**
+ * 测试计划index组件
+ */
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',

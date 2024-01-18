@@ -7,7 +7,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { TestItemComponent } from './test-item/test-item.component';
 
-
+/**
+ * 测试管理模块
+ */
 @NgModule({
   declarations: [
     IndexComponent,
