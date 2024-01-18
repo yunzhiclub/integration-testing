@@ -9,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
-
+  
+  isCollapsed = true;
+  
+  toggleCollapse() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }
