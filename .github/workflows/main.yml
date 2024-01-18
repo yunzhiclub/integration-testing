@@ -262,7 +262,6 @@
     
         - name: Create or Check Database Container
           run: |
-            docker rm ${{ env.PROJECT_NAME }}-db
             if [ "$(docker ps -a -q -f name=${{ env.PROJECT_NAME }}-db)" ]; then
               echo "${{ env.PROJECT_NAME }}-db exist"
             else
@@ -355,7 +354,7 @@
               {
               "msgtype": "text",
               "text": {
-                  "content": '[微笑][微笑][微笑]  ${{ env.PROJECT_NAME }}构建成功，提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+                  "content": '[微笑]  ${{ env.PROJECT_NAME }}构建成功，提交者: ${{ github.triggering_actor }}'
               }
               }  
 
@@ -373,6 +372,6 @@
               {
                 "msgtype": "text",
                 "text": {
-                    "content": '[打叉][打叉][打叉]  ${{ env.PROJECT_NAME }} 构建失败，提交者: ${{ github.triggering_actor }}\n任务: ${{ github.event.pull_request.title }}\n${{ github.ref_type }}: ${{ github.head_ref }}\n${{ github.event_name }}: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}'
+                    "content": '[打叉]  ${{ env.PROJECT_NAME }} 构建失败，提交者: ${{ github.triggering_actor }}'
               }
               }
