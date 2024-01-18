@@ -1,0 +1,51 @@
+
+<div class="row mb-2 mt-2">
+  <div class="col-md-6">
+    <!--    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>-->
+  </div>
+  <div class="col-6 text-right">
+    <a class="btn btn-primary" routerLink="add">同意</a>
+  </div>
+</div>
+
+<table class="table table-striped mt-2">
+  <thead>
+  <tr class="table-primary">
+    <th>选择</th>
+    <th>序号</th>
+    <th>所属项目</th>
+    <th>所属测试用例-大项</th>
+    <th>测试用例-小项</th>
+    <th>测试步骤</th>
+    <th>预期结果</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>1</td>
+    <td>牙科系统</td>
+    <td>测试登录功能</td>
+    <td>用错误的用户名登录</td>
+    <td>1打开登录页面
+      2将用户名和密码输入框留空
+      3点击登录按钮</td>
+    <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
+    <td>
+      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
+      <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!--<yz-page [size]="pageData?.size"-->
+<!--         [page]="pageData?.number"-->
+<!--         [totalElements]="pageData?.totalElements"-->
+<!--         (changePage)="onChangePage($event)"></yz-page>-->
+<!--<router-outlet></router-outlet>-->
+
+
+
+
+
