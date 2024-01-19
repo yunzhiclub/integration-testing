@@ -9,6 +9,7 @@ import { TestCaseItemComponent } from './test-case-item/test-case-item.component
 import { CloneComponent } from './clone/clone.component';
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
+import {NzTableModule} from "ng-zorro-antd/table";
 
 /**
  * 测试用例模块
@@ -19,14 +20,15 @@ import {ProjectModule} from "../project/project.module";
     TestCaseItemComponent,
     CloneComponent
   ],
-  imports: [
-    CommonModule,
-    TestCaseRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatTooltipModule,
-    DialogEntryModule,
-    ProjectModule
-  ]
+    imports: [
+        CommonModule,
+        TestCaseRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatTooltipModule,
+        DialogEntryModule,
+        ProjectModule,
+        NzTableModule
+    ]
 })
 export class TestCaseModule { }

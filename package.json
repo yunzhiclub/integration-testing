@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "rxjs": "^7.8.1"
+  },
+  "scripts": {
+    "start": "node dev-server.js 8080"
   }
 }
