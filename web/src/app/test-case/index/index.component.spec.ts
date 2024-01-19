@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IndexComponent } from './index.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {ProjectModule} from "../../project/project.module";
-import {ProjectSelectComponent} from "../../project/project-select/project-select.component";
+import {NzTableModule} from "ng-zorro-antd/table";
 
 describe('testCase->IndexComponent', () => {
   let component: IndexComponent;
@@ -14,7 +14,8 @@ describe('testCase->IndexComponent', () => {
       declarations: [ IndexComponent ],
       imports: [
         RouterTestingModule,
-        ProjectModule
+        ProjectModule,
+        NzTableModule
       ]
     })
     .compileComponents();
