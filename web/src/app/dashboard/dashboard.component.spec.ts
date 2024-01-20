@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import {NzTableModule} from "ng-zorro-antd/table";
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +9,10 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent ],
+      imports: [
+        NzTableModule
+      ]
     })
     .compileComponents();
 
