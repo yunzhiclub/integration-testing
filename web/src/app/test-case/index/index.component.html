@@ -27,7 +27,7 @@
   <tr>
     <td>1
         <i matTooltip="查看" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1" (click)="toggleCollapse()"
-          class="bi" [ngClass]="{'bi-caret-up-fill': !isCollapsed, 'bi-caret-down-fill': isCollapsed}"></i>
+          class="bi" [ngClass]="{'bi-caret-down-fill': !isCollapsed, 'bi bi-caret-right-fill': isCollapsed}"></i>
 
     </td>
     <td>牙科管理系统</td>
@@ -48,6 +48,20 @@
           <a class="btn ml-3"><i class="fa fas fa-plus"></i>新增</a>
         </div>
       </div>
+<!--      <div class="row">-->
+<!--        <th>名称</th>-->
+<!--        <th>测试步骤</th>-->
+<!--        <th>预期结果</th>-->
+<!--        <th>操作</th>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <ol>-->
+<!--          <li>test</li>-->
+<!--          <li>test</li>-->
+<!--          <li>test</li>-->
+<!--          <li>test</li>-->
+<!--        </ol>-->
+<!--      </div>-->
       <nz-table  nzSize="middle">
         <thead>
         <tr>
@@ -67,6 +81,8 @@
             3点击登录按钮</td>
           <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
           <td>
+            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
+            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
             <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
@@ -79,6 +95,8 @@
             3点击登录按钮</td>
           <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
           <td>
+            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
+            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
             <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
@@ -91,6 +109,8 @@
             3点击登录按钮</td>
           <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
           <td>
+            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
+            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
             <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
@@ -103,165 +123,8 @@
             3点击登录按钮</td>
           <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
           <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        </tbody>
-      </nz-table>
-    </td>
-  </tr>
-  <tr>
-    <td>2
-      <i matTooltip="查看" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" (click)="toggleCollapse()"
-         class="bi" [ngClass]="{'bi-caret-up-fill': !isCollapsed, 'bi-caret-down-fill': isCollapsed}"></i>
-
-    </td>
-    <td>集成测试系统</td>
-    <td>|--测试用户管理</td>
-    <td>验证系统能够正确的管理用户信息</td>
-    <td>已经登录系统且拥有用户管理的权限</td>
-    <td>
-      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-      <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-    </td>
-  </tr>
-  <tr id="collapseExample2" class="collapse">
-    <td colspan="6">
-      <nz-table>
-        <thead>
-        <tr class="table-info">
-          <th>序号</th>
-          <th>测试用例-小项</th>
-          <th>测试步骤</th>
-          <th>预期结果</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr cdkDrag>
-          <td>1</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag>
-          <td>2</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag>
-          <td>3</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag>
-          <td>4</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        </tbody>
-      </nz-table>
-    </td>
-  </tr>
-  <tr>
-    <td>3
-      <i matTooltip="查看" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample2" (click)="toggleCollapse()"
-         class="bi" [ngClass]="{'bi-caret-up-fill': !isCollapsed, 'bi-caret-down-fill': isCollapsed}"></i>
-    </td>
-    <td>集成测试系统</td>
-    <td>|--执行测试管理</td>
-    <td>验证系统能够正确的管理用户信息</td>
-    <td>已经登录系统且拥有用户管理的权限</td>
-    <td>
-      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-      <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-    </td>
-  </tr>
-  <tr id="collapseExample3" class="collapse">
-    <td colspan="6">
-      <nz-table>
-        <thead>
-        <tr class="table-info">
-          <th>序号</th>
-          <th>测试用例-小项</th>
-          <th>测试步骤</th>
-          <th>预期结果</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody cdkDropList >
-        <tr cdkDrag>
-          <td>1</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag>
-          <td>2</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag>
-          <td>3</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag>
-          <td>4</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
+            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
+            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
             <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
