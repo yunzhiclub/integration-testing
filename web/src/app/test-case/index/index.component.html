@@ -17,7 +17,7 @@
   <tr class="table-primary">
     <th>序号</th>
     <th>所属项目</th>
-    <th>测试用例-大项</th>
+    <th>名称</th>
     <th>测试目的</th>
     <th>前置条件</th>
     <th>操作</th>
@@ -31,7 +31,7 @@
 
     </td>
     <td>牙科管理系统</td>
-    <td>测试登录模块</td>
+    <td>|--测试登录模块</td>
     <td>验证用户能够使用正确的用户名和密码成功登录到系统</td>
     <td>用户已经注册并拥有有效的用户名和密码</td>
     <td>
@@ -52,14 +52,14 @@
         <thead>
         <tr>
           <th>序号</th>
-          <th>测试用例-小项</th>
+          <th>名称</th>
           <th>测试步骤</th>
           <th>预期结果</th>
           <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-        <tr cdkDrag>
+        <tbody cdkDropList>
+        <tr cdkDrag cdkDragLockAxis="y">
           <td>1</td>
           <td>用错误的用户名登录</td>
           <td>1打开登录页面
@@ -71,7 +71,7 @@
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
         </tr>
-        <tr cdkDrag>
+        <tr cdkDrag cdkDragLockAxis="y">
           <td>2</td>
           <td>用错误的用户名登录</td>
           <td>1打开登录页面
@@ -83,7 +83,7 @@
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
         </tr>
-        <tr cdkDrag>
+        <tr cdkDrag cdkDragLockAxis="y">
           <td>3</td>
           <td>用错误的用户名登录</td>
           <td>1打开登录页面
@@ -95,7 +95,7 @@
             <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
           </td>
         </tr>
-        <tr cdkDrag>
+        <tr cdkDrag cdkDragLockAxis="y">
           <td>4</td>
           <td>用错误的用户名登录</td>
           <td>1打开登录页面
@@ -118,7 +118,7 @@
 
     </td>
     <td>集成测试系统</td>
-    <td>测试用户管理</td>
+    <td>|--测试用户管理</td>
     <td>验证系统能够正确的管理用户信息</td>
     <td>已经登录系统且拥有用户管理的权限</td>
     <td>
@@ -197,7 +197,7 @@
          class="bi" [ngClass]="{'bi-caret-up-fill': !isCollapsed, 'bi-caret-down-fill': isCollapsed}"></i>
     </td>
     <td>集成测试系统</td>
-    <td>执行测试管理</td>
+    <td>|--执行测试管理</td>
     <td>验证系统能够正确的管理用户信息</td>
     <td>已经登录系统且拥有用户管理的权限</td>
     <td>

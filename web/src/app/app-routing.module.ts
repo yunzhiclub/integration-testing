@@ -40,10 +40,6 @@ const routes: Routes = [
         loadChildren: () => import('./test/test.module').then(m => m.TestModule),
       },
       {
-        path: 'addTestCaseApply',
-        loadChildren: () => import('./add-test-case-apply/add-test-case-apply.module').then(m => m.AddTestCaseApplyModule),
-      },
-      {
         path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
       },

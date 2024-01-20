@@ -35,12 +35,6 @@ export const menus: Array<BaseMenu> = [
     defaultShow: true,
   },
   {
-    name: '补充测试用例申请',
-    url: 'addTestCaseApply',
-    icon: '',
-    defaultShow: true,
-  },
-  {
     name: '用户管理',
     url: 'user',
     icon: '',
