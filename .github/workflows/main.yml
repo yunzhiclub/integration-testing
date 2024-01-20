@@ -101,7 +101,7 @@
 
     api-build:
       runs-on: ubuntu-latest
-      if: github.event_name == 'tag'
+      if: startsWith(github.ref, 'refs/tags/')
       needs: [unit-test, spring-boot-test]
       steps:
         - name: Checkout repository
