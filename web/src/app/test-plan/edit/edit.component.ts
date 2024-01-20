@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TestPlanService} from "../../../service/test-plan.service";
 import {CommonService} from "../../../service/common-service";
 import {TestPlan} from "../../../entity/testPlan";
+import {User} from "../../../entity/user";
 
 /**
  * 测试计划edit组件
@@ -26,7 +27,8 @@ export class EditComponent implements OnInit{
     this.formGroup = new FormGroup({
       projectId: new FormControl<number>(null),
       title: new FormControl<string>(''),
-      describe: new FormControl<string>(''),
+      testCase: new FormControl<string>(''),
+      testUser: new FormControl<User>(null),
     })
   }
 
