@@ -26,6 +26,7 @@ export class ProjectApi implements MockApiInterface {
               repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
               describe: '',
               testPlane: [],
+              testCase: [],
               createTime: new Date().getTime()
             } as Project;
           });

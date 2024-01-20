@@ -1,12 +1,9 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {TestComponent} from "./test/test.component";
 import {IndexComponent} from "./index/index.component";
 import {AddComponent} from "./add/add.component";
 import {EditComponent} from "./edit/edit.component";
 import {DialogEntryComponent} from "../../common/dialog-entry/dialog-entry-component";
-import {TestAddComponent} from "./test/test-add/test-add.component";
-import {TestEditComponent} from "./test/test-edit/test-edit.component";
 
 
 const routes: Routes = [

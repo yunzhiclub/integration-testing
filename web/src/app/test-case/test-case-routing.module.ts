@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {IndexComponent} from "./index/index.component";
-import {TestCaseItemComponent} from "./test-case-item/test-case-item.component";
 import {DialogEntryComponent} from "../../common/dialog-entry/dialog-entry-component";
 import {CloneComponent} from "./clone/clone.component";
 
@@ -19,10 +18,6 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'testCaseItem',
-    component: TestCaseItemComponent
-  }
 ];
 
 @NgModule({

@@ -5,6 +5,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {ProjectModule} from "../../project/project.module";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('testCase->IndexComponent', () => {
   let component: IndexComponent;
@@ -17,7 +19,8 @@ describe('testCase->IndexComponent', () => {
         RouterTestingModule,
         ProjectModule,
         NzTableModule,
-        DragDropModule
+        HttpClientTestingModule,
+        BrowserAnimationsModule
       ]
     })
     .compileComponents();

@@ -8,9 +8,6 @@ import { IndexComponent } from './index/index.component';
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {AddComponent} from "./add/add.component";
 import {EditComponent} from "./edit/edit.component";
-import {TestComponent} from "./test/test.component";
-import { TestAddComponent } from './test/test-add/test-add.component';
-import { TestEditComponent } from './test/test-edit/test-edit.component';
 import { ProjectSelectComponent } from './project-select/project-select.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
@@ -21,12 +18,9 @@ import {NzTableModule} from "ng-zorro-antd/table";
  */
 @NgModule({
   declarations: [
-    TestComponent,
     AddComponent,
     EditComponent,
     IndexComponent,
-    TestAddComponent,
-    TestEditComponent,
     ProjectSelectComponent
   ],
   exports: [
