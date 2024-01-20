@@ -25,7 +25,8 @@ export class AddComponent implements OnInit{
     this.formGroup = new FormGroup({
       projectId: new FormControl<number>(null),
       title: new FormControl<string>(''),
-      describe: new FormControl<string>(''),
+      testCase: new FormControl<string>(''),
+      testUser: new FormControl<string>(null),
     })
   }
 

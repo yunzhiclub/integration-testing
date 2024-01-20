@@ -6,6 +6,8 @@ import { IndexComponent } from './index/index.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { TestItemComponent } from './test-item/test-item.component';
+import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
+import {UserModule} from "../user/user.module";
 
 /**
  * 测试管理模块
@@ -20,7 +22,9 @@ import { TestItemComponent } from './test-item/test-item.component';
     TestRoutingModule,
     FormsModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogEntryModule,
+    UserModule
   ]
 })
 export class TestModule { }

@@ -176,6 +176,24 @@ export class UserApi implements MockApiInterface {
         url: '/user/updatePassword',
         description: '修改密码'
       },
+      {
+        method: 'GET',
+        url: '/user/getAllUser',
+        result: (urlMatches: any, options: RequestOptions) => {
+          return generatePage<User>(5, 5, index => {
+            return {
+              id: randomNumber(100),
+              name: randomString(this.names[Math.floor(Math.random() * this.names.length)]),
+              contactPhone: randomString('18100000000'),
+              dirtyContactPhone: randomString('181****0000'),
+              username: randomString('0304210123'),
+              password: randomString('yunzhi'),
+              role: 'role_user'
+            } as User;
+          });
+        }
+
+      }
     ];
   }
 

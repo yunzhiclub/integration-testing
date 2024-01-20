@@ -15,7 +15,7 @@ import {ProjectService} from "../../../service/project.service";
   ]
 })
 export class ProjectSelectComponent implements OnInit, ControlValueAccessor{
-  projects: Project[]
+  projects: Project[];
   projectSelectId = new FormControl<Project>(null);
 
   constructor(private projectService: ProjectService) {

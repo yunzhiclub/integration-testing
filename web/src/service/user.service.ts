@@ -16,6 +16,7 @@ interface UserState extends Store<User> {
   pageData: Page<User>;
   httpParams: {page: number, size: number, name?: string};
   getById: User;
+  getAllUser: User[];
 }
 
 /**
@@ -34,6 +35,10 @@ export class UserService extends Store<UserState> {
     return status.getById;
   }
 
+  static getAllUser(status: UserState): User[] {
+    return status.getAllUser;
+  }
+
   static pageData(state: UserState): Page<User> {
     return state.pageData;
   }
@@ -42,7 +47,9 @@ export class UserService extends Store<UserState> {
     super({
       currentUser: {} as User,
       pageData: new Page<User>(),
-      httpParams: {page: 0, size: 0, name: ''}
+      httpParams: {page: 0, size: 0, name: ''},
+      getById: null,
+      getAllUser: [],
     });
 
     if (!this.router.url.startsWith(`/login`)) {
@@ -83,6 +90,15 @@ export class UserService extends Store<UserState> {
     return this.httpClient.get<User>(`/user/${id}`).pipe(tap(data => {
       const state = this.getState();
       state.getById = data as User;
+      this.next(state);
+    }))
+  }
+
+  @Action()
+  getAllUser(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`/user/getAllUser`).pipe(tap(data => {
+      const state = this.getState();
+      state.getAllUser = data as User[];
       this.next(state);
     }))
   }

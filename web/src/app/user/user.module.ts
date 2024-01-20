@@ -11,6 +11,7 @@ import {RoleSelectComponent} from "./role-select/role-select.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {RolePipe} from "../../pipe/role.pipe";
+import { UserSelectComponent } from './user-select/user-select.component';
 
 
 
@@ -20,10 +21,12 @@ import {RolePipe} from "../../pipe/role.pipe";
         AddComponent,
         EditComponent,
         RoleSelectComponent,
-        RolePipe
+        RolePipe,
+        UserSelectComponent
     ],
     exports: [
-        RolePipe
+        RolePipe,
+        UserSelectComponent
     ],
     imports: [
         CommonModule,

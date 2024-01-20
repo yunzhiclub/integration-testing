@@ -11,13 +11,14 @@
 <table class="table table-striped mt-2">
   <thead>
   <tr class="table-primary">
-    <th>选择</th>
+    <th><input type="checkbox">选择</th>
     <th>序号</th>
     <th>所属项目</th>
     <th>所属测试用例-大项</th>
     <th>测试用例-小项</th>
     <th>测试步骤</th>
     <th>预期结果</th>
+    <th>申请人</th>
     <th>操作</th>
   </tr>
   </thead>
@@ -32,6 +33,7 @@
       2将用户名和密码输入框留空
       3点击登录按钮</td>
     <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
+    <td>张三</td>
     <td>
       <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
       <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>

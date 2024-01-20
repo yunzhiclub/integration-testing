@@ -20,9 +20,16 @@
   </div>
 
   <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>描述</label>
+    <label class="col-4 text-right col-form-label"><code>*</code>选择测试用例</label>
     <div class="col-4">
-      <input class="form-control" formControlName="describe"/>
+      <input class="form-control" formControlName="testCase"/>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-4 text-right col-form-label"><code>*</code>测试人： </label>
+    <div class="col-4">
+      <app-user-select formArrayName="testUser"></app-user-select>
     </div>
   </div>
   <hr/>
