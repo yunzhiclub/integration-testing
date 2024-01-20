@@ -10,5 +10,7 @@ export interface Project{
   repositoryUrl: string;
   /*项目测试计划*/
   testPlane: [];
+  /*测试用例*/
+  // testCase: [];
   createTime: number;
 }

@@ -9,13 +9,14 @@ class LargeItem {
 export interface TestPlan{
   id: number,
   title: string,
+  // todo 删除描述
   describe: string,
-  status: number,
-  createTime: number,
   /*测试用例*/
-  testCaseLarge: LargeItem[],
+  // testCase: testCase[],
   /*测试人*/
   testUser: User[],
+  status: number,
   /*所属项目Id*/
-  projectId: number
+  projectId: number;
+  createTime: number
 }
