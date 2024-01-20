@@ -10,6 +10,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
+import {UserModule} from "../user/user.module";
 
 /**
  * 测试计划模块
@@ -20,16 +21,17 @@ import {ProjectModule} from "../project/project.module";
     AddComponent,
     EditComponent
   ],
-  imports: [
-    CommonModule,
-    TestPlanRoutingModule,
-    FormsModule,
-    MatTooltipModule,
-    ReactiveFormsModule,
-    YzPageModule,
-    YzSizeModule,
-    DialogEntryModule,
-    ProjectModule
-  ]
+    imports: [
+        CommonModule,
+        TestPlanRoutingModule,
+        FormsModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        YzPageModule,
+        YzSizeModule,
+        DialogEntryModule,
+        ProjectModule,
+        UserModule
+    ]
 })
 export class TestPlanModule { }

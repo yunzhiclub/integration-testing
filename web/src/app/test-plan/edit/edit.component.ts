@@ -31,7 +31,7 @@ export class EditComponent implements OnInit{
   }
 
   onClose() {
-    this.router.navigate(['../'], {relativeTo: this.route})
+    this.router.navigate(['../../'], {relativeTo: this.route})
   }
 
   onSubmit() {
