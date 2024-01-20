@@ -4,8 +4,18 @@ import {generatePage} from "@yunzhi/ng-common";
 import {randomNumber, randomString} from "@yunzhi/utils";
 import {TestPlan} from "../entity/testPlan";
 import {Project} from "../entity/project";
+import {User} from "../entity/user";
 
 export class TestPlanApi implements MockApiInterface {
+  user = [{
+    id: randomNumber(10),
+    name: '张胜男',
+  } as User,
+    {
+      id: randomNumber(10),
+      name: '朱一龙',
+    } as User
+  ];
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -23,6 +33,7 @@ export class TestPlanApi implements MockApiInterface {
               id: randomNumber(10),
               title: name ? name : 'test1',
               describe: randomString('描述'),
+              testUser: this.user,
               status: randomNumber(3),
               projectId: randomNumber(20),
               createTime: new Date().getTime()

@@ -1,3 +1,5 @@
+import {User} from "./user";
+
 class LargeItem {
 }
 
@@ -11,7 +13,9 @@ export interface TestPlan{
   status: number,
   createTime: number,
   /*测试用例*/
-  testCaseLarge: LargeItem[]
+  testCaseLarge: LargeItem[],
+  /*测试人*/
+  testUser: User[],
   /*所属项目Id*/
   projectId: number
 }
