@@ -30,26 +30,6 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'testPlan/:id',
-    component: TestComponent,
-    children: [
-      {
-        path: 'add',
-        component: DialogEntryComponent,
-        data: {
-          component: TestAddComponent
-        }
-      },
-      {
-        path: 'edit/:id',
-        component: DialogEntryComponent,
-        data: {
-          component: TestEditComponent
-        }
-      }
-    ]
-  },
 ];
 
 @NgModule({
