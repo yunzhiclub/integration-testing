@@ -12,14 +12,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author kexiaobin
@@ -28,11 +27,13 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -119,5 +120,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void delete(Long id) {
         this.userRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean checkPasswordIsRight(String oldPassword) {
+        User user = this.getCurrentLonginUser().orElseThrow(EntityNotFoundException::new);
+        return this.passwordEncoder.matches(oldPassword, user.getPassword());
+    }
+
+    @Override
+    public void updatePassword(String oldPassword, String newPassword) {
+        this.getCurrentLonginUser().ifPresent(user -> {
+            if (this.passwordEncoder.matches(oldPassword, user.getPassword())) {
+                user.setPassword(newPassword);
+                User currentUser = this.findById(user.getId());
+                currentUser.setPassword(newPassword);
+                this.userRepository.save(currentUser);
+            }
+        });
     }
 }

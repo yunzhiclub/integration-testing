@@ -25,6 +25,7 @@ public class InitData implements ApplicationListener<ContextRefreshedEvent>, Ord
             User user = new User();
             user.setName("管理员");
             user.setUsername("13920618851");
+            user.setContactPhone("13920618851");
             user.setPassword("yunzhi");
             user.setRole(User.ROLE_ADMIN);
             userRepository.save(user);

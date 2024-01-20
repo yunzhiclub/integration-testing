@@ -365,8 +365,8 @@
 
     dingding-deploy-error:
       runs-on: ubuntu-latest
-      if: ${{ failure() }}
       needs: [deploy]
+      if: ${{ failure() }}
       steps:
         - uses: actions/checkout@v4
         - name: Send dingding notify error

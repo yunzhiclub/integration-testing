@@ -93,6 +93,19 @@ public class UserController {
         return this.userService.getCurrentLonginUser().get();
     }
 
+    /**
+     * 验证密码
+     */
+    @GetMapping("checkPasswordIsRight")
+    public boolean checkPasswordIsRight(@RequestParam String oldPassword) {
+        return this.userService.checkPasswordIsRight(oldPassword);
+    }
+
+    @PutMapping("updatePassword")
+    public void updatePassword(@RequestBody UserDto.UpdatePassword updatePassword) {
+        this.userService.updatePassword(updatePassword.getOldPassword(), updatePassword.getNewPassword());
+    }
+
     interface LoginJsonView {
     }
 

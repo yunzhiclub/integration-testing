@@ -27,8 +27,8 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ApiDemoModule,
-    // ApiProModule
+   // ApiDemoModule,
+    ApiProModule
   ],
 
   bootstrap: [AppComponent]
