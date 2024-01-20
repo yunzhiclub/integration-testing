@@ -4,6 +4,7 @@ import { IndexComponent } from './index.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {ProjectModule} from "../../project/project.module";
 import {NzTableModule} from "ng-zorro-antd/table";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 describe('testCase->IndexComponent', () => {
   let component: IndexComponent;
@@ -15,7 +16,8 @@ describe('testCase->IndexComponent', () => {
       imports: [
         RouterTestingModule,
         ProjectModule,
-        NzTableModule
+        NzTableModule,
+        DragDropModule
       ]
     })
     .compileComponents();

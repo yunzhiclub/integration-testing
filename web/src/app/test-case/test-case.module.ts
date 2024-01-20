@@ -10,6 +10,7 @@ import { CloneComponent } from './clone/clone.component';
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
 import {NzTableModule} from "ng-zorro-antd/table";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 /**
  * 测试用例模块
@@ -28,7 +29,8 @@ import {NzTableModule} from "ng-zorro-antd/table";
         MatTooltipModule,
         DialogEntryModule,
         ProjectModule,
-        NzTableModule
+        NzTableModule,
+        DragDropModule
     ]
 })
 export class TestCaseModule { }
