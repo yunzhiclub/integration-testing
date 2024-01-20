@@ -11,7 +11,7 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
       imports: [
-        NzTableModule
+        NzTableModule,
       ]
     })
     .compileComponents();
