@@ -13,6 +13,8 @@ import { TestAddComponent } from './test/test-add/test-add.component';
 import { TestEditComponent } from './test/test-edit/test-edit.component';
 import { ProjectSelectComponent } from './project-select/project-select.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import {NzTableModule} from "ng-zorro-antd/table";
 
 /**
  * 项目模块
@@ -39,7 +41,10 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     YzPageModule,
     YzSizeModule,
     DialogEntryModule,
-    NzSelectModule
+    NzSelectModule,
+    CdkDrag,
+    NzTableModule,
+    CdkDropList
   ]
 })
 export class ProjectModule { }
