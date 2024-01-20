@@ -1,4 +1,5 @@
 import {User} from "./user";
+import {TestCase} from "./test-case";
 
 class LargeItem {
 }
@@ -12,7 +13,7 @@ export interface TestPlan{
   // todo 删除描述
   describe: string,
   /*测试用例*/
-  // testCase: testCase[],
+  testCase: TestCase[],
   /*测试人*/
   testUser: User[],
   status: number,
