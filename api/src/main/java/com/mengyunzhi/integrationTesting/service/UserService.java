@@ -27,4 +27,14 @@ public interface UserService {
     String resetPassword(Long id);
 
     void delete(Long id);
+
+    /**
+     * 检查密码是否一致
+     */
+    boolean checkPasswordIsRight(String oldPassword);
+
+    /**
+     * 修改密码
+     */
+    void updatePassword(String oldPassword, String newPassword);
 }
