@@ -1,6 +1,7 @@
   name: GitHub Actions
   run-name: intergationTesting
 
+  #设置环境
   env: 
     PROJECT_NAME: intergationTesting
     DB_NAME: "intergationTesting"
@@ -10,6 +11,7 @@
     HTTP_EXPORT_PORT: 801
     DB_EXPORT_PORT: 17134
 
+  #设置触发时机
   on:
     push:
       tags:
@@ -17,10 +19,12 @@
     pull_request:
       branches: [ main ]
 
+  #每个 workflow 由多个 job 组成
+  #默认并行运行
   jobs:
     unit-test:
       runs-on: ubuntu-latest
-      # 定义任务的步骤
+      # 定义任务的步骤 串行
       steps:
         - name: Checkout repository
           uses: actions/checkout@v4
@@ -72,6 +76,7 @@
     angular-build: 
       runs-on: ubuntu-latest
       if: github.event_name == 'push'
+      #前提条件 unit-test, spring-boot-test 成功通过
       needs: [unit-test, spring-boot-test]
       steps: 
         - name: Checkout repository
@@ -96,7 +101,7 @@
 
     api-build:
       runs-on: ubuntu-latest
-      if: github.event_name == 'push'
+      if: github.event_name == 'tag'
       needs: [unit-test, spring-boot-test]
       steps:
         - name: Checkout repository
