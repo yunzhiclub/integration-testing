@@ -14,7 +14,7 @@ import * as _ from "lodash";
 interface UserState extends Store<User> {
   currentUser: User;
   pageData: Page<User>;
-  httpParams: {page: number, size: number, name?: string};
+  httpParams: { page: number, size: number, name?: string };
   getById: User;
   getAllUser: User[];
 }
@@ -27,7 +27,7 @@ interface UserState extends Store<User> {
 })
 export class UserService extends Store<UserState> {
 
-  static currentUser(state: UserState): User{
+  static currentUser(state: UserState): User {
     return state.currentUser;
   }
 
@@ -42,6 +42,7 @@ export class UserService extends Store<UserState> {
   static pageData(state: UserState): Page<User> {
     return state.pageData;
   }
+
   constructor(protected httpClient: HttpClient,
               protected router: Router) {
     super({
@@ -53,12 +54,12 @@ export class UserService extends Store<UserState> {
     });
 
     if (!this.router.url.startsWith(`/login`)) {
-     this.initCurrentLoginUser();
+      this.initCurrentLoginUser();
     }
   }
 
   @Action()
-  addAction(user: {name: string, username: string, contactPhone: string, role: string}): Observable<User> {
+  addAction(user: { name: string, username: string, contactPhone: string, role: string }): Observable<User> {
     Assert.isNotNullOrUndefined(user.name);
     Assert.isNotNullOrUndefined(user.username);
     Assert.isNotNullOrUndefined(user.contactPhone);
@@ -110,7 +111,7 @@ export class UserService extends Store<UserState> {
   }
 
   @Action()
-  updateAction(id: number, user: {name: string, username: string, contactPhone: string}): Observable<User> {
+  updateAction(id: number, user: { name: string, username: string, contactPhone: string }): Observable<User> {
     Assert.isNumber(id, 'id类型不正确');
     Assert.isNotNullOrUndefined(user.name);
     Assert.isNotNullOrUndefined(user.username);
@@ -134,7 +135,7 @@ export class UserService extends Store<UserState> {
    * 分页数据
    */
   @Action()
-  pageAction(payload: {page: number, size: number, name?: string}): Observable<Page<User>> {
+  pageAction(payload: { page: number, size: number, name?: string }): Observable<Page<User>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
 
@@ -182,8 +183,8 @@ export class UserService extends Store<UserState> {
    *
    */
   @Action()
-  initCurrentLoginUser():Observable<void>{
-    return this.httpClient.get<User>('/user/currentLoginUser').pipe(map( data => {
+  initCurrentLoginUser(): Observable<void> {
+    return this.httpClient.get<User>('/user/currentLoginUser').pipe(map(data => {
       /*存在当前登录的用户，更新状态 否则跳转登录界面*/
       if (data) {
         const state = this.getState();
