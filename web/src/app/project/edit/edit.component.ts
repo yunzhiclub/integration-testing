@@ -4,10 +4,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ProjectService} from "../../../service/project.service";
 import {CommonService} from "../../../service/common-service";
 import {filter, takeUntil} from "rxjs";
-import {UserService} from "../../../service/user.service";
 import {Project} from "../../../entity/project";
 import {BaseComponent} from "../../share/base-component";
-import {User} from "../../../entity/user";
 
 @Component({
   selector: 'app-edit',
