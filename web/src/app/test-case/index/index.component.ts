@@ -20,7 +20,6 @@ import {CommonService} from "../../../service/common-service";
 export class IndexComponent extends BaseComponent implements OnInit{
   isCollapsed = true;
   pageData = new Page<TestCase>();
-
   param = {
     page: 0,
     size: environment.size,
