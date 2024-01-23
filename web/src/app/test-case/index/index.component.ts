@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../share/base-component";
 import {Page} from "@yunzhi/ng-common";
-import {Project} from "../../../entity/project";
 import {environment} from "../../../environments/environment";
-import {TestCase} from "../../../entity/test-case";
-import {ProjectService} from "../../../service/project.service";
 import {takeUntil} from "rxjs";
 import {TestCaseService} from "../../../service/test-case.service";
 import {CommonService} from "../../../service/common-service";
+import {TestCaseModelService} from "../../../service/test-case-model.service";
+import {TestCaseModel} from "../../../entity/test-case-model";
 
 /**
  * 测试用例的大项Index组件
@@ -19,7 +18,7 @@ import {CommonService} from "../../../service/common-service";
 })
 export class IndexComponent extends BaseComponent implements OnInit{
   isCollapsed = true;
-  pageData = new Page<TestCase>();
+  pageData: Page<TestCaseModel> = new Page<TestCaseModel>();
 
   param = {
     page: 0,
@@ -27,12 +26,13 @@ export class IndexComponent extends BaseComponent implements OnInit{
   };
 
   constructor(private testCaseService: TestCaseService,
+              private testCaseModelService: TestCaseModelService,
               private commonService: CommonService) {
     super();
   }
 
   ngOnInit(): void {
-    this.testCaseService.select(TestCaseService.pageData).pipe(takeUntil(this.ngOnDestroy$))
+    this.testCaseModelService.select(TestCaseModelService.pageData).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe({
         next: (data) => {
           this.pageData = data;
@@ -43,7 +43,7 @@ export class IndexComponent extends BaseComponent implements OnInit{
   }
 
   reload(): void {
-    this.testCaseService.pageAction(this.param);
+    this.testCaseModelService.pageAction(this.param);
   }
 
   onChangeSize(size: number) {
@@ -56,8 +56,10 @@ export class IndexComponent extends BaseComponent implements OnInit{
     this.reload();
   }
 
-  toggleCollapse() {
-    this.isCollapsed = !this.isCollapsed;
+  toggleCollapse(id: number, isShow: boolean | any) {
+    if(isShow !== undefined) {
+      this.testCaseModelService.toggleCollapse(id, isShow).pipe(takeUntil(this.ngOnDestroy$)).subscribe();
+    }
   }
 
   delete(name: string, id: number) {
