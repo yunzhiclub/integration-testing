@@ -1,0 +1,45 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">新增测试用例</li>
+  </ol>
+</nav>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+  <div class="form-group row">
+    <label class="col-4 text-right col-form-label"><code>*</code>所属项目</label>
+    <div class="col-4">
+      <app-project-select></app-project-select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-4 text-right col-form-label"><code>*</code>名称</label>
+    <div class="col-4">
+      <input class="form-control" formControlName="name"/>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-4 text-right col-form-label"><code>*</code>测试目的</label>
+    <div class="col-4">
+      <textarea class="form-control" formControlName="testPurpose"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-4 text-right col-form-label"><code>*</code>前置条件</label>
+    <div class="col-4">
+      <textarea  class="form-control" formControlName="preconditions"></textarea>
+    </div>
+  </div>
+  <hr/>
+  <div class="form-group row pr-3">
+    <div class="col-12 text-right">
+      <button type="button" class="btn btn-secondary mr-1" (click)="onClose()"><i class="bi bi-x"></i>关闭</button>
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i>确定</button>
+    </div>
+  </div>
+</form>
+
+
+
+

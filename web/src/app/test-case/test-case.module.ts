@@ -10,6 +10,8 @@ import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
 
 /**
  * 测试用例模块
@@ -17,7 +19,9 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 @NgModule({
   declarations: [
     IndexComponent,
-    CloneComponent
+    CloneComponent,
+    AddComponent,
+    EditComponent
   ],
     imports: [
         CommonModule,
