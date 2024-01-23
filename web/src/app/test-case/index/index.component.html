@@ -20,28 +20,47 @@
     <th>序号</th>
     <th>所属项目</th>
     <th>名称</th>
-    <th>测试目的</th>
-    <th>前置条件</th>
+    <th>测试目的(展开是测试步骤)</th>
+    <th>前置条件（展开是预期结果）</th>
     <th>操作</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let testCase of pageData.content; index as i">
-    <td>
-      {{ i + 1 }}
-      <i matTooltip="查看" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1" (click)="toggleCollapse()"
-          class="bi" [ngClass]="{'bi-caret-down-fill': !isCollapsed, 'bi bi-caret-right-fill': isCollapsed}"></i>
-    </td>
-    <td>{{ testCase?.project?.name }}</td>
-    <td>{{ testCase?.name}}</td>
-    <td>{{ testCase?.testPurpose}}</td>
-    <td> {{ testCase?.preconditions}}</td>
-    <td>
-      <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testCase.id}}"><i class="fa fas fa-pen"></i></a>
-      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testCase?.name, testCase?.id)"><i class="fa fas fa-trash"></i></a>
-    </td>
-  </tr>
-  <tr id="collapseExample1" class="collapse">
+  <ng-container *ngFor="let testCaseModel of pageData.content; index as i">
+    <tr>
+      <td>
+        {{ i + 1 }}
+        <i matTooltip="查看" (click)="toggleCollapse(testCaseModel?.id, testCaseModel?.isShow)"
+           class="bi" [ngClass]="{'bi-caret-down-fill': testCaseModel?.isShow, 'bi bi-caret-right-fill': !testCaseModel?.isShow}"></i>
+      </td>
+      <td>{{ testCaseModel?.testCase?.project?.name }}</td>
+      <td>{{ testCaseModel?.testCase?.name}}</td>
+      <td>{{ testCaseModel?.testCase?.testPurpose}}</td>
+      <td> {{ testCaseModel?.testCase?.preconditions}}</td>
+      <td>
+        <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testCaseModel?.testCase?.id}}"><i class="fa fas fa-pen"></i></a>
+        <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testCaseModel?.testCase?.name, testCaseModel?.testCase?.id)"><i class="fa fas fa-trash"></i></a>
+      </td>
+    </tr>
+      <ng-container *ngIf="testCaseModel?.isShow ">
+            <tr *ngFor="let testItem of testCaseModel?.testItem" class="bg-light">
+              <td></td>
+              <td></td>
+              <td>{{testItem?.name}} </td>
+              <td>{{testItem?.steps}}</td>
+              <td>{{testItem?.expectedResult}}</td>
+              <td>
+                <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
+                <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
+                <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
+                <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
+              </td>
+            </tr>
+      </ng-container>
+  </ng-container>
+
+
+  <tr id="" class="collapse">
     <td colspan="6">
       <div class="row mb-2 mt-2">
         <div class="col-md-6">
@@ -50,89 +69,7 @@
           <a class="btn ml-3"><i class="fa fas fa-plus"></i>新增</a>
         </div>
       </div>
-<!--      <div class="row">-->
-<!--        <th>名称</th>-->
-<!--        <th>测试步骤</th>-->
-<!--        <th>预期结果</th>-->
-<!--        <th>操作</th>-->
-<!--      </div>-->
-<!--      <div class="row">-->
-<!--        <ol>-->
-<!--          <li>test</li>-->
-<!--          <li>test</li>-->
-<!--          <li>test</li>-->
-<!--          <li>test</li>-->
-<!--        </ol>-->
-<!--      </div>-->
-      <nz-table  nzSize="middle">
-        <thead>
-        <tr>
-          <th>序号</th>
-          <th>名称</th>
-          <th>测试步骤</th>
-          <th>预期结果</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody cdkDropList>
-        <tr cdkDrag cdkDragLockAxis="y">
-          <td>1</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
-            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag cdkDragLockAxis="y">
-          <td>2</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
-            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag cdkDragLockAxis="y">
-          <td>3</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
-            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        <tr cdkDrag cdkDragLockAxis="y">
-          <td>4</td>
-          <td>用错误的用户名登录</td>
-          <td>1打开登录页面
-            2将用户名和密码输入框留空
-            3点击登录按钮</td>
-          <td>系统提示用户输入用户名和密码不能为空  ,用户无法登录到系统</td>
-          <td>
-            <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
-            <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
-            <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-            <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
-          </td>
-        </tr>
-        </tbody>
-      </nz-table>
+
     </td>
   </tr>
   </tbody>
