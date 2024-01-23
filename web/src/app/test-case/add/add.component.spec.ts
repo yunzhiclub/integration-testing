@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddComponent } from './add.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ProjectModule} from "../../project/project.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('AddComponent', () => {
   let component: AddComponent;
@@ -8,7 +13,15 @@ describe('AddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddComponent ]
+      declarations: [ AddComponent ],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        ProjectModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
 
