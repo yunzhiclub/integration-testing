@@ -7,15 +7,16 @@ import {Project} from "../entity/project";
 import {User} from "../entity/user";
 
 export class TestPlanApi implements MockApiInterface {
-  user = [{
-    id: randomNumber(10),
-    name: '张胜男',
-  } as User,
-    {
+    user = [{
       id: randomNumber(10),
-      name: '朱一龙',
-    } as User
-  ];
+      name: '张胜男',
+    } as User,
+      {
+        id: randomNumber(10),
+        name: '朱一龙',
+      } as User
+    ];
+
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -35,7 +36,10 @@ export class TestPlanApi implements MockApiInterface {
               describe: randomString('描述'),
               testUser: this.user,
               status: randomNumber(3),
-              projectId: randomNumber(20),
+              project: {
+                id: randomNumber(10),
+                name: randomString('project', 3)
+              } as Project,
               createTime: new Date().getTime()
             } as TestPlan;
           });
@@ -48,14 +52,14 @@ export class TestPlanApi implements MockApiInterface {
       {
         method: 'POST',
         url: '/testPlan',
-        result: (urlMatcher: any, options: {body: {projectId: number, title: string, describe: string}}) => {
+        result: (urlMatcher: any, options: { body: { project: Project, title: string, describe: string } }) => {
           const testPlan = options.body as TestPlan;
           return {
             id: randomNumber(10),
             title: testPlan.title,
             describe: testPlan.describe,
             status: randomNumber(0),
-            projectId: testPlan.projectId,
+            project: testPlan.project,
             createTime: new Date().getTime()
           } as TestPlan
         }

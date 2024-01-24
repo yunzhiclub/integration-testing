@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { TestPlanRoutingModule } from './test-plan-routing.module';
-import { IndexComponent } from './index/index.component';
-import { AddComponent } from './add/add.component';
-import { EditComponent } from './edit/edit.component';
+import {TestPlanRoutingModule} from './test-plan-routing.module';
+import {IndexComponent} from './index/index.component';
+import {AddComponent} from './add/add.component';
+import {EditComponent} from './edit/edit.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
@@ -21,17 +21,18 @@ import {UserModule} from "../user/user.module";
     AddComponent,
     EditComponent
   ],
-    imports: [
-        CommonModule,
-        TestPlanRoutingModule,
-        FormsModule,
-        MatTooltipModule,
-        ReactiveFormsModule,
-        YzPageModule,
-        YzSizeModule,
-        DialogEntryModule,
-        ProjectModule,
-        UserModule
-    ]
+  imports: [
+    CommonModule,
+    TestPlanRoutingModule,
+    FormsModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+    YzPageModule,
+    YzSizeModule,
+    DialogEntryModule,
+    ProjectModule,
+    UserModule
+  ]
 })
-export class TestPlanModule { }
+export class TestPlanModule {
+}
