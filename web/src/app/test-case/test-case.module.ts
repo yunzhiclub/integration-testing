@@ -26,6 +26,9 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     EditComponent,
     TestCaseSelectComponent
   ],
+  exports: [
+    TestCaseSelectComponent
+  ],
   imports: [
     CommonModule,
     TestCaseRoutingModule,
