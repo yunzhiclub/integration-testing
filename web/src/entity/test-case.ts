@@ -11,6 +11,8 @@ export interface TestCase {
   testPurpose: string;
   /*前置条件*/
   preconditions: string;
+  /*是否展开小项*/
+  isShow: boolean
   /*测试小项*/
   testItem: TestItem[];
   /*所属项目*/
