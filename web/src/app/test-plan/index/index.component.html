@@ -28,8 +28,7 @@
     <th>序号</th>
     <th>所属项目名称</th>
     <th>标题</th>
-    <th>测试用例</th>
-    <th>测试人</th>
+    <th>任务分配</th>
     <th>状态</th>
     <th>操作</th>
   </tr>
@@ -39,11 +38,13 @@
     <td>{{i + 1}}</td>
     <td>{{testPlan?.project?.name}}</td>
     <td>{{testPlan?.title}}</td>
-    <td>测试登录功能，测试用户管理</td>
-    <td>
-      <label *ngFor="let user of testPlan?.testUser">{{user.name}}</label>
+    <td class="text-pack">
+      测试登录功能，测试用户管理： 张三；
+      测试xx: 李四;
+      测试个人中心：王五
     </td>
     <td>{{testPlan?.status}}</td>
+
 <!--    <td>{{testPlan?.createTime | date: 'yyyy-MM-dd'}}</td>-->
     <td>
       <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testPlan?.id}}"><i class="fa fas fa-pen"></i></a>

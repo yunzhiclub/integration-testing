@@ -110,6 +110,34 @@ export class ProjectApi implements MockApiInterface {
           );
         }
       },
+      {
+        method: 'GET',
+        url: '/project/getAll',
+        result: () => {
+            return [
+              {
+                id: randomNumber(100),
+                name: '牙科管理系统',
+                projectUrl: ' http://app.mengyunzhi.com:17121',
+                repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
+                describe: '',
+                testPlane: [],
+                testCase: [],
+                createTime: new Date().getTime()
+              } as Project,
+              {
+                id: randomNumber(100),
+                name: '集成测试系统',
+                projectUrl: ' http://app.mengyunzhi.com:17121',
+                repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
+                describe: '',
+                testPlane: [],
+                testCase: [],
+                createTime: new Date().getTime()
+              } as Project,
+            ]
+        }
+      }
     ];
   }
 

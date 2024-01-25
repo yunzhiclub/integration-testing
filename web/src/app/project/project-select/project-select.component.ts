@@ -2,6 +2,8 @@ import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Project} from "../../../entity/project";
 import {ProjectService} from "../../../service/project.service";
+import {BaseComponent} from "../../share/base-component";
+import {takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-project-select',
@@ -14,18 +16,19 @@ import {ProjectService} from "../../../service/project.service";
     }
   ]
 })
-export class ProjectSelectComponent implements OnInit, ControlValueAccessor{
+export class ProjectSelectComponent extends BaseComponent implements OnInit, ControlValueAccessor{
   projects: Project[];
   projectSelectId = new FormControl<Project>(null);
 
   constructor(private projectService: ProjectService) {
+    super();
   }
 
   ngOnInit(): void {
-    // this.projectService.getAll()
-    //   .subscribe((data: Project[]) => {
-    //     this.project = data;
-    //   });
+    this.projectService.getAll().pipe(takeUntil(this.ngOnDestroy$))
+      .subscribe((data: Project[]) => {
+        this.projects = data;
+      });
   }
 
   registerOnChange(fn: any): void {

@@ -11,6 +11,7 @@ import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
 import {UserModule} from "../user/user.module";
+import {TestCaseModule} from "../test-case/test-case.module";
 
 /**
  * 测试计划模块
@@ -31,7 +32,8 @@ import {UserModule} from "../user/user.module";
     YzSizeModule,
     DialogEntryModule,
     ProjectModule,
-    UserModule
+    UserModule,
+    TestCaseModule
   ]
 })
 export class TestPlanModule {
