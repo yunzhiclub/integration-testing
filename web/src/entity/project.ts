@@ -4,7 +4,7 @@ import {TestCase} from "./test-case";
 /**
  * 项目实体
  */
-export interface Project{
+export interface Project {
   id: number;
   name: string;
   /*项目测试环境地址*/

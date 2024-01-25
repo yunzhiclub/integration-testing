@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * 抽离共用字段
+ * @author kexiaobin
  */
 @MappedSuperclass
 @Data

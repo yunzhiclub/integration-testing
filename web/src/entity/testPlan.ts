@@ -8,11 +8,11 @@ class LargeItem {
 /**
  * 测试计划的实体
  */
-export interface TestPlan {
+export interface  TestPlan {
   id: number,
   title: string,
   // todo 删除描述
-  describe: string,
+  description: string,
   /*测试用例*/
   testCase: TestCase[],
   /*测试人*/
