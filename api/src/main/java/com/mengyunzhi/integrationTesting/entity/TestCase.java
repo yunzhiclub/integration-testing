@@ -17,6 +17,7 @@ import java.util.*;
  * @author kexiaobin
  * 测试用例（大项）
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @SQLDelete(sql = "update `test_case` set deleted = 1, delete_at = UNIX_TIMESTAMP() where id = ?")
@@ -32,10 +33,12 @@ public class TestCase extends BaseEntity<Long> {
 
     @OneToMany
     @JsonView(TestItemJsonView.class)
+    @ApiModelProperty("测试项")
     private List<TestItem> testItems;
 
     @ManyToOne
     @JsonView(ProjectJsonView.class)
+    @ApiModelProperty("所属项目")
     private Project project;
 
     public static interface ProjectJsonView {}
