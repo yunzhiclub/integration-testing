@@ -26,26 +26,25 @@
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let testCaseModel of pageData.content; index as i">
+  <ng-container *ngFor="let testCase of pageData.content; index as i">
     <tr>
       <td>
         {{ i + 1 }}
-        <i matTooltip="查看" (click)="toggleCollapse(testCaseModel?.id, testCaseModel?.isShow)"
-           class="bi" [ngClass]="{'bi-caret-down-fill': testCaseModel?.isShow, 'bi bi-caret-right-fill': !testCaseModel?.isShow}"></i>
+        <i matTooltip="查看" (click)="toggleCollapse(testCase?.id, testCase?.isShow)"
+           class="bi" [ngClass]="{'bi-caret-down-fill': testCase?.isShow, 'bi bi-caret-right-fill': !testCase?.isShow}"></i>
       </td>
-      <td>{{ testCaseModel?.testCase?.project?.name }}</td>
-      <td>{{ testCaseModel?.testCase?.name}}</td>
-      <td>{{ testCaseModel?.testCase?.testPurpose}}</td>
-      <td> {{ testCaseModel?.testCase?.preconditions}}</td>
+      <td>{{ testCase?.project?.name }}</td>
+      <td>{{ testCase?.name}}</td>
+      <td>{{ testCase?.testPurpose}}</td>
+      <td> {{ testCase?.preconditions}}</td>
       <td>
-        <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testCaseModel?.testCase?.id}}"><i class="fa fas fa-pen"></i></a>
-        <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testCaseModel?.testCase?.name, testCaseModel?.testCase?.id)"><i class="fa fas fa-trash"></i></a>
+        <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testCase?.id}}"><i class="fa fas fa-pen"></i></a>
+        <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testCase?.name, testCase?.id)"><i class="fa fas fa-trash"></i></a>
         <a class="text-primary mr-3" matTooltip="添加小项" ><i class="bi bi-plus-lg"></i></a>
-
       </td>
     </tr>
-      <ng-container *ngIf="testCaseModel?.isShow ">
-            <tr *ngFor="let testItem of testCaseModel?.testItem" class="bg-light">
+      <ng-container *ngIf="testCase?.isShow ">
+            <tr *ngFor="let testItem of testCase?.testItem" class="bg-light">
               <td></td>
               <td></td>
               <td>{{testItem?.name}} </td>

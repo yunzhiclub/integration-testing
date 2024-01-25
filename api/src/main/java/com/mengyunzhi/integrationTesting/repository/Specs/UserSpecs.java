@@ -10,7 +10,7 @@ public class UserSpecs {
 
     public static Specification<User> containingName(String name) {
         if (name != null) {
-            return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("name").as(String.class), String.format("%%%s%%", name));
+            return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("name").as(String.class), String.format("%s%%", name));
         } else {
             return Specification.where(null);
         }

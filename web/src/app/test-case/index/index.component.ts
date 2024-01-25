@@ -5,8 +5,7 @@ import {environment} from "../../../environments/environment";
 import {takeUntil} from "rxjs";
 import {TestCaseService} from "../../../service/test-case.service";
 import {CommonService} from "../../../service/common-service";
-import {TestCaseModelService} from "../../../service/test-case-model.service";
-import {TestCaseModel} from "../../../entity/test-case-model";
+import {TestCase} from "../../../entity/test-case";
 
 /**
  * 测试用例的大项Index组件
@@ -18,7 +17,7 @@ import {TestCaseModel} from "../../../entity/test-case-model";
 })
 export class IndexComponent extends BaseComponent implements OnInit{
   isCollapsed = true;
-  pageData: Page<TestCaseModel> = new Page<TestCaseModel>();
+  pageData: Page<TestCase> = new Page<TestCase>();
 
   param = {
     page: 0,
@@ -26,13 +25,12 @@ export class IndexComponent extends BaseComponent implements OnInit{
   };
 
   constructor(private testCaseService: TestCaseService,
-              private testCaseModelService: TestCaseModelService,
               private commonService: CommonService) {
     super();
   }
 
   ngOnInit(): void {
-    this.testCaseModelService.select(TestCaseModelService.pageData).pipe(takeUntil(this.ngOnDestroy$))
+    this.testCaseService.select(TestCaseService.pageData).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe({
         next: (data) => {
           this.pageData = data;
@@ -43,7 +41,7 @@ export class IndexComponent extends BaseComponent implements OnInit{
   }
 
   reload(): void {
-    this.testCaseModelService.pageAction(this.param);
+    this.testCaseService.pageAction(this.param);
   }
 
   onChangeSize(size: number) {
@@ -58,7 +56,7 @@ export class IndexComponent extends BaseComponent implements OnInit{
 
   toggleCollapse(id: number, isShow: boolean | any) {
     if(isShow !== undefined) {
-      this.testCaseModelService.toggleCollapse(id, isShow).pipe(takeUntil(this.ngOnDestroy$)).subscribe();
+      this.testCaseService.toggleCollapse(id, isShow).pipe(takeUntil(this.ngOnDestroy$)).subscribe();
     }
   }
 
