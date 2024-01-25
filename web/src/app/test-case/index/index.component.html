@@ -40,7 +40,9 @@
       <td>
         <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testCaseModel?.testCase?.id}}"><i class="fa fas fa-pen"></i></a>
         <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testCaseModel?.testCase?.name, testCaseModel?.testCase?.id)"><i class="fa fas fa-trash"></i></a>
-      </td> 
+        <a class="text-primary mr-3" matTooltip="添加小项" ><i class="bi bi-plus-lg"></i></a>
+
+      </td>
     </tr>
       <ng-container *ngIf="testCaseModel?.isShow ">
             <tr *ngFor="let testItem of testCaseModel?.testItem" class="bg-light">
