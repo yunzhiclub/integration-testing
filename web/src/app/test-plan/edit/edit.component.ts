@@ -5,6 +5,7 @@ import {TestPlanService} from "../../../service/test-plan.service";
 import {CommonService} from "../../../service/common-service";
 import {TestPlan} from "../../../entity/testPlan";
 import {User} from "../../../entity/user";
+import {Project} from "../../../entity/project";
 
 /**
  * 测试计划edit组件
@@ -25,7 +26,7 @@ export class EditComponent implements OnInit{
   }
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      projectId: new FormControl<number>(null),
+      project: new FormControl<Project>(null),
       title: new FormControl<string>(''),
       testCase: new FormControl<string>(''),
       testUser: new FormControl<User>(null),
@@ -36,7 +37,7 @@ export class EditComponent implements OnInit{
     this.router.navigate(['../../'], {relativeTo: this.route})
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const testPlan = this.formGroup.value as TestPlan;
 
     this.testPlanService.addAction(testPlan).subscribe({

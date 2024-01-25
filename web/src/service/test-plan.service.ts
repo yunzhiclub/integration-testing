@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Action, Store} from "@tethys/store";
 import {Project} from "../entity/project";
 import {Page} from "@yunzhi/ng-common";
@@ -7,17 +7,19 @@ import {Observable, tap} from "rxjs";
 import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
 
-interface TestPlanState extends Store<TestPlan>{
+interface TestPlanState extends Store<TestPlan> {
   pageData: Page<TestPlan>;
-  httpParams: {page: number, size: number, name?: string};
+  httpParams: { page: number, size: number, name?: string };
 }
+
 @Injectable({
   providedIn: 'root'
 })
-export class TestPlanService extends Store<TestPlanState>{
+export class TestPlanService extends Store<TestPlanState> {
   static pageData(state: TestPlanState): Page<TestPlan> {
     return state.pageData;
   }
+
   constructor(private httpClient: HttpClient) {
     super({
       pageData: new Page<TestPlan>({}),
@@ -29,7 +31,7 @@ export class TestPlanService extends Store<TestPlanState>{
    * 分页数据
    */
   @Action()
-  pageAction(payload: {page: number, size: number, name?: string}): Observable<Page<TestPlan>> {
+  pageAction(payload: { page: number, size: number, name?: string }): Observable<Page<TestPlan>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
 
@@ -46,9 +48,9 @@ export class TestPlanService extends Store<TestPlanState>{
   }
 
   @Action()
-  addAction(testPlan: {projectId: number, title: string, describe: string}): Observable<TestPlan>{
-    Assert.isNumber(testPlan.projectId);
+  addAction(testPlan: { project: Project, title: string, describe: string }): Observable<TestPlan> {
     Assert.isNotNullOrUndefined(testPlan.title);
+    Assert.isNotNullOrUndefined(testPlan.project);
     Assert.isNotNullOrUndefined(testPlan.describe);
 
     testPlan = testPlan as TestPlan;

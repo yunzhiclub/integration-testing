@@ -16,7 +16,7 @@ import {CommonService} from "../../../service/common-service";
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent extends BaseComponent implements OnInit{
+export class IndexComponent extends BaseComponent implements OnInit {
   name = new FormControl<string>('');
   pageData = new Page<TestPlan>();
 

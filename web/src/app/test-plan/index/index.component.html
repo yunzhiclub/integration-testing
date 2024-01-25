@@ -37,7 +37,7 @@
   <tbody>
   <tr *ngFor="let testPlan of pageData?.content; index as i">
     <td>{{i + 1}}</td>
-    <td>{{testPlan?.projectId}}</td>
+    <td>{{testPlan?.project?.name}}</td>
     <td>{{testPlan?.title}}</td>
     <td>测试登录功能，测试用户管理</td>
     <td>
