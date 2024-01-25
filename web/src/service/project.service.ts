@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {Project} from "../entity/project";
 import * as _ from "lodash";
 import {TestPlan} from "../entity/testPlan";
+import {state} from "@angular/animations";
 
 /**
  * 项目的状态管理
@@ -18,6 +19,7 @@ interface ProjectState extends Store<Project>{
   projectId: number,
   testPlanPageData: Page<TestPlan>;
   testPlanParam: {page: number, size: number, name?: string};
+  getAll: Project[]
 }
 @Injectable({
   providedIn: 'root'
@@ -43,6 +45,7 @@ export class ProjectService extends Store<ProjectState>{
       httpParams: {page: 0, size: 0, name: ''},
       getById: null,
       testPlanParam: {page: 0, size: 0, name: ''},
+      getAll: []
     });
   }
 
@@ -152,6 +155,15 @@ export class ProjectService extends Store<ProjectState>{
         this.next(state);
       }),
     );
+  }
+
+  @Action()
+  getAll(): Observable<Project[]>{
+    const state = this.getState();
+    return this.httpClient.get<Project[]>('/project/getAll').pipe( tap (data => {
+      state.getAll = data as Project[];
+      this.next(state);
+    }))
   }
 
 

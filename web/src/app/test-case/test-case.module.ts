@@ -12,6 +12,8 @@ import {NzTableModule} from "ng-zorro-antd/table";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
+import { TestCaseSelectComponent } from './test-case-select/test-case-select.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 /**
  * 测试用例模块
@@ -21,18 +23,20 @@ import { EditComponent } from './edit/edit.component';
     IndexComponent,
     CloneComponent,
     AddComponent,
-    EditComponent
+    EditComponent,
+    TestCaseSelectComponent
   ],
-    imports: [
-        CommonModule,
-        TestCaseRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatTooltipModule,
-        DialogEntryModule,
-        ProjectModule,
-        NzTableModule,
-        DragDropModule
-    ]
+  imports: [
+    CommonModule,
+    TestCaseRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    DialogEntryModule,
+    ProjectModule,
+    NzTableModule,
+    DragDropModule,
+    NzSelectModule
+  ]
 })
 export class TestCaseModule { }
