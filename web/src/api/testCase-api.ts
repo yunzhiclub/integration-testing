@@ -24,26 +24,26 @@ export class TestCaseApi implements MockApiInterface{
           return generatePage<TestCase>(page, size, index => {
             return {
               id: randomNumber(100),
-              name: '|--测试登录功能',
+              name: '测试登录功能',
               testPurpose: randomString('测试目的'),
               preconditions: randomString('前置条件'),
               isShow: false,
               testItem: [
                 {
                   id: randomNumber(100),
-                  name: '测试小项目',
+                  name: '|--测试小项目',
                   steps: randomString('测试步骤'),
                   expectedResult: randomString(''),
                 } as TestItem,
                 {
                   id: randomNumber(100),
-                  name: '用正确的用户名密码登录系统',
+                  name: '|--用正确的用户名密码登录系统',
                   steps: randomString('测试步骤'),
                   expectedResult: randomString('进入首页'),
                 } as TestItem,
                 {
                   id: randomNumber(100),
-                  name: '测试小项目',
+                  name: '|--测试小项目',
                   steps: randomString('测试步骤'),
                   expectedResult: randomString(''),
                 } as TestItem
@@ -76,7 +76,7 @@ export class TestCaseApi implements MockApiInterface{
           const id = urlMatcher['id'] ? +urlMatcher['id'] : randomNumber(10);
           return {
             id,
-            name: '|--测试用例',
+            name: '测试用例',
             testPurpose: randomString('测试目的'),
             preconditions: randomString('前置条件'),
             project: null,
