@@ -7,6 +7,7 @@ import {TestCaseService} from "../../../service/test-case.service";
 import {CommonService} from "../../../service/common-service";
 import {TestCase} from "../../../entity/test-case";
 import {TestItemService} from "../../../service/test-item.service";
+import {TestItem} from "../../../entity/test-item";
 
 /**
  * 测试用例的大项Index组件
@@ -85,5 +86,31 @@ export class IndexComponent extends BaseComponent implements OnInit{
         }, '删除失败' + error)
       });
     }, '是否删除' + name);
+  }
+
+  /**
+   * 上移动一格
+   * @param testItem
+   * @param index
+   */
+  upGo(testItem: TestItem[] | undefined, index: number) {
+    if(index!=0){
+      testItem[index] = testItem.splice(index-1, 1, testItem[index])[0];
+    }else{
+      testItem.push(testItem.shift());
+    }
+  }
+
+  /**
+   * 下移动一格
+   * @param testItem
+   * @param index
+   */
+  downGo(testItem: TestItem[] | undefined, index: number) {
+    if(index!=testItem.length-1){
+      testItem[index] = testItem.splice(index+1, 1, testItem[index])[0];
+    }else{
+      testItem.unshift( testItem.splice(index,1)[0]);
+    }
   }
 }

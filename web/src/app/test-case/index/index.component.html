@@ -45,15 +45,19 @@
       </td>
     </tr>
       <ng-container *ngIf="testCase?.isShow ">
-            <tr *ngFor="let testItem of testCase?.testItem" class="bg-light">
+            <tr *ngFor="let testItem of testCase?.testItem, index as index" class="bg-light">
               <td></td>
               <td></td>
               <td>{{testItem?.name}} </td>
               <td>{{testItem?.steps}}</td>
               <td>{{testItem?.expectedResult}}</td>
               <td>
-                <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
-                <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
+                <ng-container *ngIf="index!==0">
+                  <a class="text-primary mr-3" matTooltip="上移" (click)="upGo(testCase?.testItem, index)"><i class="bi bi-arrow-up"></i></a>
+                </ng-container>
+                <ng-container *ngIf="index!==(testCase?.testItem.length-1)">
+                  <a class="text-primary mr-3" matTooltip="下移" (click)="downGo(testCase?.testItem, index)" ><i class="bi bi-arrow-down"></i></a>
+                </ng-container>
                 <a class="text-primary mr-3" matTooltip="编辑" routerLink="editTestItem/{{testItem?.id}}"><i class="fa fas fa-pen"></i></a>
                 <a class="text-danger mr-3" matTooltip="删除" (click)="deleteTestItem(testItem?.id, testItem?.name)"><i class="fa fas fa-trash"></i></a>
               </td>
