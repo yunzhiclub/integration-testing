@@ -4,6 +4,7 @@ import { EditTestItemComponent } from './edit-test-item.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {EditorModule} from "../../editor/editor.module";
 
 describe('EditTestItemComponent', () => {
   let component: EditTestItemComponent;
@@ -16,8 +17,9 @@ describe('EditTestItemComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         FormsModule,
-        ReactiveFormsModule
-      ]
+        ReactiveFormsModule,
+        EditorModule
+      ],
     })
     .compileComponents();
 

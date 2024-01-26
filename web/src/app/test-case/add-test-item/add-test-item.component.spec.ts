@@ -3,9 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddTestItemComponent } from './add-test-item.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ProjectModule} from "../../project/project.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {EditorModule} from "../../editor/editor.module";
 
 describe('AddTestItemComponent', () => {
   let component: AddTestItemComponent;
@@ -18,8 +17,9 @@ describe('AddTestItemComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule,
         FormsModule,
-        ReactiveFormsModule
-      ]
+        ReactiveFormsModule,
+        EditorModule
+      ],
     })
     .compileComponents();
 
