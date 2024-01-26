@@ -6,6 +6,7 @@ import {ProjectModule} from "../../project/project.module";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {TestCaseModule} from "../test-case.module";
 
 describe('testCase->CloneComponent', () => {
   let component: CloneComponent;
@@ -19,7 +20,8 @@ describe('testCase->CloneComponent', () => {
         ProjectModule,
         RouterTestingModule,
         HttpClientTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TestCaseModule
       ]
     })
     .compileComponents();
