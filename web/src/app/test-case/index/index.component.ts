@@ -6,6 +6,7 @@ import {takeUntil} from "rxjs";
 import {TestCaseService} from "../../../service/test-case.service";
 import {CommonService} from "../../../service/common-service";
 import {TestCase} from "../../../entity/test-case";
+import {TestItemService} from "../../../service/test-item.service";
 
 /**
  * 测试用例的大项Index组件
@@ -25,7 +26,8 @@ export class IndexComponent extends BaseComponent implements OnInit{
   };
 
   constructor(private testCaseService: TestCaseService,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              private testItemService: TestItemService) {
     super();
   }
 
@@ -73,4 +75,15 @@ export class IndexComponent extends BaseComponent implements OnInit{
   }
 
 
+  deleteTestItem(id: number, name: string) {
+    this.commonService.confirm(() => {
+      this.testItemService.deleteTestItem(id).subscribe(() => {
+        this.commonService.success(() => {
+        }, '删除成功');
+      }, error => {
+        this.commonService.error(() => {
+        }, '删除失败' + error)
+      });
+    }, '是否删除' + name);
+  }
 }

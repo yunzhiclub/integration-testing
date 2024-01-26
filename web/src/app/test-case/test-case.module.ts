@@ -14,6 +14,10 @@ import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { TestCaseSelectComponent } from './test-case-select/test-case-select.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
+import { AddTestItemComponent } from './add-test-item/add-test-item.component';
+import { EditTestItemComponent } from './edit-test-item/edit-test-item.component';
+import {UserModule} from "../user/user.module";
 
 /**
  * 测试用例模块
@@ -24,7 +28,9 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     CloneComponent,
     AddComponent,
     EditComponent,
-    TestCaseSelectComponent
+    TestCaseSelectComponent,
+    AddTestItemComponent,
+    EditTestItemComponent
   ],
   exports: [
     TestCaseSelectComponent
@@ -39,7 +45,10 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     ProjectModule,
     NzTableModule,
     DragDropModule,
-    NzSelectModule
+    NzSelectModule,
+    YzSizeModule,
+    YzPageModule,
+    UserModule
   ]
 })
 export class TestCaseModule { }

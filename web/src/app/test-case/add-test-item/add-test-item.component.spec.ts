@@ -1,34 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndexComponent } from './index.component';
+import { AddTestItemComponent } from './add-test-item.component';
 import {RouterTestingModule} from "@angular/router/testing";
-import {ProjectModule} from "../../project/project.module";
-import {NzTableModule} from "ng-zorro-antd/table";
-import {DragDropModule} from "@angular/cdk/drag-drop";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ProjectModule} from "../../project/project.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 
-describe('testCase->IndexComponent', () => {
-  let component: IndexComponent;
-  let fixture: ComponentFixture<IndexComponent>;
+describe('AddTestItemComponent', () => {
+  let component: AddTestItemComponent;
+  let fixture: ComponentFixture<AddTestItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IndexComponent ],
+      declarations: [ AddTestItemComponent ],
       imports: [
         RouterTestingModule,
-        ProjectModule,
-        NzTableModule,
         HttpClientTestingModule,
-        BrowserAnimationsModule,
-        YzSizeModule,
-        YzPageModule
+        FormsModule,
+        ReactiveFormsModule
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IndexComponent);
+    fixture = TestBed.createComponent(AddTestItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
