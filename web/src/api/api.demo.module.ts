@@ -5,12 +5,14 @@ import {UserApi} from "./user-api";
 import {ProjectApi} from "./projectApi";
 import {TestPlanApi} from "./testPlan-api";
 import {TestCaseApi} from "./testCase-api";
+import {TestItemApi} from "./testItem-api";
 
 export const apis = [
     UserApi,
     ProjectApi,
     TestPlanApi,
-    TestCaseApi
+    TestCaseApi,
+    TestItemApi
 ]
 /**
  * 用于脱离后台跑demo

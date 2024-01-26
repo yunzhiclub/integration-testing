@@ -5,6 +5,8 @@ import {DialogEntryComponent} from "../../common/dialog-entry/dialog-entry-compo
 import {CloneComponent} from "./clone/clone.component";
 import {AddComponent} from "./add/add.component";
 import {EditComponent} from "./edit/edit.component";
+import {AddTestItemComponent} from "./add-test-item/add-test-item.component";
+import {EditTestItemComponent} from "./edit-test-item/edit-test-item.component";
 
 const routes: Routes = [
   {
@@ -32,6 +34,20 @@ const routes: Routes = [
           component: EditComponent
         }
       },
+      {
+        path: 'addTestItem/:id',
+        component: DialogEntryComponent,
+        data: {
+          component: AddTestItemComponent
+        }
+      },
+      {
+        path: 'editTestItem/:id',
+        component: DialogEntryComponent,
+        data: {
+          component: EditTestItemComponent
+        }
+      }
     ]
   },
 ];

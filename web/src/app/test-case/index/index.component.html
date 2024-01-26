@@ -7,6 +7,7 @@
 
 <div class="row mb-2 mt-2">
   <div class="col-md-6">
+    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>
   </div>
   <div class="col-6 text-right">
     <a class="btn btn-primary" routerLink="clone">克隆</a>
@@ -40,7 +41,7 @@
       <td>
         <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testCase?.id}}"><i class="fa fas fa-pen"></i></a>
         <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testCase?.name, testCase?.id)"><i class="fa fas fa-trash"></i></a>
-        <a class="text-primary mr-3" matTooltip="添加小项" ><i class="bi bi-plus-lg"></i></a>
+        <a class="text-primary mr-3" matTooltip="添加小项" routerLink="addTestItem/{{testCase?.id}}"><i class="bi bi-plus-lg"></i></a>
       </td>
     </tr>
       <ng-container *ngIf="testCase?.isShow ">
@@ -53,8 +54,8 @@
               <td>
                 <a class="text-primary mr-3" matTooltip="上移" routerLink="edit"><i class="bi bi-arrow-up"></i></a>
                 <a class="text-primary mr-3" matTooltip="下移" routerLink="edit"><i class="bi bi-arrow-down"></i></a>
-                <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a>
-                <a class="text-danger mr-3" matTooltip="删除"><i class="fa fas fa-trash"></i></a>
+                <a class="text-primary mr-3" matTooltip="编辑" routerLink="editTestItem/{{testItem?.id}}"><i class="fa fas fa-pen"></i></a>
+                <a class="text-danger mr-3" matTooltip="删除" (click)="deleteTestItem(testItem?.id, testItem?.name)"><i class="fa fas fa-trash"></i></a>
               </td>
             </tr>
       </ng-container>
@@ -76,6 +77,10 @@
   </tbody>
 </table>
 
+<yz-page [size]="pageData.size"
+         [page]="pageData.number"
+         [totalElements]="pageData.totalElements"
+         (changePage)="onChangePage($event)"></yz-page>
 <router-outlet></router-outlet>
 
 

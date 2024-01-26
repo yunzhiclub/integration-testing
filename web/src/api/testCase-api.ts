@@ -59,8 +59,14 @@ export class TestCaseApi implements MockApiInterface{
       {
         method: 'POST',
         url: '/testCase',
-        result: (urlMatcher: string, options: HttpParams) => {
-
+        result: (urlMatcher: string, options: {body: {project: Project, name: string, testPurpose: string, preconditions: string}}) => {
+          const testCase = options.body as TestCase;
+          return {
+            id: randomNumber(10),
+            name: testCase.name,
+            testPurpose: testCase.testPurpose,
+            preconditions: testCase.preconditions,
+          } as TestCase
         }
       },
       {
