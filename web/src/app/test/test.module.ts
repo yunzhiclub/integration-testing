@@ -10,7 +10,7 @@ import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {UserModule} from "../user/user.module";
 import {TestCaseModule} from "../test-case/test-case.module";
 import { EditTestItemComponent } from './edit-test-item/edit-test-item.component';
-  import {TestCaseSelectComponent} from "../test-case/test-case-select/test-case-select.component";
+  import {EditorModule} from "../editor/editor.module";
 
 /**
  * 测试管理模块
@@ -29,7 +29,8 @@ import { EditTestItemComponent } from './edit-test-item/edit-test-item.component
     ReactiveFormsModule,
     DialogEntryModule,
     UserModule,
-    TestCaseModule
+    TestCaseModule,
+    EditorModule
   ]
 })
 export class TestModule { }
