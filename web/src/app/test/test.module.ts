@@ -11,6 +11,7 @@ import {UserModule} from "../user/user.module";
 import {TestCaseModule} from "../test-case/test-case.module";
 import { EditTestItemComponent } from './edit-test-item/edit-test-item.component';
   import {EditorModule} from "../editor/editor.module";
+  import {NzSelectModule} from "ng-zorro-antd/select";
 
 /**
  * 测试管理模块
@@ -30,7 +31,8 @@ import { EditTestItemComponent } from './edit-test-item/edit-test-item.component
     DialogEntryModule,
     UserModule,
     TestCaseModule,
-    EditorModule
+    EditorModule,
+    NzSelectModule
   ]
 })
 export class TestModule { }

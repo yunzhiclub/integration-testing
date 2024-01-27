@@ -8,7 +8,10 @@
   <div class="form-group row">
     <label class="col-3 text-right col-form-label"><code>*</code>状态</label>
     <div class="col-4">
-      <input class="form-control" formControlName="status">
+      <nz-select nzSize="large"  nzAllowClear nzPlaceHolder="请选择状态" formControlName="status">
+        <nz-option nzCustomContent nzLabel="未通过" [nzValue]="1">未通过</nz-option>
+        <nz-option nzCustomContent nzLabel="已通过" [nzValue]="2">已通过</nz-option>
+      </nz-select>
     </div>
   </div>
 

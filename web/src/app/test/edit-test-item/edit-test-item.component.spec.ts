@@ -5,6 +5,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {EditorModule} from "../../editor/editor.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('EditTestItemComponent', () => {
   let component: EditTestItemComponent;
@@ -18,7 +20,9 @@ describe('EditTestItemComponent', () => {
         EditorModule,
         HttpClientTestingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NzSelectModule,
+        BrowserAnimationsModule
       ]
     })
     .compileComponents();
