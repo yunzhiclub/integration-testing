@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 /**
  * @author kexiaobin
@@ -60,5 +61,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void delete(Long id) {
         this.projectRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Project> getAll() {
+        return (List<Project>) this.projectRepository.findAll();
     }
 }

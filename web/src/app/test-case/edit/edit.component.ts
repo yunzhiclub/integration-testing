@@ -6,6 +6,7 @@ import {filter, takeUntil} from "rxjs";
 import {TestCase} from "../../../entity/test-case";
 import {TestCaseService} from "../../../service/test-case.service";
 import {CommonService} from "../../../service/common-service";
+import {Project} from "../../../entity/project";
 
 @Component({
   selector: 'app-edit',
@@ -16,6 +17,7 @@ export class EditComponent extends BaseComponent implements OnInit{
   formGroup: FormGroup;
   id: number;
   testCase: TestCase;
+
   key = {
     name: 'name',
     testPurpose: 'testPurpose',
@@ -82,7 +84,7 @@ export class EditComponent extends BaseComponent implements OnInit{
       name: new FormControl<string>(''),
       testPurpose: new FormControl<string>(''),
       preconditions: new FormControl<string>(''),
-      project: new FormControl<string>('')
+      project: new FormControl<Project>(null)
     });
   }
 }

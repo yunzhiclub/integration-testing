@@ -10,11 +10,12 @@ import java.sql.Timestamp;
 
 /**
  * 适用于Gson的时间戳与Long类型的转换器
+ * @author kexiaobin
  */
 public class TimestampLongFormatTypeAdapter extends TypeAdapter<Timestamp> {
 
     /**
-     * 把时间戳传换为Json
+     *  把时间戳传换为Json
      */
     @Override
     public void write(JsonWriter out, Timestamp value) throws IOException {
@@ -25,12 +26,11 @@ public class TimestampLongFormatTypeAdapter extends TypeAdapter<Timestamp> {
         }
     }
 
-
     /**
-     * 把json传换为时间戳
+     *  把json传换为时间戳
      */
     @Override
-    public Timestamp read(JsonReader jsonReader) throws IOException {
-        return new Timestamp(jsonReader.nextLong());
+    public Timestamp read(JsonReader in) throws IOException {
+        return new Timestamp(in.nextLong());
     }
 }
