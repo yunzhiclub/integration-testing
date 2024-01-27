@@ -20,16 +20,17 @@
   </div>
 
   <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>选择测试用例</label>
-    <div class="col-4">
-      <input class="form-control" formControlName="testCase"/>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>测试人： </label>
-    <div class="col-4">
+    <label class="col-4 text-right col-form-label"><code>*</code>分配任务</label>
+    <div class="col-8">
+      <app-test-case-select class="mr-2"></app-test-case-select>
       <app-user-select formArrayName="testUser"></app-user-select>
+    </div>
+    <label class="col-4  text-right col-form-label"><code></code></label>
+    <div class="col-8 mt-2">
+      <app-test-case-select class="mr-2"></app-test-case-select>
+      <app-user-select formArrayName="testUser"></app-user-select>
+      <button type="button" class="btn"><i class="bi bi-plus-lg"></i></button>
+      <button type="button" class="btn mr-1"><i class="bi bi-dash-lg"></i></button>
     </div>
   </div>
   <hr/>

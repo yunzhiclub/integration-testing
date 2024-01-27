@@ -6,6 +6,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {ProjectModule} from "../../project/project.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {TestCaseModule} from "../../test-case/test-case.module";
 
 describe('testPlan->EditComponent', () => {
   let component: EditComponent;
@@ -20,7 +21,8 @@ describe('testPlan->EditComponent', () => {
         ProjectModule,
         FormsModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TestCaseModule
       ]
     })
     .compileComponents();

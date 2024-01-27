@@ -35,7 +35,7 @@ export class TestPlanApi implements MockApiInterface {
               title: name ? name : 'test1',
               description: randomString('描述'),
               testUser: this.user,
-              status: randomNumber(3),
+              status: randomNumber(4),
               project: {
                 id: randomNumber(10),
                 name: randomString('project', 3)
