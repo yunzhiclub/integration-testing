@@ -31,7 +31,7 @@ public class TestCase extends BaseEntity<Long> {
     @ApiModelProperty("前置条件")
     private String preconditions;
 
-    @OneToMany
+    @OneToMany(mappedBy = "testCase")
     @JsonView(TestItemJsonView.class)
     @ApiModelProperty("测试项")
     private List<TestItem> testItems;

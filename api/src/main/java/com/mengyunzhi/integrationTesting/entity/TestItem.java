@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * @author kexiaobin
@@ -23,4 +24,8 @@ public class TestItem extends BaseEntity<Long> {
 
     @ApiModelProperty("预期结果")
     private String expectedResult;
+
+    @ManyToOne
+    @ApiModelProperty("测试用例")
+    private TestCase testCase;
 }
