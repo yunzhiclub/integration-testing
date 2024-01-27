@@ -12,16 +12,19 @@ import {DialogEntryModule} from "../../common/dialog-entry/dialog-entry.module";
 import {ProjectModule} from "../project/project.module";
 import {UserModule} from "../user/user.module";
 import {TestCaseModule} from "../test-case/test-case.module";
+import {StatusPipe} from "../../pipe/status.pipe";
+import {TestCaseSelectComponent} from "../test-case/test-case-select/test-case-select.component";
 
 /**
  * 测试计划模块
  */
 @NgModule({
-  declarations: [
-    IndexComponent,
-    AddComponent,
-    EditComponent
-  ],
+    declarations: [
+        IndexComponent,
+        AddComponent,
+        EditComponent,
+        StatusPipe
+    ],
   imports: [
     CommonModule,
     TestPlanRoutingModule,

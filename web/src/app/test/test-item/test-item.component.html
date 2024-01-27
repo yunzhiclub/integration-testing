@@ -32,6 +32,7 @@
     <th>状态</th>
     <th>issue</th>
     <th>描述</th>
+    <th>操作</th>
   </thead>
   <tbody>
   <tr>
@@ -39,7 +40,8 @@
     <td>测试登录失败</td>
     <td>输入正确的用户名，错误的秘密</td>
     <td>报错（用户名或者密码错误）</td>
-    <td>待开始<a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    <td>待开始</td>
+    <td></td>
     <td></td>
     <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tr>
@@ -48,34 +50,37 @@
     <td>测试登录失败</td>
     <td>输入错误的用户名，正确的秘密</td>
     <td>报错（用户名或者密码错误）</td>
-    <td>待验证<a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    <td>待验证</td>
     <td>issue</td>
-    <td>居然登录进去了 和预期的结果不对，以建立issue<a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    <td>居然登录进去了 和预期的结果不对，以建立issue</td>
+    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tr>
   <tr>
     <td>3</td>
     <td>测试登录失败</td>
     <td>输入错误的用户名，错误的秘密</td>
     <td>报错（用户名或者密码错误）</td>
-    <td>未通过<a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    <td>未通过</td>
     <td>issue</td>
-    <td>居然登录进去了 和预期的结果不对，未建立issue<a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    <td>居然登录进去了 和预期的结果不对，未建立issue</td>
+    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tr>
   <tr>
     <td>4</td>
     <td>测试登录成功</td>
     <td>输入正确的用户名，正确的秘密</td>
     <td>进入系统 首页</td>
-    <td>已通过<a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    <td>已通过</td>
     <td></td>
     <td></td>
+    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tbody>
 </table>
 <!--<yz-page [size]="pageData?.size"-->
 <!--         [page]="pageData?.number"-->
 <!--         [totalElements]="pageData?.totalElements"-->
 <!--         (changePage)="onChangePage($event)"></yz-page>-->
-<!--<router-outlet></router-outlet>-->
+<router-outlet></router-outlet>
 
 
 

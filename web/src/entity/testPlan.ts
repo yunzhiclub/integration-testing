@@ -2,9 +2,6 @@ import {User} from "./user";
 import {TestCase} from "./test-case";
 import {Project} from "./project";
 
-class LargeItem {
-}
-
 /**
  * 测试计划的实体
  */

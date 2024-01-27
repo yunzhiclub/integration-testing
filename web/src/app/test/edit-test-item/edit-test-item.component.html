@@ -1,0 +1,37 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">执行测试</li>
+  </ol>
+</nav>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+  <div class="form-group row">
+    <label class="col-3 text-right col-form-label"><code>*</code>状态</label>
+    <div class="col-4">
+      <nz-select nzSize="large"  nzAllowClear nzPlaceHolder="请选择状态" formControlName="status">
+        <nz-option nzCustomContent nzLabel="未通过" [nzValue]="1">未通过</nz-option>
+        <nz-option nzCustomContent nzLabel="已通过" [nzValue]="2">已通过</nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-3 text-right col-form-label"><code>*</code>描述</label>
+    <div class="col-8">
+      <app-editor formControlName="describe"></app-editor>
+    </div>
+  </div>
+
+  <hr/>
+  <div class="form-group row pr-3">
+    <div class="col-12 text-right">
+      <button type="button" class="btn btn-secondary mr-1" (click)="onClose()"><i class="bi bi-x"></i>关闭</button>
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i>确定</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+
