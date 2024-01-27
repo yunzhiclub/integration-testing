@@ -38,14 +38,16 @@ const routes: Routes = [
         path: 'addTestItem/:id',
         component: DialogEntryComponent,
         data: {
-          component: AddTestItemComponent
+          component: AddTestItemComponent,
+          width: '1400px'
         }
       },
       {
         path: 'editTestItem/:id',
         component: DialogEntryComponent,
         data: {
-          component: EditTestItemComponent
+          component: EditTestItemComponent,
+          width: '1400px'
         }
       }
     ]
