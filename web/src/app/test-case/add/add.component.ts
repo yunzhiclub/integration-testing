@@ -34,8 +34,7 @@ export class AddComponent extends BaseComponent implements OnInit{
 
   onSubmit() {
     const testCase = this.formGroup.value as TestCase;
-    console.log(this.formGroup.get('project').value)
-    console.log(testCase.project);
+
     this.testCaseService.addAction(testCase).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe({
         next: () => {
