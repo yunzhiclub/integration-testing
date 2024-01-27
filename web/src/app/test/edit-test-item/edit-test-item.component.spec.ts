@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditTestItemComponent } from './edit-test-item.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {EditorModule} from "../../editor/editor.module";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('EditTestItemComponent', () => {
   let component: EditTestItemComponent;
@@ -8,7 +12,14 @@ describe('EditTestItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTestItemComponent ]
+      declarations: [ EditTestItemComponent ],
+      imports: [
+        RouterTestingModule,
+        EditorModule,
+        HttpClientTestingModule,
+        FormsModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
 

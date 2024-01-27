@@ -4,6 +4,7 @@ import { TestItemComponent } from './test-item.component';
 import {TestCaseModule} from "../../test-case/test-case.module";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('test->TestItemComponent', () => {
   let component: TestItemComponent;
@@ -15,7 +16,8 @@ describe('test->TestItemComponent', () => {
       imports: [
         TestCaseModule,
         HttpClientTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
