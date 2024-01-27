@@ -43,7 +43,7 @@ export class ProjectSelectComponent extends BaseComponent implements OnInit, Con
 
   writeValue(project: Project): void {
     if (project == null) return;
-    this.projectSelectId.setValue(project);
+    this.projectSelectId.setValue(project );
   }
 
   compareFn(t1: { id: number }, t2: { id: number }) {
