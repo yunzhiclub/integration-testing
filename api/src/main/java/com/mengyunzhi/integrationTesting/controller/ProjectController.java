@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 /**
  * @author kexiaobin
  */
@@ -24,8 +26,7 @@ public class ProjectController {
 
     @GetMapping("page")
     @JsonView(PageAllJsonView.class)
-    public Page<Project> pageAll(@SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC)) Pageable pageable,
-                                 @RequestParam(defaultValue = "") String name) {
+    public Page<Project> pageAll(@SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC)) Pageable pageable, @RequestParam(defaultValue = "") String name) {
         return this.projectService.pageAll(name, pageable);
     }
 
@@ -52,9 +53,24 @@ public class ProjectController {
         this.projectService.delete(id);
     }
 
-    interface PageAllJsonView {}
-    interface GetByIdJsonView {}
-    interface SavaJsonView {}
-    interface UpdateJsonView {}
+    @GetMapping("getAll")
+    @JsonView(GetAllJsonView.class)
+    public List<Project> getAll() {
+        return this.projectService.getAll();
+    }
 
+    interface PageAllJsonView {
+    }
+
+    interface GetByIdJsonView {
+    }
+
+    interface SavaJsonView {
+    }
+
+    interface UpdateJsonView {
+    }
+
+    interface GetAllJsonView {
+    }
 }

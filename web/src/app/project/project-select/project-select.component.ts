@@ -31,7 +31,7 @@ export class ProjectSelectComponent extends BaseComponent implements OnInit, Con
       });
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (project: Project) => void): void {
     this.projectSelectId.valueChanges
       .subscribe((project: Project) => {
         fn(project);
@@ -41,9 +41,9 @@ export class ProjectSelectComponent extends BaseComponent implements OnInit, Con
   registerOnTouched(fn: any): void {
   }
 
-  writeValue(obj: Project): void {
-    if (!obj) return;
-    this.projectSelectId.setValue(obj);
+  writeValue(project: Project): void {
+    if (project == null) return;
+    this.projectSelectId.setValue(project );
   }
 
   compareFn(t1: { id: number }, t2: { id: number }) {

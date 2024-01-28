@@ -5,6 +5,8 @@ import com.mengyunzhi.integrationTesting.entity.Project;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @author kexiaobin
  */
@@ -18,4 +20,9 @@ public interface ProjectService {
     Project update(Long id, ProjectDto.UpdateRequest updateRequest);
 
     void delete(Long id);
+
+    /**
+     * 获取全部项目
+     */
+    List<Project> getAll();
 }

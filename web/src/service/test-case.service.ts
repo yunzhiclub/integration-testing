@@ -60,6 +60,7 @@ export class TestCaseService extends Store<TestCaseState>{
   @Action()
   addAction(testCase: {project: Project, name: string, testPurpose: string, preconditions: string}): Observable<TestCase> {
     Assert.isNotNullOrUndefined(testCase, '测试用例不能为空');
+    testCase = testCase as TestCase;
     return this.httpClient.post<TestCase>('/testCase', testCase).pipe(tap( data => {
       const testCase = data;
       const state = this.getState();
