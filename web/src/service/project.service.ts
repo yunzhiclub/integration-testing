@@ -8,6 +8,7 @@ import {Project} from "../entity/project";
 import * as _ from "lodash";
 import {TestPlan} from "../entity/testPlan";
 import {state} from "@angular/animations";
+import {TestCase} from "../entity/test-case";
 
 /**
  * 项目的状态管理
@@ -166,6 +167,8 @@ export class ProjectService extends Store<ProjectState>{
     }))
   }
 
-
+  addTestCase(id: number, testCase: TestCase[]): Observable<Project>{
+    return this.httpClient.put<Project>(`/project/addTestCase/${id}`, testCase);
+  }
 
 }

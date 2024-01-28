@@ -1,30 +1,44 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {BaseComponent} from "../../share/base-component";
 import {TestCase} from "../../../entity/test-case";
 import {TestCaseService} from "../../../service/test-case.service";
+import {takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-test-case-select',
-  templateUrl: './test-case-select.component.html',
-  styleUrls: ['./test-case-select.component.css'],
+  selector: 'app-test-case-select-multiple',
+  templateUrl: './test-case-select-multiple.component.html',
+  styleUrls: ['./test-case-select-multiple.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR, multi: true,
-      useExisting: forwardRef(() => TestCaseSelectComponent)
+      useExisting: forwardRef(() => TestCaseSelectMultipleComponent)
     }
   ]
 })
-export class TestCaseSelectComponent extends BaseComponent implements OnInit, ControlValueAccessor {
+export class TestCaseSelectMultipleComponent extends BaseComponent implements OnInit, ControlValueAccessor {
   testCaseSelect = new FormControl<TestCase[]>(null);
   testCases: TestCase[];
+
+  @Input()
+  set data(value: number) {
+    if (value !== undefined ){
+      this.getTestCaseByProjectId(value)
+    }
+  }
 
   constructor(private testCaseService: TestCaseService) {
     super();
   }
 
+  getTestCaseByProjectId(id: number): void{
+     this.testCaseService.getTestCaseByProjectId(id).pipe(takeUntil(this.ngOnDestroy$))
+       .subscribe(data => {
+       this.testCases = data;
+     });
+  }
+
   ngOnInit(): void {
-    // 根据选择的项目id,获取测试用例
   }
 
   registerOnChange(fn: any): void {
@@ -39,10 +53,6 @@ export class TestCaseSelectComponent extends BaseComponent implements OnInit, Co
   writeValue(obj: TestCase[]): void {
     if (!obj) return;
     this.testCaseSelect.setValue(obj);
-  }
-
-  compareFn(t1: { id: number }, t2: { id: number }) {
-    return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
 
 }

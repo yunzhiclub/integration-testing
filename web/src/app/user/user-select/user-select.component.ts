@@ -28,11 +28,16 @@ export class UserSelectComponent extends BaseComponent implements OnInit, Contro
   ngOnInit(): void {
     this.userService.select(UserService.getAllUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
-        console.log('datra', data)
         if(data !==null) {
           this.users = data
         }
       })
+
+    this.reload();
+  }
+
+  reload(): void {
+    this.userService.getAllUser();
   }
 
   registerOnChange(fn: any): void {

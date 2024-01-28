@@ -13,7 +13,7 @@ import {ProjectModule} from "../project/project.module";
 import {UserModule} from "../user/user.module";
 import {TestCaseModule} from "../test-case/test-case.module";
 import {StatusPipe} from "../../pipe/status.pipe";
-import {TestCaseSelectComponent} from "../test-case/test-case-select/test-case-select.component";
+import {TestCaseSelectMultipleComponent} from "../test-case/test-case-select-multiple/test-case-select-multiple.component";
 
 /**
  * 测试计划模块

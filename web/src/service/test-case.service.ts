@@ -126,4 +126,8 @@ export class TestCaseService extends Store<TestCaseState>{
       // this.pageAction(state.httpParam);
     }));
   }
+
+  getTestCaseByProjectId(id: number): Observable<TestCase[]> {
+    return this.httpClient.get<TestCase[]>(`/testCase/getTestCaseByProjectId/${id}`);
+  }
 }
