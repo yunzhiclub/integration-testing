@@ -11,7 +11,7 @@ import {ReactiveFormsModule} from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    TinyEditorModule,
+    TinyEditorModule,  // <--导入
     ReactiveFormsModule
   ],
   providers: [

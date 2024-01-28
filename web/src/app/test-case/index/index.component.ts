@@ -8,6 +8,8 @@ import {CommonService} from "../../../service/common-service";
 import {TestCase} from "../../../entity/test-case";
 import {TestItemService} from "../../../service/test-item.service";
 import {TestItem} from "../../../entity/test-item";
+import {FormControl} from "@angular/forms";
+import {Project} from "../../../entity/project";
 
 /**
  * 测试用例的大项Index组件
@@ -20,10 +22,12 @@ import {TestItem} from "../../../entity/test-item";
 export class IndexComponent extends BaseComponent implements OnInit{
   isCollapsed = true;
   pageData: Page<TestCase> = new Page<TestCase>();
+  project = new FormControl<Project>(null);
 
   param = {
     page: 0,
     size: environment.size,
+    projectId: 0
   };
 
   constructor(private testCaseService: TestCaseService,
@@ -55,6 +59,11 @@ export class IndexComponent extends BaseComponent implements OnInit{
   onChangePage(page: number) {
     this.param.page = page;
     this.reload();
+  }
+
+  onQuery(): void{
+    this.param.projectId = +(this.project.value.id);
+    this.reload()
   }
 
   toggleCollapse(id: number, isShow: boolean | any) {

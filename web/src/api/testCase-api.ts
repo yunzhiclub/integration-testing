@@ -20,6 +20,7 @@ export class TestCaseApi implements MockApiInterface{
 
           const page = +params.get('page');
           const size = +params.get('size');
+          const projectId = +params.get('projectId') ?  +params.get('projectId') : 0;
 
           return generatePage<TestCase>(page, size, index => {
             return {
@@ -28,6 +29,7 @@ export class TestCaseApi implements MockApiInterface{
               testPurpose: randomString('测试目的'),
               preconditions: randomString('前置条件'),
               isShow: false,
+              project: this.getProjectById(projectId),
               testItem: [
                 {
                   id: randomNumber(100),
@@ -111,6 +113,19 @@ export class TestCaseApi implements MockApiInterface{
         }
       },
     ];
+  }
+
+  getProjectById(id: number): Project{
+    if(id === 0) {
+      return {
+        id,
+        name: 'xxx系统'
+      } as  Project
+    }
+    return {
+      id,
+      name: '牙科系统'
+    } as  Project
   }
 
 }
