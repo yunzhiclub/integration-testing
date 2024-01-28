@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestCaseSelectComponent } from './test-case-select.component';
+import { TestCaseSelectMultipleComponent } from './test-case-select-multiple.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('TestCaseSelectComponent', () => {
-  let component: TestCaseSelectComponent;
-  let fixture: ComponentFixture<TestCaseSelectComponent>;
+  let component: TestCaseSelectMultipleComponent;
+  let fixture: ComponentFixture<TestCaseSelectMultipleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestCaseSelectComponent ],
+      declarations: [ TestCaseSelectMultipleComponent ],
       imports: [
         HttpClientTestingModule,
         NzSelectModule,
@@ -23,7 +23,7 @@ describe('TestCaseSelectComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TestCaseSelectComponent);
+    fixture = TestBed.createComponent(TestCaseSelectMultipleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

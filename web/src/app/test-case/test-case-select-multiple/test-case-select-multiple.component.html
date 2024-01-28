@@ -1,5 +1,5 @@
-<nz-select nzSize="large"  nzShowSearch nzAllowClear nzPlaceHolder="选择测试用例"
-           [formControl]="testCaseSelect" [compareWith]="compareFn">
+<nz-select   nzShowSearch nzAllowClear nzPlaceHolder="选择测试用例"  nzMode="multiple"
+           [formControl]="testCaseSelect" >
   <nz-option nzCustomContent *ngFor="let testCase of testCases" [nzLabel]="testCase?.name"
              [nzValue]="testCase?.id">
     {{testCase?.name}}

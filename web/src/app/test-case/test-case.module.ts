@@ -13,7 +13,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
-import {TestCaseSelectComponent} from "./test-case-select/test-case-select.component";
+import {TestCaseSelectMultipleComponent} from "./test-case-select-multiple/test-case-select-multiple.component";
 import {AddTestItemComponent} from "./add-test-item/add-test-item.component";
 import {EditTestItemComponent} from "./edit-test-item/edit-test-item.component";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
@@ -29,12 +29,12 @@ import {EditorModule} from "../editor/editor.module";
     CloneComponent,
     AddComponent,
     EditComponent,
-    TestCaseSelectComponent,
+    TestCaseSelectMultipleComponent,
     AddTestItemComponent,
     EditTestItemComponent
   ],
   exports: [
-    TestCaseSelectComponent
+    TestCaseSelectMultipleComponent
   ],
     imports: [
         CommonModule,
