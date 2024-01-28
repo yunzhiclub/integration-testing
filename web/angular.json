@@ -23,7 +23,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
+              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce-i18n/langs",
+                "output": "/tinymce/langs/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
@@ -31,13 +41,15 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.css"
+              "./node_modules/@fortawesome/fontawesome-free/css/all.css",
             ],
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/jquery/dist/jquery.slim.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/tinymce/tinymce.min.js"
+              "./node_modules/tinymce/tinymce.min.js",
+              "./node_modules/tinymce/plugins/link/plugin.js",
+              "./node_modules/tinymce/plugins/table/plugin.js"
             ]
           },
           "configurations": {

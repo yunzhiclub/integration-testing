@@ -8,6 +8,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('testCase->IndexComponent', () => {
   let component: IndexComponent;
@@ -23,7 +24,8 @@ describe('testCase->IndexComponent', () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         YzSizeModule,
-        YzPageModule
+        YzPageModule,
+        ReactiveFormsModule
       ]
     })
     .compileComponents();

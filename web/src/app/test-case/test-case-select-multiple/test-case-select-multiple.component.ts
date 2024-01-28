@@ -22,7 +22,7 @@ export class TestCaseSelectMultipleComponent extends BaseComponent implements On
 
   @Input()
   set data(value: number) {
-    if (value !== undefined ){
+    if (value){
       this.getTestCaseByProjectId(value)
     }
   }

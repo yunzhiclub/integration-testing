@@ -13,7 +13,7 @@ import * as _ from "lodash";
  */
 interface TestCaseState extends Store<TestCase>{
   pageData: Page<TestCase>;
-  httpParams: {page: number, size: number};
+  httpParams: {page: number, size: number, projectId?: number};
   getById: TestCase,
 }
 @Injectable({
@@ -32,7 +32,7 @@ export class TestCaseService extends Store<TestCaseState>{
   constructor(private httpClient: HttpClient) {
     super({
       pageData: new Page<TestCase>({}),
-      httpParams: {page: 0, size: 0,},
+      httpParams: {page: 0, size: 0, projectId: undefined},
       getById: null,
     });
   }
@@ -41,13 +41,14 @@ export class TestCaseService extends Store<TestCaseState>{
    * 分页数据
    */
   @Action()
-  pageAction(payload: {page: number, size: number}): Observable<Page<TestCase>> {
+  pageAction(payload: {page: number, size: number, projectId?: number}): Observable<Page<TestCase>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
 
     //获取state快照
     const state = this.snapshot;
     state.httpParams = payload;
+
     return this.httpClient.get<Page<TestCase>>('/testCase/page', {params: payload})
       .pipe(
         tap(data => {
@@ -66,6 +67,7 @@ export class TestCaseService extends Store<TestCaseState>{
       const state = this.getState();
       state.pageData.content.unshift(testCase as TestCase);
       this.next(state);
+      this.pageAction(state.httpParams);
     }) )
   }
 
