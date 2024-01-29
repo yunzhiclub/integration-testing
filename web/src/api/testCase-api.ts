@@ -1,7 +1,7 @@
 import {ApiInjector, MockApiInterface, RequestOptions} from "@yunzhi/ng-mock-api";
 import {HttpParams} from "@angular/common/http";
 import {generatePage} from "@yunzhi/ng-common";
-import {randomNumber, randomString} from "@yunzhi/utils";
+import {Assert, randomNumber, randomString} from "@yunzhi/utils";
 import {TestCase} from "../entity/test-case";
 import {Project} from "../entity/project";
 import {TestItem} from "../entity/test-item";
@@ -20,6 +20,7 @@ export class TestCaseApi implements MockApiInterface{
 
           const page = +params.get('page');
           const size = +params.get('size');
+          const projectId = +params.get('projectId') ?  +params.get('projectId') : 0;
 
           return generatePage<TestCase>(page, size, index => {
             return {
@@ -28,7 +29,8 @@ export class TestCaseApi implements MockApiInterface{
               testPurpose: randomString('测试目的'),
               preconditions: randomString('前置条件'),
               isShow: false,
-              testItem: [
+              project: this.getProjectById(projectId),
+              testItems: [
                 {
                   id: randomNumber(100),
                   name: '|--测试小项目',
@@ -110,7 +112,77 @@ export class TestCaseApi implements MockApiInterface{
           }
         }
       },
+      {
+        method: 'GET',
+        url: '/testCase/getTestCaseByProjectId/(\\d+)',
+        result: (urlMatcher: any, options: HttpParams) => {
+          const projectId = urlMatcher['id'] ? +urlMatcher['id'] : randomNumber(10);
+          return this.getTestByProjectId(projectId);
+        }
+      },
     ];
+  }
+
+  getTestByProjectId(id: number) {
+    Assert.isNumber(id, 'id必须是整形');
+
+
+    if (!id) {
+      return []
+    }
+
+    if (id === 1) {
+      return [
+        {
+          id: 1,
+          name: '测试登录功能',
+          testPurpose: randomString('测试目的'),
+          preconditions: randomString('前置条件'),
+          isShow: false,
+        } as TestCase,
+
+        {
+          id: 2,
+          name: '测试患者增删查改功能',
+          testPurpose: randomString('测试目的'),
+          preconditions: randomString('前置条件'),
+          isShow: false
+        } as TestCase,
+      ]
+    } else {
+      return [
+        {
+          id: 3,
+          name: '测试项目的增删查改功能',
+          testPurpose: randomString('测试目的'),
+          preconditions: randomString('前置条件'),
+          isShow: false,
+        } as TestCase,
+
+        {
+          id: 4,
+          name: '对测试计划管理进行测试',
+          testPurpose: randomString('测试目的'),
+          preconditions: randomString('前置条件'),
+          isShow: false
+        } as TestCase,
+      ]
+    }
+  }
+
+
+  getProjectById(id: number): Project{
+    if(id === 0) {
+      return {
+        id,
+        name: 'xxx系统'
+      } as  Project
+    }
+    return {
+      id,
+      name: '牙科系统'
+    } as  Project
+
   }
 
 }

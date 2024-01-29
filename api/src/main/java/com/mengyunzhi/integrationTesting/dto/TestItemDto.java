@@ -18,7 +18,10 @@ public class TestItemDto {
         private TestCase testCase;
     }
 
-    @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class UpdateRequest extends SaveRequest {}
+    public static class UpdateRequest {
+        private String name;
+        private String steps;
+        private String expectedResult;
+    }
 }

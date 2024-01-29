@@ -49,11 +49,8 @@ public class TestItemServiceImpl implements TestItemService {
         Assert.notNull(updateRequest.getName(), "名称不能为空");
         Assert.notNull(updateRequest.getSteps(), "步骤不能为空");
         Assert.notNull(updateRequest.getExpectedResult(), "预期结果不能为空");
-        Assert.notNull(updateRequest.getTestCase(), "测试用例不能为空");
 
-        TestCase testCase = this.testCaseRepository.findById(updateRequest.getTestCase().getId()).orElseThrow(EntityNotFoundException::new);
         TestItem testItem = this.getById(id);
-        testItem.setTestCase(testCase);
         testItem.setName(updateRequest.getName());
         testItem.setSteps(updateRequest.getSteps());
         testItem.setExpectedResult(updateRequest.getExpectedResult());
@@ -62,6 +59,7 @@ public class TestItemServiceImpl implements TestItemService {
 
     @Override
     public void delete(Long id) {
+        System.out.println(id);
         this.testItemRepository.deleteById(id);
     }
 }

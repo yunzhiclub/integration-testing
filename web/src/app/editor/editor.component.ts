@@ -57,29 +57,21 @@ export class EditorComponent implements OnDestroy, OnInit, ControlValueAccessor 
   ngOnInit(): void {
     this.init = {
       base_url: '/tinymce',
+      // 后缀
       suffix: '.min',
       height: this.height,
-      contextmenu: false,
+      contextmenu: true,
       relative_urls: false,
+      //菜单栏
       menubar: false,
       language: 'zh_CN',
+      // 插件
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
         `insertdatetime media table paste code help wordcount ${EditorService.keys.yzImageTip}`
       ],
-      // 文件上传拦截器
-      images_upload_handler: (blobInfo: any, success: any, failure: any): void => {
-        this.attachmentService.upload(blobInfo.blob())
-          .subscribe((response: HttpEvent<Attachment>) => {
-            if (response.type === HttpEventType.Response) {
-              const attachment = response.body as Attachment
-              success(MyFileService.getFullPath(attachment.file));
-            }
-          }, (response: HttpErrorResponse) => {
-            failure('上传图片异常: ' + response.error);
-          });
-      },
+      //工具栏
       toolbar:
         `undo redo | formatselect | bold italic ${EditorService.keys.yzImageTip} | ` +
         'alignleft aligncenter alignright alignjustify  | ' +

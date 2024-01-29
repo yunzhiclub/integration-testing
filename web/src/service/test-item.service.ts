@@ -18,7 +18,7 @@ interface TestItemState extends Store<TestItem>{
 })
 export class TestItemService extends Store<TestItemState>{
 
-  static getById(state: TestItemState ): TestItem{
+  static getById(state: TestItemState): TestItem{
     return state.getById;
   }
   constructor(private httpClient: HttpClient) {

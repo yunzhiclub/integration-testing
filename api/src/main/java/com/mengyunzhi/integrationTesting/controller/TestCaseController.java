@@ -53,13 +53,12 @@ public class TestCaseController {
         return this.testCaseService.getById(id);
     }
 
-    @GetMapping("toggleCollapse/{id}")
-    @JsonView(ToggleCollapseJsonView.class)
-    public TestCase toggleCollapse(@PathVariable Long id) {
-        return this.testCaseService.getById(id);
+    @PutMapping("toggleCollapse/{id}")
+    public Boolean toggleCollapse(@PathVariable Long id) {
+        return this.testCaseService.toggleCollapse(id);
     }
 
-    interface PageJsonView extends TestCase.ProjectJsonView {
+    interface PageJsonView extends TestCase.ProjectJsonView, TestCase.TestItemJsonView  {
     }
 
     interface SaveJsonView extends TestCase.ProjectJsonView {
@@ -71,5 +70,4 @@ public class TestCaseController {
     interface GetByIdJsonView extends TestCase.ProjectJsonView {
     }
 
-    interface ToggleCollapseJsonView extends TestCase.ProjectJsonView, TestCase.TestItemJsonView {}
 }

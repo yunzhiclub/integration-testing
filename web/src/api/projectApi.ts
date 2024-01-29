@@ -4,6 +4,7 @@ import {generatePage} from "@yunzhi/ng-common";
 import {Assert, randomNumber, randomString} from "@yunzhi/utils";
 import {Project} from "../entity/project";
 import {TestPlan} from "../entity/testPlan";
+import {TestCase} from "../entity/test-case";
 
 export class ProjectApi implements MockApiInterface {
   getInjectors(): ApiInjector[] {
@@ -116,7 +117,7 @@ export class ProjectApi implements MockApiInterface {
         result: () => {
             return [
               {
-                id: randomNumber(100),
+                id: 1,
                 name: '牙科管理系统',
                 projectUrl: ' http://app.mengyunzhi.com:17121',
                 repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
@@ -126,7 +127,7 @@ export class ProjectApi implements MockApiInterface {
                 createTime: new Date().getTime()
               } as Project,
               {
-                id: randomNumber(100),
+                id: 2,
                 name: '集成测试系统',
                 projectUrl: ' http://app.mengyunzhi.com:17121',
                 repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
@@ -136,6 +137,17 @@ export class ProjectApi implements MockApiInterface {
                 createTime: new Date().getTime()
               } as Project,
             ]
+        }
+      },
+      {
+        method: 'PUT',
+        url: '/project/addTestCase/(\\d+)',
+        result: (urlMatcher: any, body: {testCase: TestCase[]}) => {
+          const id = +urlMatcher['id'] ? +urlMatcher['id'] : randomNumber();
+          return {
+            id,
+            testCase: body.testCase
+          } as Project
         }
       }
     ];

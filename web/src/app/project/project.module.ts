@@ -12,6 +12,7 @@ import { ProjectSelectComponent } from './project-select/project-select.componen
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {NzTableModule} from "ng-zorro-antd/table";
+import {EditorModule} from "@tinymce/tinymce-angular";
 
 /**
  * 项目模块
@@ -38,7 +39,7 @@ import {NzTableModule} from "ng-zorro-antd/table";
     NzSelectModule,
     CdkDrag,
     NzTableModule,
-    CdkDropList
+    EditorModule
   ]
 })
 export class ProjectModule { }

@@ -20,4 +20,9 @@ public interface TestCaseService {
 
     void delete(Long id);
 
+    /**
+     * 子项是否显示
+     */
+    Boolean toggleCollapse(Long id);
+
 }
