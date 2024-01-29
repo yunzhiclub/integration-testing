@@ -41,7 +41,6 @@ export class AddTestItemComponent extends BaseComponent implements OnInit{
           this.testCaseService.getById(this.testCaseId);
         }
       );
-
     this.initDetail();
   }
 
