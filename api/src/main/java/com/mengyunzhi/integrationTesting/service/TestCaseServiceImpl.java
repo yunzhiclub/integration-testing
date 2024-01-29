@@ -3,6 +3,7 @@ package com.mengyunzhi.integrationTesting.service;
 import com.mengyunzhi.integrationTesting.dto.TestCaseDto;
 import com.mengyunzhi.integrationTesting.entity.Project;
 import com.mengyunzhi.integrationTesting.entity.TestCase;
+import com.mengyunzhi.integrationTesting.entity.TestItem;
 import com.mengyunzhi.integrationTesting.repository.ProjectRepository;
 import com.mengyunzhi.integrationTesting.repository.TestCaseRepository;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author kexiaobin
@@ -27,7 +30,14 @@ public class TestCaseServiceImpl implements TestCaseService {
 
     @Override
     public Page<TestCase> pageAll(Long projectId, Pageable pageable) {
-        return this.testCaseRepository.getAll(projectId, pageable);
+        Page<TestCase> all = this.testCaseRepository.getAll(projectId, pageable);
+        all.getContent().forEach(testCase -> {
+            List<TestItem> filteredTestItems = testCase.getTestItems().stream()
+                    .filter(testItem -> !testItem.getDeleted())
+                    .collect(Collectors.toList());
+            testCase.setTestItems(filteredTestItems);
+        });
+        return all;
     }
 
     @Override
@@ -71,5 +81,12 @@ public class TestCaseServiceImpl implements TestCaseService {
     @Override
     public void delete(Long id) {
         this.testCaseRepository.deleteById(id);
+    }
+
+    @Override
+    public Boolean toggleCollapse(Long id) {
+        TestCase testCase = this.getById(id);
+        testCase.setIsShow(!testCase.getIsShow());
+        return this.testCaseRepository.save(testCase).getIsShow();
     }
 }

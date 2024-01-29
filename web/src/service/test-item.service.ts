@@ -18,7 +18,7 @@ interface TestItemState extends Store<TestItem>{
 })
 export class TestItemService extends Store<TestItemState>{
 
-  static getById(state: TestItemState ): TestItem{
+  static getById(state: TestItemState): TestItem{
     return state.getById;
   }
   constructor(private httpClient: HttpClient) {
@@ -36,8 +36,8 @@ export class TestItemService extends Store<TestItemState>{
   }
 
   addTestItem(testItem: {name: string, steps: string, expectedResult: string, testCase: TestCase}): Observable<TestItem>{
-    Assert.isNotNullOrUndefined(testItem, 'testItem不能为空')
-    return this.httpClient.post<TestItem>('/testItem', testItem);
+    Assert.isNotNullOrUndefined(testItem, 'testItem不能为空');
+    return this.httpClient.post<TestItem>(`/testItem`, testItem);
   }
 
   deleteTestItem(id: number): Observable<void> {

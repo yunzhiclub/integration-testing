@@ -12,9 +12,9 @@ export interface TestCase {
   /*前置条件*/
   preconditions: string;
   /*是否展开小项*/
-  isShow: boolean
+  isShow: boolean;
   /*测试小项*/
-  testItem: TestItem[];
+  testItems: TestItem[];
   /*所属项目*/
   project: Project;
 }

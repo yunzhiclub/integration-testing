@@ -1,5 +1,6 @@
 package com.mengyunzhi.integrationTesting.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,5 +28,8 @@ public class TestItem extends BaseEntity<Long> {
 
     @ManyToOne
     @ApiModelProperty("测试用例")
+    @JsonView(TestCaseJsonView.class)
     private TestCase testCase;
+
+    public static interface TestCaseJsonView {}
 }

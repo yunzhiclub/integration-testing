@@ -18,7 +18,6 @@ public interface TestCaseRepository extends PagingAndSortingRepository<TestCase,
 
     default Page<TestCase> getAll(Long projectId, Pageable pageable) {
         Assert.notNull(pageable, "pageable不能为null");
-      //  Specification<TestCase> specification = TestCaseSpecs.belongProject();
         return this.findAll(pageable);
     }
 }

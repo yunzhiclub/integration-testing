@@ -115,17 +115,16 @@ export class TestCaseService extends Store<TestCaseState>{
   }
 
   @Action()
-  toggleCollapse(id: number, isShow: Boolean): Observable<TestCase> {
+  toggleCollapse(id: number): Observable<boolean> {
     Assert.isNumber(id, 'id不能为空');
-    return this.httpClient.put<TestCase>(`/testCase/toggleCollapse/${id}`, isShow).pipe(tap(value => {
+    return this.httpClient.put<boolean>(`/testCase/toggleCollapse/${id}`, {}).pipe(tap(value => {
       const state = this.getState();
       const testCase = _.find(state.pageData.content, {id}) as TestCase;
       if (testCase) {
-        testCase.isShow = !isShow;
+        testCase.isShow = value;
       }
-
       this.next(state);
-      // this.pageAction(state.httpParam);
+      this.pageAction(state.httpParams);
     }));
   }
 

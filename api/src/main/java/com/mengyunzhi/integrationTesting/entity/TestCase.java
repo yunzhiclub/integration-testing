@@ -41,6 +41,9 @@ public class TestCase extends BaseEntity<Long> {
     @ApiModelProperty("所属项目")
     private Project project;
 
+    @ApiModelProperty("是否显示子项")
+    private Boolean isShow = false;
+
     public static interface ProjectJsonView {}
 
     public static interface TestItemJsonView {}
