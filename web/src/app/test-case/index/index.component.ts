@@ -61,7 +61,7 @@ export class IndexComponent extends BaseComponent implements OnInit {
   }
 
   onQuery(): void {
-    this.param.projectId = +(this.project.value.id);
+    this.param.projectId = this.project?.value?.id ? +(this.project?.value?.id) : 0;
     this.reload()
   }
 

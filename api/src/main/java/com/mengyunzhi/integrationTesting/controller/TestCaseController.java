@@ -26,8 +26,8 @@ public class TestCaseController {
     @GetMapping("page")
     @JsonView(PageJsonView.class)
     public Page<TestCase> page(@SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
-                               Pageable pageable) {
-        return this.testCaseService.pageAll(null, pageable);
+                               Pageable pageable, @RequestParam Long projectId) {
+        return this.testCaseService.pageAll(projectId, pageable);
     }
 
     @PostMapping

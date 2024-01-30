@@ -20,7 +20,7 @@ public class TestCaseSpecs {
     }
 
     public static Specification<TestCase> belongProject(Long projectId) {
-        if (projectId == null) {
+        if (projectId == null || projectId == 0) {
             return Specification.where(null);
         } else {
             return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.join("project", JoinType.LEFT).get("id").as(Long.class), projectId);
