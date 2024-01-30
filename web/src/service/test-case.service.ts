@@ -128,6 +128,9 @@ export class TestCaseService extends Store<TestCaseState>{
     }));
   }
 
+  /**
+   * 根据项目id获取包含的testCase
+   */
   getTestCaseByProjectId(id: number): Observable<TestCase[]> {
     return this.httpClient.get<TestCase[]>(`/testCase/getTestCaseByProjectId/${id}`);
   }

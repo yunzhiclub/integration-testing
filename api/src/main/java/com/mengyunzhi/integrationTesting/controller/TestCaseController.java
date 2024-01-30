@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 /**
  * @author kexiaobin
  */
@@ -58,7 +60,13 @@ public class TestCaseController {
         return this.testCaseService.toggleCollapse(id);
     }
 
-    interface PageJsonView extends TestCase.ProjectJsonView, TestCase.TestItemJsonView  {
+    @GetMapping("getTestCaseByProjectId/{id}")
+    @JsonView(GetTestCasByyProjectIdJsonView.class)
+    public List<TestCase> getTestCaseByProjectId(@PathVariable Long id) {
+        return this.testCaseService.getTestCaseByProjectId(id);
+    }
+
+    interface PageJsonView extends TestCase.ProjectJsonView, TestCase.TestItemJsonView {
     }
 
     interface SaveJsonView extends TestCase.ProjectJsonView {
@@ -68,6 +76,9 @@ public class TestCaseController {
     }
 
     interface GetByIdJsonView extends TestCase.ProjectJsonView {
+    }
+
+    interface GetTestCasByyProjectIdJsonView {
     }
 
 }
