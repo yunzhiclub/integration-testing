@@ -29,8 +29,14 @@ export const menus: Array<BaseMenu> = [
     defaultShow: true,
   },
   {
-    name: '测试管理',
+    name: '测试管理(user)',
     url: 'test',
+    icon: '',
+    defaultShow: true,
+  },
+  {
+    name: '测试管理(admin)',
+    url: 'testAdmin',
     icon: '',
     defaultShow: true,
   },
