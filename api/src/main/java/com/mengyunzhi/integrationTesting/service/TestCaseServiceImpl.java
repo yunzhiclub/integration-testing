@@ -89,4 +89,9 @@ public class TestCaseServiceImpl implements TestCaseService {
         testCase.setIsShow(!testCase.getIsShow());
         return this.testCaseRepository.save(testCase).getIsShow();
     }
+
+    @Override
+    public List<TestCase> getTestCaseByProjectId(Long id) {
+        return this.testCaseRepository.getTestCaseByProjectId(id);
+    }
 }

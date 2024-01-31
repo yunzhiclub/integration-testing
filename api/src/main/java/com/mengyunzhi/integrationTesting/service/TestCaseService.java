@@ -5,6 +5,8 @@ import com.mengyunzhi.integrationTesting.entity.TestCase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @author kexiaobin
  */
@@ -25,4 +27,5 @@ public interface TestCaseService {
      */
     Boolean toggleCollapse(Long id);
 
+    List<TestCase> getTestCaseByProjectId(Long id);
 }

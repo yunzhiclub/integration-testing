@@ -16,7 +16,7 @@ import {takeUntil} from "rxjs";
     }
   ]
 })
-export class ProjectSelectComponent extends BaseComponent implements OnInit, ControlValueAccessor{
+export class ProjectSelectComponent extends BaseComponent implements OnInit, ControlValueAccessor {
   projects: Project[];
   projectSelectId = new FormControl<Project>(null);
 
@@ -43,7 +43,7 @@ export class ProjectSelectComponent extends BaseComponent implements OnInit, Con
 
   writeValue(project: Project): void {
     if (project == null) return;
-    this.projectSelectId.setValue(project );
+    this.projectSelectId.setValue(project);
   }
 
   compareFn(t1: { id: number }, t2: { id: number }) {

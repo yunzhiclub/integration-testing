@@ -5,6 +5,7 @@ import com.mengyunzhi.integrationTesting.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -37,4 +38,6 @@ public interface UserService {
      * 修改密码
      */
     void updatePassword(String oldPassword, String newPassword);
+
+    List<User> getAllUser();
 }

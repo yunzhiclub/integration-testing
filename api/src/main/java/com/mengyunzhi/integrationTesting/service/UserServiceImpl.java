@@ -18,6 +18,7 @@ import org.springframework.util.Assert;
 
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -138,5 +139,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 this.userRepository.save(currentUser);
             }
         });
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return (List<User>) this.userRepository.findAll();
     }
 }
