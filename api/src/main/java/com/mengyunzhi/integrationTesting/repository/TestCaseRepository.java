@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 /**
  * @author kexiaobin
  */
@@ -18,7 +20,12 @@ public interface TestCaseRepository extends PagingAndSortingRepository<TestCase,
 
     default Page<TestCase> getAll(Long projectId, Pageable pageable) {
         Assert.notNull(pageable, "pageable不能为null");
-      //  Specification<TestCase> specification = TestCaseSpecs.belongProject();
-        return this.findAll(pageable);
+        Specification<TestCase> specification = TestCaseSpecs.belongProject(projectId);
+        return this.findAll(specification, pageable);
+    }
+
+    default List<TestCase> getTestCaseByProjectId(Long projectId) {
+        Specification<TestCase> specification = TestCaseSpecs.belongProject(projectId);
+        return this.findAll(specification);
     }
 }

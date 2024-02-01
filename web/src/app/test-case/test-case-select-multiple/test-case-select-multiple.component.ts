@@ -22,7 +22,7 @@ export class TestCaseSelectMultipleComponent extends BaseComponent implements On
 
   @Input()
   set data(value: number) {
-    if (value){
+    if (value) {
       this.getTestCaseByProjectId(value)
     }
   }
@@ -31,11 +31,11 @@ export class TestCaseSelectMultipleComponent extends BaseComponent implements On
     super();
   }
 
-  getTestCaseByProjectId(id: number): void{
-     this.testCaseService.getTestCaseByProjectId(id).pipe(takeUntil(this.ngOnDestroy$))
-       .subscribe(data => {
-       this.testCases = data;
-     });
+  getTestCaseByProjectId(id: number): void {
+    this.testCaseService.getTestCaseByProjectId(id).pipe(takeUntil(this.ngOnDestroy$))
+      .subscribe(data => {
+        this.testCases = data;
+      });
   }
 
   ngOnInit(): void {

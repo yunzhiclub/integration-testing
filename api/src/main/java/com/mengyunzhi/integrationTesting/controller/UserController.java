@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.*;
 
 /**
  * @author kexiaobin
@@ -106,6 +107,12 @@ public class UserController {
         this.userService.updatePassword(updatePassword.getOldPassword(), updatePassword.getNewPassword());
     }
 
+    @GetMapping("getAllUser")
+    @JsonView(GetAllUserJsonView.class)
+    public List<User> getAllUser() {
+        return this.userService.getAllUser();
+    }
+
     interface LoginJsonView {
     }
 
@@ -117,4 +124,6 @@ public class UserController {
 
     interface UpdateJsonView {
     }
+
+    interface GetAllUserJsonView {}
 }

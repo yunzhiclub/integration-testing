@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CommonService} from "../../../service/common-service";
 import {TestPlanService} from "../../../service/test-plan.service";
 import {TestPlan} from "../../../entity/testPlan";
+import {Project} from "../../../entity/project";
 
 /**
  * 测试计划add组件
@@ -24,11 +25,11 @@ export class AddComponent implements OnInit{
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      projectId: new FormControl<number>(null),
+      project: new FormControl<Project>(null),
       title: new FormControl<string>(''),
       testCase: new FormControl<string>(''),
       testUser: new FormControl<string>(null),
-    })
+    });
   }
 
   onClose() {

@@ -1,11 +1,11 @@
 package com.mengyunzhi.integrationTesting.service;
 
-import com.mengyunzhi.integrationTesting.dto.ProjectDto;
 import com.mengyunzhi.integrationTesting.dto.TestCaseDto;
-import com.mengyunzhi.integrationTesting.entity.Project;
 import com.mengyunzhi.integrationTesting.entity.TestCase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * @author kexiaobin
@@ -21,4 +21,11 @@ public interface TestCaseService {
     TestCase update(Long id, TestCaseDto.UpdateRequest updateRequest);
 
     void delete(Long id);
+
+    /**
+     * 子项是否显示
+     */
+    Boolean toggleCollapse(Long id);
+
+    List<TestCase> getTestCaseByProjectId(Long id);
 }

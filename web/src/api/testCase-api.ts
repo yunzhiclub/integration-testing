@@ -30,7 +30,7 @@ export class TestCaseApi implements MockApiInterface{
               preconditions: randomString('前置条件'),
               isShow: false,
               project: this.getProjectById(projectId),
-              testItem: [
+              testItems: [
                 {
                   id: randomNumber(100),
                   name: '|--测试小项目',

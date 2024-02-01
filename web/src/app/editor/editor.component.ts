@@ -32,7 +32,6 @@ export class EditorComponent implements OnDestroy, OnInit, ControlValueAccessor 
 
   constructor(private editorService: EditorService,
               private attachmentService: AttachmentService) {
-    console.log('constructor')
   }
 
   ngOnDestroy(): void {
@@ -40,7 +39,6 @@ export class EditorComponent implements OnDestroy, OnInit, ControlValueAccessor 
   }
 
   onEditorInit($event: EventObj<any>) {
-    console.log('2')
     this.editor = $event.editor;
     this.editorService.addComponentAddEditor(this.editor, this);
   }
@@ -57,7 +55,6 @@ export class EditorComponent implements OnDestroy, OnInit, ControlValueAccessor 
   }
 
   ngOnInit(): void {
-    console.log('1')
     this.init = {
       base_url: '/tinymce',
       // 后缀

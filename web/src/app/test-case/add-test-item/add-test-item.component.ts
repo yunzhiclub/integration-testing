@@ -40,7 +40,6 @@ export class AddTestItemComponent extends BaseComponent implements OnInit{
           this.testCaseId = +v['id'];
         }
       );
-
     this.initDetail();
   }
 

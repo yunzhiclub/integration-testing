@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 /**
  * @author kexiaobin
  */
@@ -26,8 +28,8 @@ public class TestCaseController {
     @GetMapping("page")
     @JsonView(PageJsonView.class)
     public Page<TestCase> page(@SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
-                               Pageable pageable) {
-        return this.testCaseService.pageAll(null, pageable);
+                               Pageable pageable, @RequestParam Long projectId) {
+        return this.testCaseService.pageAll(projectId, pageable);
     }
 
     @PostMapping
@@ -53,7 +55,18 @@ public class TestCaseController {
         return this.testCaseService.getById(id);
     }
 
-    interface PageJsonView extends TestCase.ProjectJsonView {
+    @PutMapping("toggleCollapse/{id}")
+    public Boolean toggleCollapse(@PathVariable Long id) {
+        return this.testCaseService.toggleCollapse(id);
+    }
+
+    @GetMapping("getTestCaseByProjectId/{id}")
+    @JsonView(GetTestCasByyProjectIdJsonView.class)
+    public List<TestCase> getTestCaseByProjectId(@PathVariable Long id) {
+        return this.testCaseService.getTestCaseByProjectId(id);
+    }
+
+    interface PageJsonView extends TestCase.ProjectJsonView, TestCase.TestItemJsonView {
     }
 
     interface SaveJsonView extends TestCase.ProjectJsonView {
@@ -64,4 +77,8 @@ public class TestCaseController {
 
     interface GetByIdJsonView extends TestCase.ProjectJsonView {
     }
+
+    interface GetTestCasByyProjectIdJsonView {
+    }
+
 }
