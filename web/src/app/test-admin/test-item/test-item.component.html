@@ -15,16 +15,10 @@
     <app-project-select></app-project-select>
   </div>
   <div class="mt-3 mr-2">
-    <input type="text" class="form-control" [formControl]="" placeholder="状态">
+    <input type="text" class="form-control" placeholder="状态">
   </div>
   <button type="submit" class="btn btn-info mt-3"><i class="fa fas fa-search" ></i>查询</button>
 </form>
-
-<div class="row mb-2 mt-2">
-  <div class="col-12 text-right">
-    <a class="btn btn-primary"><i class="fa fas fa-plus"></i>新增</a>
-  </div>
-</div>
 
 <table class="table table-striped mt-2">
   <thead>
@@ -36,7 +30,6 @@
     <th>状态</th>
     <th>issue</th>
     <th>描述</th>
-    <th>操作</th>
   </thead>
   <tbody>
   <tr>
@@ -47,7 +40,6 @@
     <td>待开始</td>
     <td></td>
     <td></td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tr>
   <tr>
     <td>2</td>
@@ -57,7 +49,6 @@
     <td>待验证</td>
     <td>issue</td>
     <td>居然登录进去了 和预期的结果不对，以建立issue</td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tr>
   <tr>
     <td>3</td>
@@ -67,7 +58,6 @@
     <td>未通过</td>
     <td>issue</td>
     <td>居然登录进去了 和预期的结果不对，未建立issue</td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tr>
   <tr>
     <td>4</td>
@@ -77,7 +67,6 @@
     <td>已通过</td>
     <td></td>
     <td></td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
   </tbody>
 </table>
 <!--<yz-page [size]="pageData?.size"-->

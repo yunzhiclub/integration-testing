@@ -82,9 +82,9 @@ export class IndexComponent extends BaseComponent implements OnInit {
   }
 
 
-  deleteTestItem(id: number, name: string) {
+  deleteTestItem(testCaseId: number, id: number, name: string) {
     this.commonService.confirm(() => {
-      this.testItemService.deleteTestItem(id).subscribe(() => {
+      this.testItemService.deleteTestItem(testCaseId, id).subscribe(() => {
         this.commonService.success(() => {
           this.reload();
         }, '删除成功');

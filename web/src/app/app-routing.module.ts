@@ -40,6 +40,10 @@ const routes: Routes = [
         loadChildren: () => import('./test/test.module').then(m => m.TestModule),
       },
       {
+        path: 'testAdmin',
+        loadChildren: () => import('./test-admin/test-admin.module').then(m => m.TestAdminModule),
+      },
+      {
         path: 'user',
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
       },

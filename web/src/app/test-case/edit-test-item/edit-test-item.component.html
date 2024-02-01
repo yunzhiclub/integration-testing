@@ -4,7 +4,7 @@
   </ol>
 </nav>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" style="height:600px; overflow-y: scroll; overflow-x: hidden">
   <div class="form-group row">
     <label class="col-3 text-right col-form-label"><code>*</code>名称</label>
     <div class="col-4">
@@ -21,8 +21,8 @@
 
   <div class="form-group row">
     <label class="col-3 text-right col-form-label"><code>*</code>预期结果</label>
-    <div class="col-4">
-      <textarea rows="3" class="form-control" formControlName="expectedResult"></textarea>
+    <div class="col-8">
+      <app-editor formControlName="expectedResult"></app-editor>
     </div>
   </div>
   <hr/>

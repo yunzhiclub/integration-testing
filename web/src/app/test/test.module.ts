@@ -12,6 +12,8 @@ import {TestCaseModule} from "../test-case/test-case.module";
 import {EditTestItemComponent} from './edit-test-item/edit-test-item.component';
 import {EditorModule} from "../editor/editor.module";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {ProjectModule} from "../project/project.module";
+
 
 /**
  * 测试管理模块
@@ -22,18 +24,19 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     TestItemComponent,
     EditTestItemComponent
   ],
-  imports: [
-    CommonModule,
-    TestRoutingModule,
-    FormsModule,
-    MatTooltipModule,
-    ReactiveFormsModule,
-    DialogEntryModule,
-    UserModule,
-    TestCaseModule,
-    EditorModule,
-    NzSelectModule
-  ]
+    imports: [
+        CommonModule,
+        TestRoutingModule,
+        FormsModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        DialogEntryModule,
+        UserModule,
+        TestCaseModule,
+        EditorModule,
+        NzSelectModule,
+        ProjectModule
+    ]
 })
 export class TestModule {
 }

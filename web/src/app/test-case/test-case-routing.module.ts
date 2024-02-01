@@ -43,7 +43,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'editTestItem/:id',
+        path: 'editTestItem/:id/:testCaseId',
         component: DialogEntryComponent,
         data: {
           component: EditTestItemComponent,
