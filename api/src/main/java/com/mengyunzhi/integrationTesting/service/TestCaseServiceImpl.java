@@ -6,6 +6,7 @@ import com.mengyunzhi.integrationTesting.entity.TestCase;
 import com.mengyunzhi.integrationTesting.entity.TestItem;
 import com.mengyunzhi.integrationTesting.repository.ProjectRepository;
 import com.mengyunzhi.integrationTesting.repository.TestCaseRepository;
+import com.mengyunzhi.integrationTesting.repository.TestItemRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,12 @@ import java.util.stream.Collectors;
 public class TestCaseServiceImpl implements TestCaseService {
     private final TestCaseRepository testCaseRepository;
     private final ProjectRepository projectRepository;
+    private final TestItemRepository testItemRepository;
 
-    public TestCaseServiceImpl(TestCaseRepository testCaseRepository, ProjectRepository projectRepository) {
+    public TestCaseServiceImpl(TestCaseRepository testCaseRepository, ProjectRepository projectRepository, TestItemRepository testItemRepository) {
         this.testCaseRepository = testCaseRepository;
         this.projectRepository = projectRepository;
+        this.testItemRepository = testItemRepository;
     }
 
     @Override
@@ -93,5 +96,50 @@ public class TestCaseServiceImpl implements TestCaseService {
     @Override
     public List<TestCase> getTestCaseByProjectId(Long id) {
         return this.testCaseRepository.getTestCaseByProjectId(id);
+    }
+
+    @Override
+    public List<TestCase> addTestCase(Long projectId, TestCaseDto.CloneTestCase cloneTestCase) {
+        List<TestCase> testCases = new ArrayList<>();
+
+        cloneTestCase.getTestCases().forEach(v -> {
+            List<TestItem> testItems = new ArrayList<>();
+            TestCase testCase = this.saveTestCase(projectId, v.getId());
+            this.testItemRepository.getBelongTestCase(v.getId()).forEach(value -> {
+                testItems.add(this.saveTestItem(testCase, value.getId()));
+            });
+            testCase.setTestItems(testItems);
+            testCases.add(testCase);
+        });
+
+        return testCases;
+    }
+
+
+    public TestItem saveTestItem(TestCase testCase, Long id) {
+        TestItem testItem = testItemRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("TestItem not found with id: " + id));
+
+        TestItem newTestItem = new TestItem();
+        newTestItem.setTestCase(testCase);
+        newTestItem.setName(testItem.getName());
+        newTestItem.setSteps(testItem.getSteps());
+        newTestItem.setExpectedResult(testItem.getExpectedResult());
+
+        return testItemRepository.save(newTestItem);
+    }
+
+    public TestCase saveTestCase(Long projectId, Long id) {
+        TestCase testCase = getById(id);
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new EntityNotFoundException("Project not found with id: " + projectId));
+
+        TestCase newTestCase = new TestCase();
+        newTestCase.setTestPurpose(testCase.getTestPurpose());
+        newTestCase.setProject(project);
+        newTestCase.setName(testCase.getName());
+        newTestCase.setPreconditions(testCase.getPreconditions());
+
+        return testCaseRepository.save(newTestCase);
     }
 }

@@ -28,4 +28,6 @@ public interface TestCaseService {
     Boolean toggleCollapse(Long id);
 
     List<TestCase> getTestCaseByProjectId(Long id);
+
+    List<TestCase> addTestCase(Long projectId, TestCaseDto.CloneTestCase cloneTestCase);
 }

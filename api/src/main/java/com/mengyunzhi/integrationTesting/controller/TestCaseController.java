@@ -66,6 +66,13 @@ public class TestCaseController {
         return this.testCaseService.getTestCaseByProjectId(id);
     }
 
+    @PutMapping("addTestCase/{id}")
+    @JsonView(AddTestCase.class)
+    public List<TestCase> addTestCase(@PathVariable Long id, @RequestBody TestCaseDto.CloneTestCase cloneTestCase) {
+        return this.testCaseService.addTestCase(id, cloneTestCase);
+    }
+
+
     interface PageJsonView extends TestCase.ProjectJsonView, TestCase.TestItemJsonView {
     }
 
@@ -77,6 +84,8 @@ public class TestCaseController {
 
     interface GetByIdJsonView extends TestCase.ProjectJsonView {
     }
+
+    interface AddTestCase extends PageJsonView {}
 
     interface GetTestCasByyProjectIdJsonView {
     }
