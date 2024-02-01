@@ -16,6 +16,7 @@ import {CommonService} from "../../../service/common-service";
 export class EditTestItemComponent extends BaseComponent implements OnInit{
   formGroup: FormGroup;
   testItemId: number;
+  testCaseId: number;
   testItem: TestItem;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -26,9 +27,10 @@ export class EditTestItemComponent extends BaseComponent implements OnInit{
 
   ngOnInit(): void {
     this.initFromGroup();
-    this.route.params.pipe(filter(v => v.hasOwnProperty('id')))
+    this.route.params.pipe(filter(v => v.hasOwnProperty('id' && 'testCaseId')))
       .subscribe(v => {
           this.testItemId = +v['id'];
+          this.testCaseId = +v['testCaseId']
           this.testItemService.getById(this.testItemId);
         }
       );
@@ -53,7 +55,7 @@ export class EditTestItemComponent extends BaseComponent implements OnInit{
 
   onSubmit() {
     const testItem = this.formGroup.value as TestItem;
-    this.testItemService.updateTestItem(this.testItemId, testItem).subscribe({
+    this.testItemService.updateTestItem(this.testCaseId, this.testItemId, testItem).subscribe({
       next: () => {
         this.commonService.success(() => {
           this.onClose();
