@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ProjectModule} from "../../project/project.module";
 
-describe('test->TestItemComponent', () => {
+describe('TestItemComponent', () => {
   let component: TestItemComponent;
   let fixture: ComponentFixture<TestItemComponent>;
 
