@@ -134,4 +134,13 @@ export class TestCaseService extends Store<TestCaseState>{
   getTestCaseByProjectId(id: number): Observable<TestCase[]> {
     return this.httpClient.get<TestCase[]>(`/testCase/getTestCaseByProjectId/${id}`);
   }
+
+  /**
+   * 项目clone测试用例
+   * @param id
+   * @param testCases
+   */
+  addTestCase(id: number, testCases: TestCase[]): Observable<TestCase[]> {
+    return this.httpClient.put<TestCase[]>(`/testCase/addTestCase/${id}`, {testCases});
+  }
 }

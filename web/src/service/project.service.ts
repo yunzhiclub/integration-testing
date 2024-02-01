@@ -13,19 +13,20 @@ import {TestCase} from "../entity/test-case";
 /**
  * 项目的状态管理
  */
-interface ProjectState extends Store<Project>{
+interface ProjectState extends Store<Project> {
   pageData: Page<Project>;
-  httpParams: {page: number, size: number, name?: string};
+  httpParams: { page: number, size: number, name?: string };
   getById: Project,
   projectId: number,
   testPlanPageData: Page<TestPlan>;
-  testPlanParam: {page: number, size: number, name?: string};
+  testPlanParam: { page: number, size: number, name?: string };
   getAll: Project[]
 }
+
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService extends Store<ProjectState>{
+export class ProjectService extends Store<ProjectState> {
 
   static pageData(state: ProjectState): Page<Project> {
     return state.pageData;
@@ -41,7 +42,7 @@ export class ProjectService extends Store<ProjectState>{
   }
 
   constructor(private httpClient: HttpClient) {
-    super( {
+    super({
       pageData: new Page<Project>({}),
       httpParams: {page: 0, size: 0, name: ''},
       getById: null,
@@ -54,7 +55,7 @@ export class ProjectService extends Store<ProjectState>{
    * 分页数据
    */
   @Action()
-  pageAction(payload: {page: number, size: number, name?: string}): Observable<Page<Project>> {
+  pageAction(payload: { page: number, size: number, name?: string }): Observable<Page<Project>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
 
@@ -71,7 +72,7 @@ export class ProjectService extends Store<ProjectState>{
   }
 
   @Action()
-  addAction(project: {name: string, projectUrl: string, repositoryUrl: string}): Observable<Project>{
+  addAction(project: { name: string, projectUrl: string, repositoryUrl: string }): Observable<Project> {
     Assert.isNotNullOrUndefined(project.name);
     Assert.isNotNullOrUndefined(project.projectUrl);
     Assert.isNotNullOrUndefined(project.repositoryUrl);
@@ -86,7 +87,7 @@ export class ProjectService extends Store<ProjectState>{
   }
 
   @Action()
-  getById(id: number): Observable<Project>{
+  getById(id: number): Observable<Project> {
     Assert.isNumber(id, 'id类型不正确');
     return this.httpClient.get<Project>(`/project/${id}`).pipe(tap(data => {
       const state = this.getState();
@@ -96,7 +97,7 @@ export class ProjectService extends Store<ProjectState>{
   }
 
   @Action()
-  updateAction(id: number, project: {name: string, projectUrl: string, repositoryUrl: string}): Observable<Project>{
+  updateAction(id: number, project: { name: string, projectUrl: string, repositoryUrl: string }): Observable<Project> {
     Assert.isNumber(id, 'id类型不是Number');
     Assert.isNotNullOrUndefined(project.name);
     Assert.isNotNullOrUndefined(project.projectUrl);
@@ -142,7 +143,7 @@ export class ProjectService extends Store<ProjectState>{
   }
 
   @Action()
-  testPlanPageAction(id: number, payload: {page: number; size: number; name?: string}): Observable<Page<TestPlan>> {
+  testPlanPageAction(id: number, payload: { page: number; size: number; name?: string }): Observable<Page<TestPlan>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
 
@@ -159,16 +160,12 @@ export class ProjectService extends Store<ProjectState>{
   }
 
   @Action()
-  getAll(): Observable<Project[]>{
+  getAll(): Observable<Project[]> {
     const state = this.getState();
-    return this.httpClient.get<Project[]>('/project/getAll').pipe( tap (data => {
+    return this.httpClient.get<Project[]>('/project/getAll').pipe(tap(data => {
       state.getAll = data as Project[];
       this.next(state);
     }))
-  }
-
-  addTestCase(id: number, testCase: TestCase[]): Observable<Project>{
-    return this.httpClient.put<Project>(`/project/addTestCase/${id}`, testCase);
   }
 
 }

@@ -5,6 +5,7 @@ import {Project} from "../../../entity/project";
 import {TestCase} from "../../../entity/test-case";
 import {ProjectService} from "../../../service/project.service";
 import {CommonService} from "../../../service/common-service";
+import {TestCaseService} from "../../../service/test-case.service";
 
 /**
  * 克隆测试用例至其他项目组件
@@ -14,30 +15,32 @@ import {CommonService} from "../../../service/common-service";
   templateUrl: './clone.component.html',
   styleUrls: ['./clone.component.css']
 })
-export class CloneComponent implements OnInit{
-   projectId: number;
+export class CloneComponent implements OnInit {
+  projectId: number;
 
   formGroup = new FormGroup({
     project: new FormControl<Project>(null),
     testCases: new FormControl<TestCase[]>(null)
   });
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private projectService: ProjectService,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              private testCaseService: TestCaseService) {
   }
 
   ngOnInit(): void {
-   this.formGroup.get('project').valueChanges.subscribe( () => {
-     const project = this.formGroup.get('project').value
-     this.projectId = project.id
-   })
+    this.formGroup.get('project').valueChanges.subscribe(() => {
+      const project = this.formGroup.get('project').value;
+      this.projectId = project.id;
+    })
   }
 
   onSubmit() {
-
     const testCases = this.formGroup.get('testCases').value as TestCase[];
-    this.projectService.addTestCase(this.projectId, testCases).subscribe({
+
+    this.testCaseService.addTestCase(this.projectId, testCases).subscribe({
       next: () => {
         this.commonService.success(() => {
           this.onClose();
@@ -53,6 +56,4 @@ export class CloneComponent implements OnInit{
   onClose() {
     this.router.navigate(['../'], {relativeTo: this.route})
   }
-
-
 }
