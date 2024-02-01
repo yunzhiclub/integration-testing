@@ -28,17 +28,6 @@ export class TestItemService extends Store<TestItemState>{
     super({getById: null});
   }
 
-  updateTestItems(testItems: Array<TestItem>, testCaseId: number): void{
-    const  state = this.testCaseService.snapshot;
-    const testCase = state.pageData.content.find( v=> {
-      return v.id === testCaseId;
-    });
-    if(testCase !== null) {
-      testCase.testItem = testItems;
-      this.testCaseService.next(state);
-    }
-  }
-
   @Action()
   getById(id: number): Observable<TestItem>{
     Assert.isNumber(id, 'id不是number')
@@ -49,22 +38,64 @@ export class TestItemService extends Store<TestItemState>{
     }));
   }
 
-  addTestItem(testItem: {name: string, steps: string, expectedResult: string, testCase: TestCase}): Observable<TestItem>{
+  @Action()
+  addTestItem( testCaseId: number, testItem: {name: string, steps: string, expectedResult: string, testCase: TestCase}): Observable<TestItem>{
     Assert.isNotNullOrUndefined(testItem, 'testItem不能为空')
 
-    return this.httpClient.post<TestItem>('/testItem', testItem);
-  }
+    return this.httpClient.post<TestItem>('/testItem', testItem).pipe(tap( data => {
+      const state = this.testCaseService.snapshot;
+      const testCase = state.pageData.content.find(v => v.id === testCaseId);
 
-  deleteTestItem(id: number): Observable<void> {
-    Assert.isNumber(id, 'id类型不正确');
-    return this.httpClient.delete<void>(`/testItem/${id}`);
-  }
-
-  updateTestItem(testCaseId: number, testItemId: number, testItem: {name: string, steps: string, expectedResult: string }): Observable<TestItem>{
-
-    return this.httpClient.put<TestItem>(`/testItem/${testItemId}`, testItem).pipe(tap((data) => {
-      this.updateTestItems(testCaseId, testItemId, data);
+      if(testCase){
+        testCase.testItem.unshift(data);
+        this.testCaseService.next(state);
+      }
     }));
+  }
+
+  @Action()
+  deleteTestItem(testCaseId: number, testItemId: number): Observable<void> {
+    Assert.isNumber(testItemId, 'testItemId类型不正确');
+    Assert.isNumber(testCaseId, 'testCaseId类型不正确');
+
+    return this.httpClient.delete<void>(`/testItem/${testItemId}`).pipe(tap( () => {
+      const state = this.testCaseService.snapshot;
+      const testCase = state.pageData.content.find(v => {
+        return testCaseId === v.id;
+      })
+      testCase.testItem.filter(v => v.id === testItemId);
+
+      this.testCaseService.next(state);
+    }));
+  }
+
+  @Action()
+  updateTestItemAction(testCaseId: number, testItemId: number, testItem: {name: string, steps: string, expectedResult: string }): Observable<TestItem>{
+    return this.httpClient.put<TestItem>(`/testItem/${testItemId}`, testItem).pipe(tap((data) => {
+      this.updateTestItem(testCaseId, testItemId, data);
+    }));
+  }
+
+  /**
+   * 修改后的新值testItem替换旧值testItem
+   * @param testCaseId
+   * @param testItemId
+   * @param testItem
+   */
+  updateTestItem(testCaseId: number, testItemId: number,  testItem: TestItem): void{
+    const  state = this.testCaseService.snapshot;
+    const testCase = state.pageData.content.find( v=> {
+      return v.id === testCaseId;
+    });
+    const data = testCase.testItem.find(value => {
+      return value.id=== testItemId;
+    })
+
+    if(data !== null) {
+      const index = testCase.testItem.indexOf(data)
+      testCase.testItem.splice(index, 1, testItem)
+      this.testCaseService.next(state);
+    }
   }
 
 }

@@ -55,7 +55,7 @@ export class EditTestItemComponent extends BaseComponent implements OnInit{
 
   onSubmit() {
     const testItem = this.formGroup.value as TestItem;
-    this.testItemService.updateTestItem(this.testCaseId, this.testItemId, testItem).subscribe({
+    this.testItemService.updateTestItemAction(this.testCaseId, this.testItemId, testItem).subscribe({
       next: () => {
         this.commonService.success(() => {
           this.onClose();

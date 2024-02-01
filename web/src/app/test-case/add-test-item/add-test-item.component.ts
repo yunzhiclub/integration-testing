@@ -38,7 +38,6 @@ export class AddTestItemComponent extends BaseComponent implements OnInit{
     this.route.params.pipe(filter(v => v.hasOwnProperty('id')))
       .subscribe(v => {
           this.testCaseId = +v['id'];
-          this.testCaseService.getById(this.testCaseId);
         }
       );
 
@@ -58,7 +57,7 @@ export class AddTestItemComponent extends BaseComponent implements OnInit{
     const testItem = this.formGroup.value as TestItem;
     testItem.testCase = this.testCase;
 
-    this.testItemService.addTestItem(testItem).pipe(takeUntil(this.ngOnDestroy$))
+    this.testItemService.addTestItem(this.testCaseId, testItem).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe({
         next: () => {
           this.commonService.success(() => {
