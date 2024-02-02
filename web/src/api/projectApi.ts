@@ -103,7 +103,6 @@ export class ProjectApi implements MockApiInterface {
               return {
                 id: index + 1,
                 title: randomString('12'),
-                description: randomString('测试'),
                 status: randomNumber(3),
                 createTime: new Date().getTime()
               } as TestPlan;

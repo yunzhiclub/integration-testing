@@ -8,14 +8,11 @@ import {Project} from "./project";
 export interface  TestPlan {
   id: number,
   title: string,
-  // todo 删除描述
-  description: string,
-  /*测试用例*/
-  testCase: TestCase[],
-  /*测试人*/
-  testUser: User[],
+  /*任务分配*/
+  testAssignment: {testCase: TestCase[], testUser: User}[]
   status: number,
   /*所属项目*/
   project: Project;
-  createTime: number
+  createTime: number;
+
 }

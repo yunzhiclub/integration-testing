@@ -7,6 +7,7 @@ import {takeUntil} from "rxjs";
 import {TestPlanService} from "../../../service/test-plan.service";
 import {TestPlan} from "../../../entity/testPlan";
 import {CommonService} from "../../../service/common-service";
+import {Project} from "../../../entity/project";
 
 /**
  * 测试计划index组件
@@ -17,13 +18,15 @@ import {CommonService} from "../../../service/common-service";
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent extends BaseComponent implements OnInit {
+  project = new FormControl<Project>(null);
   name = new FormControl<string>('');
   pageData = new Page<TestPlan>();
 
   param = {
     page: 0,
     size: environment.size,
-    name: ''
+    name: '',
+    projectId: 0,
   };
 
   constructor(private testPlanService: TestPlanService,

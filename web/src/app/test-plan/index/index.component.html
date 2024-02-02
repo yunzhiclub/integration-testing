@@ -1,7 +1,7 @@
 <form class="form-inline" (ngSubmit)="onQuery()">
   <div class="row mb-2 mt-2">
     <div class="col-3 mt-3 mr-3">
-      <app-project-select></app-project-select>
+      <app-project-select [formControl]="project"></app-project-select>
     </div>
     <div class="col-sm-4 mr-3">
       <input type="text" class="form-control mt-3" [formControl]="name" placeholder="选择标题">
@@ -40,9 +40,18 @@
     <td>{{i + 1}}</td>
     <td>{{testPlan?.project?.name}}</td>
     <td>{{testPlan?.title}}</td>
-    <td class="text-pack">
-      测试登录功能，测试用户管理，测试个人中心，测试xxx</td>
-    <td>张三，李四，王五</td>
+      <td class="text-pack">
+        <ng-container *ngFor="let test of testPlan?.testAssignment">
+          <ng-container *ngFor="let testCase of test.testCase">
+            {{testCase?.name}}
+          </ng-container>
+        </ng-container>
+      </td>
+      <td>
+        <ng-container *ngFor="let test of testPlan?.testAssignment">
+          {{test?.testUser.name}}
+        </ng-container>
+      </td>
     <td bind-innerHTML="testPlan?.status | status"></td>
     <td>{{testPlan?.createTime | date: 'yyyy-MM-dd'}}</td>
     <td>

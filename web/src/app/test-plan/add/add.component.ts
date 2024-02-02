@@ -37,7 +37,7 @@ export class AddComponent implements OnInit{
   }
 
   onSubmit() {
-    const testPlan = this.formGroup.value as TestPlan;
+    const testPlan = this.formGroup.value;
 
     this.testPlanService.addAction(testPlan).subscribe({
       next: () => {

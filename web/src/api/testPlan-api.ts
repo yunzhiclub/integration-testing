@@ -33,9 +33,11 @@ export class TestPlanApi implements MockApiInterface {
             return {
               id: randomNumber(10),
               title: name ? name : 'test1',
-              description: randomString('描述'),
-              testUser: this.user,
               status: randomNumber(4),
+              testAssignment: [
+                {testCase: [{id: randomNumber(), name: randomString('测试用例1')}], testUser: {id: randomNumber(10), name: '张胜男',} as User},
+                {testCase: [{id: randomNumber(), name: randomString('测试用例A')}], testUser: {id: randomNumber(10), name: '李四',} as User}
+              ],
               project: {
                 id: randomNumber(10),
                 name: randomString('project', 3)
@@ -52,12 +54,11 @@ export class TestPlanApi implements MockApiInterface {
       {
         method: 'POST',
         url: '/testPlan',
-        result: (urlMatcher: any, options: { body: { project: Project, title: string, description: string } }) => {
+        result: (urlMatcher: any, options: { body: { project: Project, title: string } }) => {
           const testPlan = options.body as TestPlan;
           return {
             id: randomNumber(10),
             title: testPlan.title,
-            description: testPlan.description,
             status: randomNumber(0),
             project: testPlan.project,
             createTime: new Date().getTime()

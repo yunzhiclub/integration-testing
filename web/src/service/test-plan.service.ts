@@ -48,10 +48,9 @@ export class TestPlanService extends Store<TestPlanState> {
   }
 
   @Action()
-  addAction(testPlan: { project: Project, title: string, description: string }): Observable<TestPlan> {
+  addAction(testPlan: { project: Project, title: string }): Observable<TestPlan> {
     Assert.isNotNullOrUndefined(testPlan.title);
     Assert.isNotNullOrUndefined(testPlan.project);
-    Assert.isNotNullOrUndefined(testPlan.description);
 
     testPlan = testPlan as TestPlan;
     return this.httpClient.post<TestPlan>('/testPlan', testPlan).pipe(tap(value => {
