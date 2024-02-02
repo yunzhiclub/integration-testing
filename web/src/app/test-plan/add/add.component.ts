@@ -3,7 +3,6 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonService} from "../../../service/common-service";
 import {TestPlanService} from "../../../service/test-plan.service";
-import {TestPlan} from "../../../entity/testPlan";
 import {Project} from "../../../entity/project";
 
 /**
@@ -16,6 +15,8 @@ import {Project} from "../../../entity/project";
 })
 export class AddComponent implements OnInit{
   formGroup: FormGroup;
+  /*任务分配的数量*/
+  item = [0]
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -38,6 +39,7 @@ export class AddComponent implements OnInit{
 
   onSubmit() {
     const testPlan = this.formGroup.value;
+    console.log(testPlan, '测试计划')
 
     this.testPlanService.addAction(testPlan).subscribe({
       next: () => {
@@ -50,5 +52,13 @@ export class AddComponent implements OnInit{
         }, '', '添加失败', err);
       }
     });
+  }
+
+  addItem() {
+    this.item.push(2);
+  }
+
+  decreaseItem() {
+    this.item.splice(this.item.length-1, 1);
   }
 }

@@ -14,7 +14,8 @@ const routes: Routes = [
         path: 'add',
         component: DialogEntryComponent,
         data: {
-          component: AddComponent
+          component: AddComponent,
+          width: '900px'
         }
       },
       {
