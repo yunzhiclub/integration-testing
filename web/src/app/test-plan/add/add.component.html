@@ -8,7 +8,7 @@
   <div class="form-group row">
     <label class="col-3 text-right col-form-label"><code>*</code>测试项目</label>
     <div class="col-4">
-      <app-project-select formControlName="project"></app-project-select>
+      <app-proj ect-select formControlName="project"></app-project-select>
     </div>
   </div>
 
@@ -24,8 +24,8 @@
     <div class="col-9">
       <ng-container *ngFor="let i of item">
         <div class="col-9">
-          <app-test-case-select-multiple formArrayName="testCase" class="mr-2" [data]="this.formGroup.get('project').value?.id"></app-test-case-select-multiple>
-          <app-user-select formArrayName="testUser"></app-user-select>
+          <app-test-case-select-multiple formControlName="testCase" class="mr-2" [data]="this.formGroup.get('project').value?.id"></app-test-case-select-multiple>
+          <app-user-select formControlName="testUser"></app-user-select>
         </div>
       </ng-container>
       <button type="button" class="btn"><i class="bi bi-plus-lg" (click)="addItem()"></i></button>

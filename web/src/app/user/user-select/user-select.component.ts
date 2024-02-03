@@ -18,14 +18,17 @@ import {BaseComponent} from "../../share/base-component";
   ]
 })
 export class UserSelectComponent extends BaseComponent implements OnInit, ControlValueAccessor{
+  /*所有的用户*/
   users: User[];
-  userSelects = new FormControl<User[]>(null);
+  /*选中的人*/
+  userSelects = new FormControl<User>(null);
 
   constructor(private userService: UserService) {
     super();
   }
 
   ngOnInit(): void {
+    console.log('user ngOnInit')
     this.userService.select(UserService.getAllUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
         if(data !==null) {
@@ -42,16 +45,17 @@ export class UserSelectComponent extends BaseComponent implements OnInit, Contro
 
   registerOnChange(fn: any): void {
     this.userSelects.valueChanges
-      .subscribe((users: User[]) => {
-        fn(users);
+      .subscribe((user: User) => {
+        fn(user);
       });
   }
 
   registerOnTouched(fn: any): void {
   }
 
-  writeValue(obj: User[]): void {
-    if (!obj) return;
+  writeValue(obj: User): void {
+    console.log('writeValue')
+    if (obj === null) return;
     this.userSelects.setValue(obj);
   }
 
