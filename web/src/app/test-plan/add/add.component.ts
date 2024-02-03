@@ -7,6 +7,7 @@ import {TestPlan} from "../../../entity/testPlan";
 import {Project} from "../../../entity/project";
 import {TestCase} from "../../../entity/test-case";
 import {User} from "../../../entity/user";
+import {Task} from "../../../entity/task";
 
 /**
  * 测试计划add组件
@@ -16,7 +17,7 @@ import {User} from "../../../entity/user";
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
-export class AddComponent implements OnInit{
+export class AddComponent implements OnInit {
   formGroup: FormGroup;
   testPlan: TestPlan;
 
@@ -28,13 +29,6 @@ export class AddComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.formGroup = new FormGroup({
-    //   project: new FormControl<Project>(null),
-    //   title: new FormControl<string>(''),
-    //   testCase: new FormControl<string>(''),
-    //   testUser: new FormControl<string>(null),
-    // });
-
     this.formGroup = new FormGroup({
       project: new FormControl<Project>(null),
       title: new FormControl<string>(''),
@@ -47,7 +41,7 @@ export class AddComponent implements OnInit{
   addFormTasks() {
     const tasks = new FormGroup({
       testCase: new FormControl<TestCase[]>(null),
-      testUser: new FormControl<User>(null),
+      testUser: new FormControl<User[]>(null),
     });
 
     (this.formGroup.get('tasks') as FormArray).push(tasks);
@@ -57,7 +51,7 @@ export class AddComponent implements OnInit{
     return (this.formGroup.get('tasks') as FormArray).controls;
   }
 
-  removeFormField(index: number) {
+  removeFormTasks(index: number) {
     (this.formGroup.get('tasks') as FormArray).removeAt(index);
   }
 
@@ -66,18 +60,22 @@ export class AddComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
+    const batchTestPlan: {
+      project: Project,
+      title: string,
+      tasks: Task[]
+    } = this.formGroup.value;
 
-    // this.testPlanService.addAction(testPlan).subscribe({
-    //   next: () => {
-    //     this.commonService.success(() => {
-    //       this.onClose();
-    //     }, '添加成功');
-    //   }, error: (err) => {
-    //     this.commonService.error(() => {
-    //       this.onClose();
-    //     }, '', '添加失败', err);
-    //   }
-    // });
+    this.testPlanService.batchAddTestPlan(batchTestPlan).subscribe({
+      next: () => {
+        this.commonService.success(() => {
+          this.onClose();
+        }, '添加成功');
+      }, error: (err) => {
+        this.commonService.error(() => {
+          this.onClose();
+        }, '', '添加失败', err);
+      }
+    });
   }
 }
