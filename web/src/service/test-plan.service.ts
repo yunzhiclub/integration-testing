@@ -6,6 +6,9 @@ import {TestPlan} from "../entity/testPlan";
 import {Observable, tap} from "rxjs";
 import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
+import {TestCase} from "../entity/test-case";
+import {User} from "../entity/user";
+import {Task} from "../entity/task";
 
 interface TestPlanState extends Store<TestPlan> {
   pageData: Page<TestPlan>;
@@ -71,6 +74,25 @@ export class TestPlanService extends Store<TestPlanState> {
       this.next(state);
 
       this.pageAction(state.httpParams);
+    }));
+  }
+
+
+  @Action()
+  batchAddTestPlan(batchTestPlan: {
+    project: Project,
+    title: string,
+    tasks: Task[]
+  }): Observable<TestPlan[]> {
+    Assert.isNotNullOrUndefined(batchTestPlan.title);
+    Assert.isNotNullOrUndefined(batchTestPlan.project);
+
+    return this.httpClient.post<TestPlan[]>('/testPlan/batchTestPlan', batchTestPlan).pipe(tap(value => {
+      const state = this.getState();
+      value.forEach(v => {
+        state.pageData.content.unshift(v);
+      })
+      this.next(state);
     }));
   }
 }

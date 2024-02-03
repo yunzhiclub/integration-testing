@@ -5,17 +5,18 @@ import {randomNumber, randomString} from "@yunzhi/utils";
 import {TestPlan} from "../entity/testPlan";
 import {Project} from "../entity/project";
 import {User} from "../entity/user";
+import {Task} from "../entity/task";
 
 export class TestPlanApi implements MockApiInterface {
-    user = [{
+  user = [{
+    id: randomNumber(10),
+    name: '张胜男',
+  } as User,
+    {
       id: randomNumber(10),
-      name: '张胜男',
-    } as User,
-      {
-        id: randomNumber(10),
-        name: '朱一龙',
-      } as User
-    ];
+      name: '朱一龙',
+    } as User
+  ];
 
   getInjectors(): ApiInjector[] {
     return [
@@ -64,6 +65,21 @@ export class TestPlanApi implements MockApiInterface {
           } as TestPlan
         }
       },
+      {
+        method: 'POST',
+        url: '/testPlan/batchTestPlan',
+        result: (urlMatcher: any, options: {
+          body: { project: Project, title: string, tasks: Task[] }
+        }) => {
+          return [{
+            id: randomNumber(10),
+            title: options.body.title,
+            status: randomNumber(0),
+            project: options.body.project,
+            testUser: [{id: 1} as User] as User[]
+          } as TestPlan] as TestPlan[]
+        }
+      }
     ];
   }
 

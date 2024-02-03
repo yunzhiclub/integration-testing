@@ -6,40 +6,31 @@
 
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>测试项目</label>
-    <div class="col-4">
+    <label class=" col-3 text-right col-form-label"><code>*</code>测试项目</label>
+    <div class="col-5">
       <app-project-select formControlName="project"></app-project-select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>标题</label>
+    <label class="col-3 text-right col-form-label"><code>*</code>标题</label>
     <div class="col-4">
       <input class="form-control" formControlName="title"/>
     </div>
   </div>
-
-<!--  <div class="form-group row">-->
-<!--    <label class="col-4 text-right col-form-label"><code>*</code>选择测试用例</label>-->
-<!--    <div class="col-4">-->
-<!--      <app-test-case-select-multiple></app-test-case-select-multiple>-->
-<!--&lt;!&ndash;      <input class="form-control" formControlName="testCase"/>&ndash;&gt;-->
-<!--    </div>-->
-<!--  </div>-->
-
-  <div class="form-group row" *ngIf="this.formGroup.get('project').value">
-    <label class="col-4 text-right col-form-label"><code>*</code>分配任务</label>
-    <div class="col-8">
-      <app-test-case-select-multiple [data]="this.formGroup.get('project').value?.id"></app-test-case-select-multiple>
-      <app-user-select formArrayName="testUser"></app-user-select>
-    </div>
-    <label class="col-4  text-right col-form-label"><code></code></label>
-<!--    <div class="col-8 mt-2">-->
-<!--      <app-test-case-select-multiple></app-test-case-select-multiple>-->
-<!--      <app-user-select formArrayName="testUser"></app-user-select>-->
-<!--      <button type="button" class="btn"><i class="bi bi-plus-lg"></i></button>-->
-<!--      <button type="button" class="btn mr-1"><i class="bi bi-dash-lg"></i></button>-->
-<!--    </div>-->
+  <div formArrayName="tasks">
+    <div class="form-group row" *ngIf="this.formGroup.get('project').value">
+      <label class="col-3 text-right col-form-label"><code>*</code>分配任务</label>
+      <div *ngFor="let task of formTasks; let i = index" [formGroupName]="i"  class="col-9">
+          <app-test-case-select-multiple formControlName="testCase"
+                                         [data]="this.formGroup.get('project').value?.id" class="mr-2"></app-test-case-select-multiple>
+          <app-user-select formControlName="testUser" class="mr-2"></app-user-select>
+          <button type="button" class="btn" (click)="addFormTasks()"><i class="bi bi-plus-lg"></i></button>
+          <button type="button" class="btn mr-1" *ngIf="formTasks.length > 1" (click)="removeFormTasks(i)"><i
+            class="bi bi-dash-lg"></i></button>
+        </div>
+        <label class="col-4 text-right col-form-label"><code></code></label>
+      </div>
   </div>
   <hr/>
   <div class="form-group row pr-3">
