@@ -85,11 +85,7 @@ export class TestPlanService extends Store<TestPlanState> {
 
 
   @Action()
-  batchAddTestPlan(batchTestPlan: {
-    project: Project,
-    title: string,
-    tasks: Task[]
-  }): Observable<TestPlan[]> {
+  batchAddTestPlan(batchTestPlan: { project: Project, title: string, tasks: Task[] }): Observable<TestPlan[]> {
     Assert.isNotNullOrUndefined(batchTestPlan.title);
     Assert.isNotNullOrUndefined(batchTestPlan.project);
 
@@ -107,8 +103,8 @@ export class TestPlanService extends Store<TestPlanState> {
    * @param id
    */
   @Action()
-  getById(id: number): Observable<TestPlan>{
-    return this.httpClient.get<TestPlan>(`/testPlan/${id}`).pipe(tap( data => {
+  getById(id: number): Observable<TestPlan> {
+    return this.httpClient.get<TestPlan>(`/testPlan/${id}`).pipe(tap(data => {
       Assert.isNotNullOrUndefined(data, '数据不能为空')
 
       const state = this.snapshot;

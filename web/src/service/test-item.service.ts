@@ -10,10 +10,11 @@ import {TestCaseService} from "./test-case.service";
 /**
  * 测试用例小项状态管理
  */
-interface TestItemState extends Store<TestItem>{
+interface TestItemState extends Store<TestItem> {
   getById: TestItem;
 
 }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -60,7 +61,7 @@ export class TestItemService extends Store<TestItemState> {
   }
 
   @Action()
-  deleteTestItem(testCaseId: number, testItemId: number): Observable < void > {
+  deleteTestItem(testCaseId: number, testItemId: number): Observable<void> {
     Assert.isNumber(testItemId, 'testItemId类型不正确');
     Assert.isNumber(testCaseId, 'testCaseId类型不正确');
 
@@ -70,13 +71,16 @@ export class TestItemService extends Store<TestItemState> {
         return testCaseId === v.id;
       })
       testCase.testItems.filter(v => v.id === testItemId);
-
       this.testCaseService.next(state);
     }));
   }
 
   @Action()
-  updateTestItemAction(testCaseId: number, testItemId: number, testItem: { name: string, steps: string, expectedResult: string }): Observable < TestItem > {
+  updateTestItemAction(testCaseId: number, testItemId: number, testItem: {
+    name: string,
+    steps: string,
+    expectedResult: string
+  }): Observable<TestItem> {
     return this.httpClient.put<TestItem>(`/testItem/${testItemId}`, testItem).pipe(tap((data) => {
       this.updateTestItem(testCaseId, testItemId, data);
     }));
@@ -89,17 +93,14 @@ export class TestItemService extends Store<TestItemState> {
    * @param testItem
    */
   updateTestItem(testCaseId: number, testItemId: number, testItem: TestItem): void {
-    const  state = this.testCaseService.snapshot;
-    const testCase = state.pageData.content.find(v => {
-      return v.id === testCaseId;
-    });
-    const data = testCase.testItems.find(value => {
-      return value.id === testItemId;
-    })
-    if(data !== null) {
-    const index = testCase.testItems.indexOf(data)
-    testCase.testItems.splice(index, 1, testItem)
-    this.testCaseService.next(state);
+    const state = this.testCaseService.snapshot;
+    const testCase = state.pageData.content.find(v => v.id === testCaseId);
+    const data = testCase.testItems.find(v => v.id === testItemId);
+
+    if (data !== null) {
+      const index = testCase.testItems.indexOf(data)
+      testCase.testItems.splice(index, 1, testItem)
+      this.testCaseService.next(state);
     }
   }
 
