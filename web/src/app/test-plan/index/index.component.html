@@ -41,15 +41,15 @@
     <td>{{testPlan?.project?.name}}</td>
     <td>{{testPlan?.title}}</td>
       <td class="text-pack">
-        <ng-container *ngFor="let test of testPlan?.testAssignment">
-          <ng-container *ngFor="let testCase of test.testCase">
+        <ng-container *ngFor="let task of testPlan?.tasks">
+          <ng-container *ngFor="let testCase of task?.testCase">
             {{testCase?.name}}
           </ng-container>
         </ng-container>
       </td>
       <td>
-        <ng-container *ngFor="let test of testPlan?.testAssignment">
-          {{test?.testUser.name}}
+        <ng-container *ngFor="let task of testPlan?.tasks">
+          {{task?.testUser?.name}}
         </ng-container>
       </td>
     <td bind-innerHTML="testPlan?.status | status"></td>
@@ -59,7 +59,7 @@
         <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testPlan?.id}}"><i class="fa fas fa-pen"></i></a>
         <a class="text-info mr-3" matTooltip="发布" routerLink="testPlan/{{testPlan?.id}}"><i class="bi bi-cloud-check-fill"></i></a>
       </ng-container>
-      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testPlan?.title, testPlan?.id)" ><i class="fa fas fa-trash"></i></a>
+      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testPlan?.title, testPlan?.id)" ><i class="                                    fa fas fa-trash"></i></a>
     </td>
   </tr>
   </tbody>

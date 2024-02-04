@@ -6,9 +6,9 @@
 
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" style="height:500px; overflow-y: scroll; overflow-x: hidden">
   <div class="form-group row">
-    <label class="col-3 text-right col-form-label"><code>*</code>测试项目</label>
-    <div class="col-4">
-      <app-proj ect-select formControlName="project"></app-project-select>
+    <label class=" col-3 text-right col-form-label"><code>*</code>测试项目</label>
+    <div class="col-5">
+      <app-project-select formControlName="project"></app-project-select>
     </div>
   </div>
 
@@ -19,17 +19,21 @@
     </div>
   </div>
 
-  <div class="form-group row" *ngIf="this.formGroup.get('project').value">
-    <label class="col-3 text-right col-form-label"><code>*</code>分配任务</label>
-    <div class="col-9">
-      <ng-container *ngFor="let i of item">
-        <div class="col-9">
-          <app-test-case-select-multiple formControlName="testCase" class="mr-2" [data]="this.formGroup.get('project').value?.id"></app-test-case-select-multiple>
-          <app-user-select formControlName="testUser"></app-user-select>
+  <div formArrayName="tasks">
+    <div class="form-group row" *ngIf="this.formGroup.get('project').value">
+      <label class="col-3 text-right col-form-label"><code>*</code>分配任务</label>
+      <ng-container *ngFor="let task of formTasks; let i = index" [formGroupName]="i">
+        <div class=" offset-3 col-9">
+          <app-test-case-select-multiple formControlName="testCase"
+                                         [data]="this.formGroup.get('project').value?.id" class="mr-2"></app-test-case-select-multiple>
+          <app-user-select formControlName="testUser" class="mr-2"></app-user-select>
         </div>
       </ng-container>
-      <button type="button" class="btn"><i class="bi bi-plus-lg" (click)="addItem()"></i></button>
-      <button type="button" class="btn"><i class="bi bi-dash-lg" (click)="decreaseItem()"></i></button>
+      <div class="offset-3 col-9 ">
+        <button type="button" class="btn" (click)="addFormTasks()"><i class="bi bi-plus-lg"></i></button>
+        <button type="button" class="btn mr-1" *ngIf="formTasks.length > 1" (click)="removeFormTasks()"><i
+          class="bi bi-dash-lg"></i></button>
+      </div>
     </div>
   </div>
 

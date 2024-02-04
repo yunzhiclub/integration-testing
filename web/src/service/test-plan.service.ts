@@ -6,10 +6,15 @@ import {TestPlan} from "../entity/testPlan";
 import {Observable, tap} from "rxjs";
 import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
+import {TestCase} from "../entity/test-case";
+import {User} from "../entity/user";
+import {Task} from "../entity/task";
+import {TestPlanRoutingModule} from "../app/test-plan/test-plan-routing.module";
 
 interface TestPlanState extends Store<TestPlan> {
   pageData: Page<TestPlan>;
   httpParams: { page: number, size: number, name?: string };
+  getById: TestPlan;
 }
 
 @Injectable({
@@ -20,10 +25,15 @@ export class TestPlanService extends Store<TestPlanState> {
     return state.pageData;
   }
 
+  static getById(state: TestPlanState): TestPlan {
+    return state.getById;
+  }
+
   constructor(private httpClient: HttpClient) {
     super({
       pageData: new Page<TestPlan>({}),
       httpParams: {page: 0, size: 0, name: ''},
+      getById: {} as TestPlan
     });
   }
 
@@ -71,5 +81,39 @@ export class TestPlanService extends Store<TestPlanState> {
 
       this.pageAction(state.httpParams);
     }));
+  }
+
+
+  @Action()
+  batchAddTestPlan(batchTestPlan: {
+    project: Project,
+    title: string,
+    tasks: Task[]
+  }): Observable<TestPlan[]> {
+    Assert.isNotNullOrUndefined(batchTestPlan.title);
+    Assert.isNotNullOrUndefined(batchTestPlan.project);
+
+    return this.httpClient.post<TestPlan[]>('/testPlan/batchTestPlan', batchTestPlan).pipe(tap(value => {
+      const state = this.getState();
+      value.forEach(v => {
+        state.pageData.content.unshift(v);
+      })
+      this.next(state);
+    }));
+  }
+
+  /**
+   * 根据id获取测试计划
+   * @param id
+   */
+  @Action()
+  getById(id: number): Observable<TestPlan>{
+    return this.httpClient.get<TestPlan>(`/testPlan/${id}`).pipe(tap( data => {
+      Assert.isNotNullOrUndefined(data, '数据不能为空')
+
+      const state = this.snapshot;
+      state.getById = data as TestPlan;
+      this.next(state);
+    }))
   }
 }
