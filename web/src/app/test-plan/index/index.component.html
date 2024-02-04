@@ -1,7 +1,7 @@
 <form class="form-inline" (ngSubmit)="onQuery()">
   <div class="row mb-2 mt-2">
     <div class="col-3 mt-3 mr-3">
-      <app-project-select></app-project-select>
+      <app-project-select [formControl]="project"></app-project-select>
     </div>
     <div class="col-sm-4 mr-3">
       <input type="text" class="form-control mt-3" [formControl]="name" placeholder="选择标题">
@@ -40,9 +40,18 @@
     <td>{{i + 1}}</td>
     <td>{{testPlan?.project?.name}}</td>
     <td>{{testPlan?.title}}</td>
-    <td class="text-pack">
-      测试登录功能，测试用户管理，测试个人中心，测试xxx</td>
-    <td>张三，李四，王五</td>
+      <td class="text-pack">
+        <ng-container *ngFor="let task of testPlan?.tasks">
+          <ng-container *ngFor="let testCase of task?.testCase">
+            {{testCase?.name}}
+          </ng-container>
+        </ng-container>
+      </td>
+      <td>
+        <ng-container *ngFor="let task of testPlan?.tasks">
+          {{task?.testUser?.name}}
+        </ng-container>
+      </td>
     <td bind-innerHTML="testPlan?.status | status"></td>
     <td>{{testPlan?.createTime | date: 'yyyy-MM-dd'}}</td>
     <td>
@@ -50,7 +59,7 @@
         <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testPlan?.id}}"><i class="fa fas fa-pen"></i></a>
         <a class="text-info mr-3" matTooltip="发布" routerLink="testPlan/{{testPlan?.id}}"><i class="bi bi-cloud-check-fill"></i></a>
       </ng-container>
-      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testPlan?.title, testPlan?.id)" ><i class="fa fas fa-trash"></i></a>
+      <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testPlan?.title, testPlan?.id)" ><i class="                                    fa fas fa-trash"></i></a>
     </td>
   </tr>
   </tbody>

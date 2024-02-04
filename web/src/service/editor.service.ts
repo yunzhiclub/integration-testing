@@ -3,6 +3,8 @@ import tinymce, {Editor} from 'tinymce';
 
 import {EditorComponent} from '../app/editor/editor.component';
 import {CommonService} from "./common-service";
+import {Observable} from "rxjs";
+import {HttpEvent} from "@angular/common/http";
 
 
 /**
@@ -15,7 +17,8 @@ export class EditorService {
   private editorMap = new Map<Editor, EditorComponent>();
   private registered = false;
   public static keys = {
-    yzImageTip: 'yzImageTip'
+    yzImageTip: 'yzImageTip',
+    yzFileTip: 'yzFileTip'
   }
 
   constructor(private commonService: CommonService) {
@@ -29,9 +32,11 @@ export class EditorService {
     if (!this.registered) {
       this.registered = true;
       const self = this;
+
       tinymce.PluginManager.add('yzImageTip', function (editor) {
         editor.ui.registry.addButton('yzImageTip', {
           icon: 'image',
+          tooltip:'上传图片',
           onAction: () => {
             const component = self.editorMap.get(editor);
             // todo: 动态的创建副件上传组件，最后将得到的附件插入到当前内容中
@@ -42,6 +47,16 @@ export class EditorService {
           }
         })
       });
+
+      tinymce.PluginManager.add('yzFileTip', function (editor) {
+        editor.ui.registry.addButton('yzFileTip', {
+          icon: 'browse',
+          tooltip: '上传文件',
+          onAction: () => {
+
+          }
+        })
+      })
     }
   }
 

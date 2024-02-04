@@ -9,10 +9,12 @@ import {HttpClient} from "@angular/common/http";
 import {TestCase} from "../entity/test-case";
 import {User} from "../entity/user";
 import {Task} from "../entity/task";
+import {TestPlanRoutingModule} from "../app/test-plan/test-plan-routing.module";
 
 interface TestPlanState extends Store<TestPlan> {
   pageData: Page<TestPlan>;
   httpParams: { page: number, size: number, name?: string };
+  getById: TestPlan;
 }
 
 @Injectable({
@@ -23,10 +25,15 @@ export class TestPlanService extends Store<TestPlanState> {
     return state.pageData;
   }
 
+  static getById(state: TestPlanState): TestPlan {
+    return state.getById;
+  }
+
   constructor(private httpClient: HttpClient) {
     super({
       pageData: new Page<TestPlan>({}),
       httpParams: {page: 0, size: 0, name: ''},
+      getById: {} as TestPlan
     });
   }
 
@@ -51,10 +58,9 @@ export class TestPlanService extends Store<TestPlanState> {
   }
 
   @Action()
-  addAction(testPlan: { project: Project, title: string, description: string }): Observable<TestPlan> {
+  addAction(testPlan: { project: Project, title: string }): Observable<TestPlan> {
     Assert.isNotNullOrUndefined(testPlan.title);
     Assert.isNotNullOrUndefined(testPlan.project);
-    Assert.isNotNullOrUndefined(testPlan.description);
 
     testPlan = testPlan as TestPlan;
     return this.httpClient.post<TestPlan>('/testPlan', testPlan).pipe(tap(value => {
@@ -94,5 +100,20 @@ export class TestPlanService extends Store<TestPlanState> {
       })
       this.next(state);
     }));
+  }
+
+  /**
+   * 根据id获取测试计划
+   * @param id
+   */
+  @Action()
+  getById(id: number): Observable<TestPlan>{
+    return this.httpClient.get<TestPlan>(`/testPlan/${id}`).pipe(tap( data => {
+      Assert.isNotNullOrUndefined(data, '数据不能为空')
+
+      const state = this.snapshot;
+      state.getById = data as TestPlan;
+      this.next(state);
+    }))
   }
 }

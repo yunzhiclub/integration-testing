@@ -12,4 +12,10 @@ export interface TestItem {
   expectedResult: string;
   /*所属大项*/
   testCase: TestCase;
+  /*状态*/
+  status: number;
+  /*测试失败的issue测试地址*/
+  issueUrl?: string;
+  /*测试失败的描述*/
+  describe?: string;
 }

@@ -69,11 +69,22 @@ export class EditorComponent implements OnDestroy, OnInit, ControlValueAccessor 
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        `insertdatetime media table paste code help wordcount ${EditorService.keys.yzImageTip}`
+        `insertdatetime media table paste code help wordcount ${EditorService.keys.yzImageTip} ${EditorService.keys.yzFileTip}`
       ],
+      images_upload_handler: (blobInfo: any, success: any, failure: any): void => {
+        this.attachmentService.upload(blobInfo.blob())
+          .subscribe((response: HttpEvent<Attachment>) => {
+            if (response.type === HttpEventType.Response) {
+              const attachment = response.body as Attachment
+              success(MyFileService.getFullPath(attachment.file));
+            }
+          }, (response: HttpErrorResponse) => {
+            failure('上传图片异常: ' + response.error);
+          });
+      },
       //工具栏
       toolbar:
-        `undo redo | formatselect | bold italic ${EditorService.keys.yzImageTip} | ` +
+        `undo redo | formatselect | bold italic ${EditorService.keys.yzImageTip} ${EditorService.keys.yzFileTip}| ` +
         'alignleft aligncenter alignright alignjustify  | ' +
         'bullist numlist outdent indent | removeformat | help',
       // 允许拖拽图片

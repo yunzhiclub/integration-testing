@@ -1,6 +1,7 @@
 import {User} from "./user";
 import {TestCase} from "./test-case";
 import {Project} from "./project";
+import {Task} from "./task";
 
 /**
  * 测试计划的实体
@@ -8,12 +9,8 @@ import {Project} from "./project";
 export interface  TestPlan {
   id: number,
   title: string,
-  // todo 删除描述
-  description: string,
-  /*测试用例*/
-  testCase: TestCase[],
-  /*测试人*/
-  testUser: User[],
+  /*任务分配*/
+  tasks: Task[]
   status: number,
   /*所属项目*/
   project: Project;

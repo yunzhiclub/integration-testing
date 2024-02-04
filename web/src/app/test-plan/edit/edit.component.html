@@ -6,33 +6,37 @@
 
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>测试项目</label>
+    <label class="col-3 text-right col-form-label"><code>*</code>测试项目</label>
     <div class="col-4">
-      <app-project-select></app-project-select>
+      <app-project-select formControlName="project"></app-project-select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>测试计划标题</label>
+    <label class="col-3 text-right col-form-label"><code>*</code>测试计划标题</label>
     <div class="col-4">
       <input class="form-control" formControlName="title"/>
     </div>
   </div>
 
-  <div class="form-group row">
-    <label class="col-4 text-right col-form-label"><code>*</code>分配任务</label>
-    <div class="col-8">
-      <app-test-case-select-multiple class="mr-2"></app-test-case-select-multiple>
-      <app-user-select formArrayName="testUser"></app-user-select>
-    </div>
-    <label class="col-4  text-right col-form-label"><code></code></label>
-    <div class="col-8 mt-2">
-      <app-test-case-select-multiple class="mr-2"></app-test-case-select-multiple>
-      <app-user-select formArrayName="testUser"></app-user-select>
-      <button type="button" class="btn"><i class="bi bi-plus-lg"></i></button>
-      <button type="button" class="btn mr-1"><i class="bi bi-dash-lg"></i></button>
+  <div formArrayName="tasks">
+    <div class="form-group row" *ngIf="this.formGroup.get('project').value">
+      <label class="col-3 text-right col-form-label"><code>*</code>分配任务</label>
+      <ng-container *ngFor="let task of formTasks; let i = index" [formGroupName]="i">
+        <div class=" offset-3 col-9">
+          <app-test-case-select-multiple formControlName="testCase"
+                                         [data]="this.formGroup.get('project').value?.id" class="mr-2"></app-test-case-select-multiple>
+          <app-user-select formControlName="testUser" class="mr-2"></app-user-select>
+        </div>
+      </ng-container>
+      <div class="offset-3 col-9 ">
+        <button type="button" class="btn" (click)="addFormTasks()"><i class="bi bi-plus-lg"></i></button>
+        <button type="button" class="btn mr-1" *ngIf="formTasks.length > 1" (click)="removeFormTasks()"><i
+          class="bi bi-dash-lg"></i></button>
+      </div>
     </div>
   </div>
+
   <hr/>
   <div class="form-group row pr-3">
     <div class="col-12 text-right">

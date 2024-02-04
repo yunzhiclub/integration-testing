@@ -6,6 +6,7 @@ import {TestPlan} from "../entity/testPlan";
 import {Project} from "../entity/project";
 import {User} from "../entity/user";
 import {Task} from "../entity/task";
+import {TestCase} from "../entity/test-case";
 
 export class TestPlanApi implements MockApiInterface {
   user = [{
@@ -34,13 +35,23 @@ export class TestPlanApi implements MockApiInterface {
             return {
               id: randomNumber(10),
               title: name ? name : 'test1',
-              description: randomString('描述'),
-              testUser: this.user,
               status: randomNumber(4),
               project: {
                 id: randomNumber(10),
                 name: randomString('project', 3)
               } as Project,
+              tasks: [
+                {
+                  testCase: [{
+                    id: randomNumber(),
+                    name: randomString('测试名称'),
+                  }] as TestCase[],
+                  testUser: {
+                    id: randomNumber(),
+                    name: randomString('测试人姓名')
+                  } as User,
+                }
+              ] as Task[],
               createTime: new Date().getTime()
             } as TestPlan;
           });
@@ -53,12 +64,11 @@ export class TestPlanApi implements MockApiInterface {
       {
         method: 'POST',
         url: '/testPlan',
-        result: (urlMatcher: any, options: { body: { project: Project, title: string, description: string } }) => {
+        result: (urlMatcher: any, options: { body: { project: Project, title: string } }) => {
           const testPlan = options.body as TestPlan;
           return {
             id: randomNumber(10),
             title: testPlan.title,
-            description: testPlan.description,
             status: randomNumber(0),
             project: testPlan.project,
             createTime: new Date().getTime()
@@ -76,8 +86,38 @@ export class TestPlanApi implements MockApiInterface {
             title: options.body.title,
             status: randomNumber(0),
             project: options.body.project,
-            testUser: [{id: 1} as User] as User[]
+            // testUser: [{id: 1} as User] as User[]
           } as TestPlan] as TestPlan[]
+        }
+      },
+      {
+        method: 'GET',
+        url: '/testPlan/(\\d+)',
+        result: (urlMatcher: any) => {
+          const id = urlMatcher['id'] ? +urlMatcher['id'] : randomNumber(10);
+
+          return {
+            id: id,
+            title: randomString('测试计划标题'),
+            status: randomNumber(4),
+            project: {
+              id: 1,
+              name: randomString('project', 3),
+            } as Project,
+            tasks: [
+              {
+                testCase: [{
+                  id: randomNumber(),
+                  name: randomString('测试名称'),
+                }] as TestCase[],
+                testUser: {
+                  id: randomNumber(),
+                  name: randomString('测试人姓名')
+                } as User,
+              }
+            ] as Task[],
+            createTime: new Date().getTime()
+          } as TestPlan;
         }
       }
     ];
