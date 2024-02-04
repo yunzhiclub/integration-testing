@@ -46,12 +46,12 @@ export class AddComponent implements OnInit {
     (this.formGroup.get('tasks') as FormArray).push(tasks);
   }
 
-  get formTasks () {
+  get formTasks() {
     return (this.formGroup.get('tasks') as FormArray).controls;
   }
 
   removeFormTasks() {
-    (this.formGroup.get('tasks') as FormArray).removeAt(this.formTasks.length-1);
+    (this.formGroup.get('tasks') as FormArray).removeAt(this.formTasks.length - 1);
   }
 
   onClose() {
@@ -59,12 +59,7 @@ export class AddComponent implements OnInit {
   }
 
   onSubmit() {
-
-    const batchTestPlan: {
-      project: Project,
-      title: string,
-      tasks: Task[]
-    } = this.formGroup.value;
+    const batchTestPlan: { project: Project, title: string, tasks: Task[] } = this.formGroup.value;
 
     this.testPlanService.batchAddTestPlan(batchTestPlan).subscribe({
       next: () => {
