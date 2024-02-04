@@ -1,4 +1,4 @@
-<nz-select nzSize="large" nzMode="multiple" nzShowSearch nzAllowClear nzPlaceHolder="选择测试人"
+<nz-select nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="选择测试人"
            [formControl]="userSelects" [compareWith]="compareFn">
   <nz-option nzCustomContent *ngFor="let user of users" [nzLabel]="user?.name"
              [nzValue]="user">
