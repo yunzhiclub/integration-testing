@@ -9,6 +9,44 @@ import {User} from "../entity/user";
 import {TestCase} from "../entity/test-case";
 
 export class TestApi implements MockApiInterface{
+
+  private testPlans = [{
+    id: randomNumber(10),
+    title: 'test1',
+  } as TestPlan,
+    {
+      id: randomNumber(10),
+      title: 'test2',
+    } as TestPlan,
+    {
+      id: randomNumber(10),
+      title: 'test3',
+    } as TestPlan,
+    {
+      id: randomNumber(10),
+      title: 'test4',
+    } as TestPlan,
+  ];
+
+  /*项目数组*/
+  private projects = [{
+    id: randomNumber(10),
+    name: '牙科管理系统',
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '集成测试系统'
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '周汇报系统'
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '健康管理'
+    } as Project,
+  ];
+
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -20,12 +58,11 @@ export class TestApi implements MockApiInterface{
           const page = +params.get('page');
           const size = +params.get('size');
 
+          /*根据测试计划的任务分配，一个测试人分配领取测试用例就是一个任务*/
           return generatePage<Test>(page, size, index => {
             return {
               id: randomNumber(100),
-              testPlan: {
-                title: 'test1'
-              } as TestPlan,
+              testPlan: this.testPlans[Math.floor(Math.random() * this.testPlans.length)],
               testUser: {
                 name: '张三'
               } as User,
@@ -37,9 +74,7 @@ export class TestApi implements MockApiInterface{
                   name: '测试用户管理'
                 } as TestCase,
               ] as TestCase[],
-              project: {
-                name: '集成测试系统'
-              } as Project,
+              project: this.projects[Math.floor(Math.random() * this.projects.length)],
               status: randomNumber(3)+1
             } as Test;
           });
