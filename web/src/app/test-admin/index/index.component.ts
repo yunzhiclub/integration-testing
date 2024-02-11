@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
+  isShow = false;
 
+  toggleCollapse() {
+    this.isShow = !this.isShow;
+  }
 }
