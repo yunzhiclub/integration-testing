@@ -39,7 +39,7 @@ export class EditComponent extends BaseComponent implements OnInit{
   }
   ngOnInit(): void {
     this.initFormGroup();
-    this.addFormTasks()
+    this.addFormTasks();
 
     this.route.params.pipe(filter(v => v.hasOwnProperty('id')))
       .subscribe(v => {
@@ -83,7 +83,6 @@ export class EditComponent extends BaseComponent implements OnInit{
     this.testPlanService.select(TestPlanService.getById).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(value => {
         if (value !== null) {
-          console.log('data', value)
           this.testPlan = value as TestPlan;
           this.setFormGroup();
         }

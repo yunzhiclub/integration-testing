@@ -5,7 +5,7 @@
 
 <div class="row mb-2 mt-2">
   <div class="col-md-6">
-    <!--    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>-->
+        <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>
   </div>
 </div>
 
@@ -22,46 +22,25 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>1</td>
-    <td>牙科管理系统</td>
-    <td>test1</td>
+  <tr *ngFor="let test of pageData?.content, index as i">
+    <td>{{i}}</td>
+    <td>{{test.project?.name}}</td>
+    <td>{{test.testPlan?.title}}</td>
     <td>测试登录功能，测试用户管理</td>
-    <td>张三</td>
-    <td>待开始</td>
+    <td>{{test?.testUser?.name}}</td>
+    <td bind-innerHTML="test?.status | status"></td>
     <td>
-      <a class="text-info mr-3" matTooltip="测试" routerLink="testItem"><i class="bi bi-box-fill"></i></a>
-    </td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>集成测试系统</td>
-    <td>test1</td>
-    <td> 测试xx</td>
-    <td>李四</td>
-    <td>部分完成</td>
-    <td>
-      <a class="text-info mr-3" matTooltip="测试" routerLink="testItem"><i class="bi bi-box-fill"></i></a>
-    </td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>集成测试系统</td>
-    <td>test1</td>
-    <td>测试个人中心</td>
-    <td>王五</td>
-    <td>已完成</td>
-    <td>
-      <a class="text-info mr-3" matTooltip="测试" routerLink="testItem"><i class="fa fas fa-pen"></i></a>
+      <a *ngIf="test?.status!==3" class="text-info mr-3" matTooltip="测试" routerLink="testItem"><i class="bi bi-box-fill"></i></a>
+      <a *ngIf="test?.status===3" class="text-info mr-3" matTooltip="查看" routerLink="testItem"><i class="fa fa-eye"></i></a>
     </td>
   </tr>
   </tbody>
 </table>
-<!--<yz-page [size]="pageData?.size"-->
-<!--         [page]="pageData?.number"-->
-<!--         [totalElements]="pageData?.totalElements"-->
-<!--         (changePage)="onChangePage($event)"></yz-page>-->
-<!--<router-outlet></router-outlet>-->
+<yz-page [size]="pageData?.size"
+         [page]="pageData?.number"
+         [totalElements]="pageData?.totalElements"
+         (changePage)="onChangePage($event)"></yz-page>
+<router-outlet></router-outlet>
 
 
 

@@ -18,42 +18,49 @@
     <th>测试用例标题</th>
     <th>测试人</th>
     <th>状态</th>
-    <th>操作</th>
   </tr>
   </thead>
   <tbody>
   <tr>
-    <td>1</td>
+    <td>1
+      <i matTooltip="查看" (click)="toggleCollapse()"
+         class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
+    </td>
     <td>牙科管理系统</td>
     <td>test1</td>
     <td>测试登录功能，测试用户管理</td>
     <td>张三</td>
     <td>待开始</td>
-    <td>
-      <a class="text-info mr-3" matTooltip="查看" routerLink="testItem"><i class="fa fa-eye"></i></a>
-    </td>
   </tr>
+  <ng-container *ngIf="isShow">
+    <tr>
+      <td>xxx-xx名称</td>
+      <td>状态</td>
+      <td>issue</td>
+      <td>失败描述信息</td>
+    </tr>
+  </ng-container>
   <tr>
-    <td>2</td>
+    <td>2
+      <i matTooltip="查看" (click)="toggleCollapse()"
+         class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
+    </td>
     <td>集成测试系统</td>
     <td>test1</td>
     <td> 测试xx</td>
     <td>李四</td>
     <td>部分完成</td>
-    <td>
-      <a class="text-info mr-3" matTooltip="查看" routerLink="testItem"><i class="fa fa-eye"></i></a>
-    </td>
   </tr>
   <tr>
-    <td>3</td>
+    <td>3
+      <i matTooltip="查看" (click)="toggleCollapse()"
+         class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
+    </td>
     <td>集成测试系统</td>
     <td>test1</td>
     <td>测试个人中心</td>
     <td>王五</td>
     <td>已完成</td>
-    <td>
-      <a class="text-info mr-3" matTooltip="查看" routerLink="testItem"><i class="fa fa-eye"></i></a>
-    </td>
   </tr>
   </tbody>
 </table>

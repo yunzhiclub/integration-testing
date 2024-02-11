@@ -13,6 +13,8 @@ import {EditTestItemComponent} from './edit-test-item/edit-test-item.component';
 import {EditorModule} from "../editor/editor.module";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {ProjectModule} from "../project/project.module";
+import {TestPlanModule} from "../test-plan/test-plan.module";
+import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 
 
 /**
@@ -24,19 +26,22 @@ import {ProjectModule} from "../project/project.module";
     TestItemComponent,
     EditTestItemComponent
   ],
-    imports: [
-        CommonModule,
-        TestRoutingModule,
-        FormsModule,
-        MatTooltipModule,
-        ReactiveFormsModule,
-        DialogEntryModule,
-        UserModule,
-        TestCaseModule,
-        EditorModule,
-        NzSelectModule,
-        ProjectModule
-    ]
+  imports: [
+    CommonModule,
+    TestRoutingModule,
+    FormsModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+    DialogEntryModule,
+    UserModule,
+    TestCaseModule,
+    EditorModule,
+    NzSelectModule,
+    ProjectModule,
+    TestPlanModule,
+    YzPageModule,
+    YzSizeModule
+  ]
 })
 export class TestModule {
 }
