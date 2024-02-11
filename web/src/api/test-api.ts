@@ -24,14 +24,23 @@ export class TestApi implements MockApiInterface{
             return {
               id: randomNumber(100),
               testPlan: {
-                testAssignment: [
-
-                ]
+                title: 'test1'
               } as TestPlan,
-              testUser: {} as User,
-              testCase: [] as TestCase[],
-              project: {} as Project,
-              status: randomNumber(3)
+              testUser: {
+                name: '张三'
+              } as User,
+              testCase: [
+                {
+                  name: '测试登录功能'
+                } as TestCase,
+                {
+                  name: '测试用户管理'
+                } as TestCase,
+              ] as TestCase[],
+              project: {
+                name: '集成测试系统'
+              } as Project,
+              status: randomNumber(3)+1
             } as Test;
           });
         }

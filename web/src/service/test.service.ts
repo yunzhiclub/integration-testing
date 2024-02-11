@@ -45,6 +45,8 @@ export class TestService extends Store<TestState>{
     return this.httpClient.get<Page<Test>>('/test/page', {params: payload})
       .pipe(
         tap(data => {
+          Assert.isNotNullOrUndefined(data, '返回的数据不能为空或未定义');
+
           state.pageData = data as Page<Test>;
           this.next(state);
         }),

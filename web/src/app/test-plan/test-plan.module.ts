@@ -25,19 +25,22 @@ import {TestCaseSelectMultipleComponent} from "../test-case/test-case-select-mul
         EditComponent,
         StatusPipe
     ],
-  imports: [
-    CommonModule,
-    TestPlanRoutingModule,
-    FormsModule,
-    MatTooltipModule,
-    ReactiveFormsModule,
-    YzPageModule,
-    YzSizeModule,
-    DialogEntryModule,
-    ProjectModule,
-    UserModule,
-    TestCaseModule
-  ]
+    exports: [
+        StatusPipe
+    ],
+    imports: [
+        CommonModule,
+        TestPlanRoutingModule,
+        FormsModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        YzPageModule,
+        YzSizeModule,
+        DialogEntryModule,
+        ProjectModule,
+        UserModule,
+        TestCaseModule
+    ]
 })
 export class TestPlanModule {
 }
