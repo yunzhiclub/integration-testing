@@ -23,15 +23,17 @@
   </thead>
   <tbody>
   <tr *ngFor="let test of pageData?.content, index as i">
-    <td>{{i}}</td>
+    <td>{{i + 1}}</td>
     <td>{{test.project?.name}}</td>
     <td>{{test.testPlan?.title}}</td>
-    <td>测试登录功能，测试用户管理</td>
+    <td >
+      <label *ngFor="let testCase of test?.testCase, let last = last"> {{testCase?.name}}{{last ? '' : '、'}}</label>
+    </td>
     <td>{{test?.testUser?.name}}</td>
     <td bind-innerHTML="test?.status | status"></td>
     <td>
-      <a *ngIf="test?.status!==3" class="text-info mr-3" matTooltip="测试" routerLink="testItem"><i class="bi bi-box-fill"></i></a>
-      <a *ngIf="test?.status===3" class="text-info mr-3" matTooltip="查看" routerLink="testItem"><i class="fa fa-eye"></i></a>
+      <a *ngIf="test?.status!==3" class="text-info mr-3" matTooltip="测试" routerLink="testItem/{{test?.id}}"><i class="bi bi-box-fill"></i></a>
+      <a *ngIf="test?.status===3" class="text-info mr-3" matTooltip="查看" routerLink="testItem/{{test?.id}}"><i class="fa fa-eye"></i></a>
     </td>
   </tr>
   </tbody>

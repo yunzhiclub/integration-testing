@@ -9,11 +9,9 @@ const routes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    children: [
-    ]
   },
   {
-    path: 'testItem',
+    path: 'testItem/:id',
     component: TestItemComponent,
     children: [
       {
@@ -24,15 +22,7 @@ const routes: Routes = [
         }
       }
     ]
-  },
-
-  // {
-  //   path: 'testItem/edit',
-  //   component: DialogEntryComponent,
-  //   data: {
-  //     component: EditTestItemComponent
-  //   }
-  // }
+  }
 ];
 
 @NgModule({

@@ -22,21 +22,29 @@ export class IndexComponent extends BaseComponent implements OnInit{
     constructor(private testService: TestService) {
       super();
   }
+
   ngOnInit(): void {
-    this.testService.pageAction(this.param).pipe(takeUntil(this.ngOnDestroy$))
+    this.testService.select(TestService.pageData).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
         Assert.isNotNullOrUndefined(data, '数据不能为空或未定义');
 
         this.pageData = data;
-        console.log('数据', data);
       })
+
+    this.reload();
+  }
+
+  reload(): void {
+    this.testService.pageAction(this.param);
   }
 
   onChangePage(page: number) {
      this.param.page = page;
+     this.reload();
   }
 
   onChangeSize(size: number) {
      this.param.page = size;
+     this.reload();
   }
 }

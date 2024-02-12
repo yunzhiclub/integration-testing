@@ -1,13 +1,13 @@
 <div class="row mb-2 mt-2">
   <div class="col-6">
-    <a class="btn btn-primary" routerLink="../">返回</a>
+    <a class="btn btn-primary" routerLink="../../">返回</a>
   </div>
 </div>
 
 <div class="row mb-2 mt-2">
-  <div class="col-4">所属项目：牙科管理系统</div>
-  <div class="col-4">所属测试计划： 测试登录模块</div>
-  <div class="col-4">项目地址：https</div>
+  <div class="col-4"><h2>所属项目：牙科管理系统</h2></div>
+  <div class="col-4"><h2>所属测试计划： 测试登录模块</h2></div>
+  <div class="col-4"><h2>项目地址：https</h2></div>
 </div>
 
 <form class="form-inline" >
@@ -39,45 +39,18 @@
     <th>操作</th>
   </thead>
   <tbody>
-  <tr>
-    <td>1</td>
-    <td>xxx--测试登录失败</td>
-    <td>输入正确的用户名，错误的秘密</td>
-    <td>报错（用户名或者密码错误）</td>
-    <td>待开始</td>
-    <td></td>
-    <td></td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>xxx--测试登录失败</td>
-    <td>输入错误的用户名，正确的秘密</td>
-    <td>报错（用户名或者密码错误）</td>
-    <td>待验证</td>
-    <td>issue</td>
-    <td>居然登录进去了 和预期的结果不对，以建立issue</td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>xxx--测试登录失败</td>
-    <td>输入错误的用户名，错误的秘密</td>
-    <td>报错（用户名或者密码错误）</td>
-    <td>未通过</td>
-    <td>issue</td>
-    <td>居然登录进去了 和预期的结果不对，未建立issue</td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>xxx--测试登录成功</td>
-    <td>输入正确的用户名，正确的秘密</td>
-    <td>进入系统 首页</td>
-    <td>已通过</td>
-    <td></td>
-    <td></td>
-    <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+  <ng-container *ngFor="let testCase of test?.testCase">
+    <tr *ngFor="let testItem of testCase?.testItems; index as index">
+      <td>{{index + 1}}</td>
+      <td>{{testCase?.name}} |--{{testItem?.name}}</td>
+      <td>{{testItem?.steps}}</td>
+      <td>{{testItem?.expectedResult}}</td>
+      <td bind-innerHTML="testItem?.status | status"></td>
+      <td>{{testItem?.issueUrl}}</td>
+      <td>{{testItem?.describe}}</td>
+      <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
+    </tr>
+  </ng-container>
   </tbody>
 </table>
 <!--<yz-page [size]="pageData?.size"-->

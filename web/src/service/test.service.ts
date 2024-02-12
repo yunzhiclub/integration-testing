@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Action, Store} from "@tethys/store";
-import {TestCase} from "../entity/test-case";
 import {Page} from "@yunzhi/ng-common";
 import {Test} from "../entity/test";
-import {Project} from "../entity/project";
 import {Observable, tap} from "rxjs";
 import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
+import {TestItem} from "../entity/test-item";
 
 /**
  * 测试的状态管理
@@ -14,7 +13,7 @@ import {HttpClient} from "@angular/common/http";
 interface TestState extends Store<Test>{
   pageData: Page<Test>;
   httpParams: { page: number, size: number };
-
+  getById: Test;
 }
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,8 @@ export class TestService extends Store<TestState>{
   constructor(private httpClient: HttpClient) {
     super({
       pageData: new Page<Test>(),
-      httpParams: {page: 0, size: 0}
+      httpParams: {page: 0, size: 0},
+      getById: null
     });
   }
 
@@ -51,5 +51,22 @@ export class TestService extends Store<TestState>{
           this.next(state);
         }),
       );
+  }
+
+  /**
+   * 获取测试用例小项目
+   * @param testId
+   */
+  @Action()
+  getTestById(testId: number): Observable<Test>{
+    Assert.isNumber(testId, 'testId不是整数');
+
+    return this.httpClient.get<Test>(`/getTestById/${testId}`).pipe(tap(data => {
+      Assert.isNotNullOrUndefined(data, '返回的数据不能为空或未定义');
+
+      const state = this.getState();
+      state.getById = data as Test;
+      this.next(state);
+    }));
   }
 }
