@@ -30,6 +30,18 @@ export class StatusPipe implements PipeTransform {
         textStyle = 'badge badge-success mt-1';
         text = "已完成";
         break;
+      case 4:
+        textStyle = 'badge badge-success mt-1';
+        text = "已通过";
+        break;
+      case 5:
+        textStyle = 'badge badge-danger  mt-1';
+        text = "未通过";
+        break;
+      case 6:
+        textStyle = 'badge badge-info mt-1';
+        text = "待验证";
+        break;
     }
 
     const html = `<span class="${textStyle}">${text}</span>`;

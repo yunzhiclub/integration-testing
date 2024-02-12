@@ -7,6 +7,7 @@ import {Test} from "../entity/test";
 import {TestPlan} from "../entity/testPlan";
 import {User} from "../entity/user";
 import {TestCase} from "../entity/test-case";
+import {TestItem} from "../entity/test-item";
 
 export class TestApi implements MockApiInterface{
 
@@ -89,6 +90,62 @@ export class TestApi implements MockApiInterface{
               status: randomNumber(3)+1
             } as Test;
           });
+        }
+      },
+      {
+        method: 'GET',
+        url: '/getTestById/(\\d+)',
+        description: '根据id获取测试小项',
+        result: (urlMatcher: any) => {
+          const testId = urlMatcher['testId'] ? +urlMatcher['testId'] : randomNumber(10);
+
+          return {
+            id: testId,
+            testCase: [
+              {
+                name: '测试登录失败',
+                testItems: [
+                  {
+                    id: randomNumber(),
+                    name: '正确的用户名和密码登录',
+                    steps: '输入正确的用户名，正确的秘密',
+                    expectedResult: '进入系统首页',
+                    status: 1,
+                  }
+                ] as TestItem[],
+              },
+              {
+                name: '测试用户管理',
+                testItems: [
+                  {
+                    id: randomNumber(),
+                    name: '删除普通用户',
+                    steps: '直接删除用户',
+                    expectedResult: '提示删除成功，且成员中没有该用户',
+                    status: 4
+                  },
+                  {
+                    id: randomNumber(),
+                    name: '添加普通用户',
+                    steps: '1输入正确的学号，2输入正确的姓名',
+                    expectedResult: '提示添加成功',
+                    status: 5,
+                    issueUrl: 'web: 添加用户失败',
+                    describe: '提示添加失败，且没有添加的用户信息'
+                  },
+                  {
+                    id: randomNumber(),
+                    name: '修改普通用户信息',
+                    steps: '选择用户，修改信息',
+                    expectedResult: '提示修改成功， 信息被成功修改',
+                    status: 6,
+                    issueUrl: 'web: 修改用户失败',
+                    describe: '提示修改失败，且信息没有变化'
+                  }
+                ] as TestItem[],
+              }
+            ] as TestCase[],
+          } as Test
         }
       }
     ];
