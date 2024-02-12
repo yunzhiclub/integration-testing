@@ -75,4 +75,22 @@ export class IndexComponent extends BaseComponent implements OnInit {
       });
     }, '是否删除' + title);
   }
+
+  publish(title: string, id: number) {
+    this.testPlanService.getById(id).subscribe(data => {
+        const testPlan = data;
+
+      this.commonService.confirm(() => {
+        this.testPlanService.publishAction(id, testPlan).subscribe(() => {
+          this.commonService.success(() => {
+          }, '发布成功');
+        }, error => {
+          this.commonService.error(() => {
+          }, '发布失败' + error)
+        });
+      }, '该操作不可逆！是否发布测试计划' + title);
+      }
+    )
+
+  }
 }

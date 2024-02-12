@@ -10,6 +10,7 @@ import {TestCase} from "../entity/test-case";
 import {User} from "../entity/user";
 import {Task} from "../entity/task";
 import {TestPlanRoutingModule} from "../app/test-plan/test-plan-routing.module";
+import * as _ from "lodash";
 
 interface TestPlanState extends Store<TestPlan> {
   pageData: Page<TestPlan>;
@@ -79,6 +80,21 @@ export class TestPlanService extends Store<TestPlanState> {
       state.pageData.content = state.pageData.content.filter(testPlan => testPlan.id !== id);
       this.next(state);
 
+      this.pageAction(state.httpParams);
+    }));
+  }
+
+  @Action()
+  publishAction(id: number, testPlan: {status: number} ): Observable<TestPlan> {
+    /*请求数据库数据更改*/
+    return this.httpClient.put<TestPlan>(`/testPlan/${id}`, testPlan).pipe(tap(data => {
+      const state = this.getState();
+      testPlan = _.find(state.pageData.content, {id}) as TestPlan
+      if(data) {
+        testPlan.status = data.status;
+      }
+
+      this.next(state);
       this.pageAction(state.httpParams);
     }));
   }

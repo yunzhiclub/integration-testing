@@ -23,7 +23,7 @@
     <div class="form-group row" *ngIf="this.formGroup.get('project').value">
       <label class="col-3 text-right col-form-label"><code>*</code>分配任务</label>
       <ng-container *ngFor="let task of formTasks; let i = index" [formGroupName]="i">
-        <div class=" offset-3 col-9">
+        <div class=" offset-3 col-6">
           <app-test-case-select-multiple formControlName="testCase"
                                          [data]="this.formGroup.get('project').value?.id" class="mr-2"></app-test-case-select-multiple>
           <app-user-select formControlName="testUser" class="mr-2"></app-user-select>

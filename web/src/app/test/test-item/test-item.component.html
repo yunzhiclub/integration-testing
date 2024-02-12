@@ -46,7 +46,7 @@
       <td>{{testItem?.steps}}</td>
       <td>{{testItem?.expectedResult}}</td>
       <td bind-innerHTML="testItem?.status | status"></td>
-      <td>{{testItem?.issueUrl}}</td>
+      <td><a href="https://github.com/yunzhiclub/integration-testing">{{testItem?.issueUrl}}</a></td>
       <td>{{testItem?.describe}}</td>
       <td><a class="text-primary mr-3" matTooltip="编辑" routerLink="edit"><i class="fa fas fa-pen"></i></a></td>
     </tr>

@@ -58,7 +58,7 @@
     <td>
       <ng-container *ngIf="testPlan?.status === 0">
         <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{testPlan?.id}}"><i class="fa fas fa-pen"></i></a>
-        <a class="text-info mr-3" matTooltip="发布" routerLink="testPlan/{{testPlan?.id}}"><i class="bi bi-cloud-check-fill"></i></a>
+        <a class="text-info mr-3" matTooltip="发布" (click)="publish(testPlan?.title, testPlan?.id)"><i class="bi bi-cloud-check-fill"></i></a>
       </ng-container>
       <a class="text-danger mr-3" matTooltip="删除" (click)="delete(testPlan?.title, testPlan?.id)" ><i class="                                    fa fas fa-trash"></i></a>
     </td>
