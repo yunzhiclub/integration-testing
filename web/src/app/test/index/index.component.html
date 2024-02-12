@@ -26,7 +26,9 @@
     <td>{{i}}</td>
     <td>{{test.project?.name}}</td>
     <td>{{test.testPlan?.title}}</td>
-    <td>测试登录功能，测试用户管理</td>
+    <td >
+      <label *ngFor="let testCase of test?.testCase, let last = last"> {{testCase?.name}}{{last ? '' : '、'}}</label>
+    </td>
     <td>{{test?.testUser?.name}}</td>
     <td bind-innerHTML="test?.status | status"></td>
     <td>

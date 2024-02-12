@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BaseComponent} from "../../share/base-component";
 
 /**
  * 用户执行测试用例组件
@@ -8,6 +9,13 @@ import { Component } from '@angular/core';
   templateUrl: './test-item.component.html',
   styleUrls: ['./test-item.component.css']
 })
-export class TestItemComponent {
+export class TestItemComponent extends BaseComponent implements OnInit{
+
+  constructor() {
+    super();
+  }
+
+  ngOnInit(): void {
+  }
 
 }

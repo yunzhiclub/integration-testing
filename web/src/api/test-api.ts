@@ -47,6 +47,16 @@ export class TestApi implements MockApiInterface{
     } as Project,
   ];
 
+  private testUsers = [{
+    id: randomNumber(10),
+    name: '张三'
+  } as User,
+    {
+      id: randomNumber(10),
+      name: '李四'
+    } as User
+  ]
+
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -58,20 +68,21 @@ export class TestApi implements MockApiInterface{
           const page = +params.get('page');
           const size = +params.get('size');
 
-          /*根据测试计划的任务分配，一个测试人分配领取测试用例就是一个任务*/
+          /*根据测试计划的任务分配，多个测试用例分配给一个人就是一个任务*/
           return generatePage<Test>(page, size, index => {
             return {
               id: randomNumber(100),
               testPlan: this.testPlans[Math.floor(Math.random() * this.testPlans.length)],
-              testUser: {
-                name: '张三'
-              } as User,
+              testUser: this.testUsers[Math.floor(Math.random() * this.testUsers.length)],
               testCase: [
                 {
-                  name: '测试登录功能'
+                  name: '测试登录功能111'
                 } as TestCase,
                 {
                   name: '测试用户管理'
+                } as TestCase,
+                {
+                  name: '测试xxx'
                 } as TestCase,
               ] as TestCase[],
               project: this.projects[Math.floor(Math.random() * this.projects.length)],
