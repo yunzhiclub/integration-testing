@@ -91,6 +91,18 @@ export class TestPlanApi implements MockApiInterface {
         }
       },
       {
+        url: '/testPlan/(\\d+)',
+        method:  'PUT',
+        result: (urlMatcher: string[], options: {body: {status: number}}) => {
+          const testPlan = options.body as TestPlan;
+          const id = +urlMatcher[1];
+          return {
+            id,
+            status: testPlan.status
+          } as TestPlan
+        }
+      },
+      {
         method: 'GET',
         url: '/testPlan/(\\d+)',
         result: (urlMatcher: any) => {
