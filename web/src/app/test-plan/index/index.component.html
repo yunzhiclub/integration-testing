@@ -42,14 +42,15 @@
     <td>{{testPlan?.title}}</td>
       <td class="text-pack">
         <ng-container *ngFor="let task of testPlan?.tasks">
-          <ng-container *ngFor="let testCase of task?.testCase">
-            {{testCase?.name}}
+          <ng-container *ngFor="let testCase of task?.testCase; let last = last">
+            {{testCase?.name}}{{ last ? '' : '、' }}
           </ng-container>
+          {{';'}}
         </ng-container>
       </td>
       <td>
-        <ng-container *ngFor="let task of testPlan?.tasks">
-          {{task?.testUser?.name}}
+        <ng-container *ngFor="let task of testPlan?.tasks; let last = last">
+          {{task?.testUser?.name}}{{ last ? '' : '、' }}
         </ng-container>
       </td>
     <td bind-innerHTML="testPlan?.status | status"></td>

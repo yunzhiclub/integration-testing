@@ -7,6 +7,9 @@ import {TestPlan} from "../entity/testPlan";
 import {TestCase} from "../entity/test-case";
 
 export class ProjectApi implements MockApiInterface {
+
+  private names = ["牙科管理系统", "集成测试系统", "周汇报系统", "健康管理", "排课管理"];
+
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -21,8 +24,8 @@ export class ProjectApi implements MockApiInterface {
 
           return generatePage<Project>(page, size, index => {
             return {
-              id: randomNumber(100),
-              name: name ? name : '牙科管理系统',
+              id: randomNumber(10),
+              name: name ? randomString(name, 2) : randomString(this.names[Math.floor(Math.random() * this.names.length)]),
               projectUrl: ' http://app.mengyunzhi.com:17121',
               repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
               describe: '',

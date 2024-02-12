@@ -9,14 +9,26 @@ import {Task} from "../entity/task";
 import {TestCase} from "../entity/test-case";
 
 export class TestPlanApi implements MockApiInterface {
-  user = [{
+
+  private names = ["test1", "test2", "test3", "test4", "test5"];
+
+  /*项目数组*/
+  private projects = [{
     id: randomNumber(10),
-    name: '张胜男',
-  } as User,
+    name: '牙科管理系统',
+  } as Project,
     {
       id: randomNumber(10),
-      name: '朱一龙',
-    } as User
+      name: '集成测试系统'
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '周汇报系统'
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '健康管理'
+    } as Project,
   ];
 
   getInjectors(): ApiInjector[] {
@@ -34,24 +46,10 @@ export class TestPlanApi implements MockApiInterface {
           return generatePage<TestPlan>(page, size, index => {
             return {
               id: randomNumber(10),
-              title: name ? name : 'test1',
+              title: name ? name : this.names[Math.floor(Math.random() * this.names.length)],
               status: randomNumber(4),
-              project: {
-                id: randomNumber(10),
-                name: randomString('project', 3)
-              } as Project,
-              tasks: [
-                {
-                  testCase: [{
-                    id: randomNumber(),
-                    name: randomString('测试名称'),
-                  }] as TestCase[],
-                  testUser: {
-                    id: randomNumber(),
-                    name: randomString('测试人姓名')
-                  } as User,
-                }
-              ] as Task[],
+              project: this.projects[Math.floor(Math.random() * this.projects.length)],
+              tasks: this.tasks(),
               createTime: new Date().getTime()
             } as TestPlan;
           });
@@ -133,6 +131,38 @@ export class TestPlanApi implements MockApiInterface {
         }
       }
     ];
+  }
+
+  tasks(): Array<Task>{
+    return [
+      {
+        testCase: [
+          {
+            id: randomNumber(),
+            name: '测试登录功能',
+          }
+        ] as TestCase[],
+        testUser: {
+          id: randomNumber(),
+          name: '张三'
+        } as User,
+      },
+      {
+        testCase: [{
+          id: randomNumber(),
+          name: '测试用户管理',
+        },
+          {
+            id: randomNumber(),
+            name: '测试xxx',
+          }
+        ] as TestCase[],
+        testUser: {
+          id: randomNumber(),
+          name: '李四'
+        } as User,
+      },
+    ] as Task[]
   }
 
 }

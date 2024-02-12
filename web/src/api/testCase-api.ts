@@ -10,6 +10,28 @@ import {TestItem} from "../entity/test-item";
  * 测试用例Mock
  */
 export class TestCaseApi implements MockApiInterface{
+  /*测试用例名称数组*/
+  private names = ["测试登录功能", "测试用户管理", "测试修改密码", "测试xxx", "测试发布功能"];
+
+  /*项目数组*/
+  private projects = [{
+    id: randomNumber(10),
+    name: '牙科管理系统',
+  } as Project,
+    {
+      id: randomNumber(10),
+      name: '集成测试系统'
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '周汇报系统'
+    } as Project,
+    {
+      id: randomNumber(10),
+      name: '健康管理'
+    } as Project,
+  ];
+
   getInjectors(): ApiInjector[] {
     return [
       {
@@ -25,11 +47,12 @@ export class TestCaseApi implements MockApiInterface{
           return generatePage<TestCase>(page, size, index => {
             return {
               id: randomNumber(100),
-              name: '测试登录功能',
+              name: this.names[Math.floor(Math.random() * this.names.length)],
               testPurpose: randomString('测试目的'),
               preconditions: randomString('前置条件'),
               isShow: false,
-              project: this.getProjectById(projectId),
+              project: this.projects[Math.floor(Math.random() * this.projects.length)],
+
               testItems: [
                 {
                   id: randomNumber(100),
