@@ -13,34 +13,36 @@ import {ProjectModule} from "../project/project.module";
 import {UserModule} from "../user/user.module";
 import {TestCaseModule} from "../test-case/test-case.module";
 import {StatusPipe} from "../../pipe/status.pipe";
-import {TestCaseSelectMultipleComponent} from "../test-case/test-case-select-multiple/test-case-select-multiple.component";
+import {
+  TestCaseSelectMultipleComponent
+} from "../test-case/test-case-select-multiple/test-case-select-multiple.component";
 
 /**
  * 测试计划模块
  */
 @NgModule({
-    declarations: [
-        IndexComponent,
-        AddComponent,
-        EditComponent,
-        StatusPipe
-    ],
-    exports: [
-        StatusPipe
-    ],
-    imports: [
-        CommonModule,
-        TestPlanRoutingModule,
-        FormsModule,
-        MatTooltipModule,
-        ReactiveFormsModule,
-        YzPageModule,
-        YzSizeModule,
-        DialogEntryModule,
-        ProjectModule,
-        UserModule,
-        TestCaseModule
-    ]
+  declarations: [
+    IndexComponent,
+    AddComponent,
+    EditComponent,
+    StatusPipe
+  ],
+  exports: [
+    StatusPipe
+  ],
+  imports: [
+    CommonModule,
+    TestPlanRoutingModule,
+    FormsModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+    YzPageModule,
+    YzSizeModule,
+    DialogEntryModule,
+    ProjectModule,
+    UserModule,
+    TestCaseModule
+  ]
 })
 export class TestPlanModule {
 }

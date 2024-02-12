@@ -4,7 +4,7 @@
   </ol>
 </nav>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" style="height:500px; overflow-y: scroll; overflow-x: hidden">
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <div class="form-group row">
     <label class=" col-3 text-right col-form-label"><code>*</code>测试项目</label>
     <div class="col-5">
@@ -19,17 +19,18 @@
     </div>
   </div>
 
-  <div formArrayName="tasks">
-    <div class="form-group row" *ngIf="this.formGroup.get('project').value">
+  <div *ngIf="this.formGroup.get('project').value" formArrayName="tasks">
+    <div class="form-group row">
       <label class="col-3 text-right col-form-label"><code>*</code>分配任务</label>
       <ng-container *ngFor="let task of formTasks; let i = index" [formGroupName]="i">
-        <div class=" offset-3 col-6">
+        <div class="col-6" [ngClass]="{'offset-3 mt-2': i > 0}">
           <app-test-case-select-multiple formControlName="testCase"
-                                         [data]="this.formGroup.get('project').value?.id" class="mr-2"></app-test-case-select-multiple>
+                                         [data]="this.formGroup.get('project').value?.id"
+                                         class="mr-2"></app-test-case-select-multiple>
           <app-user-select formControlName="testUser" class="mr-2"></app-user-select>
         </div>
       </ng-container>
-      <div class="offset-3 col-9 ">
+      <div class="offset-6 col-4">
         <button type="button" class="btn" (click)="addFormTasks()"><i class="bi bi-plus-lg"></i></button>
         <button type="button" class="btn mr-1" *ngIf="formTasks.length > 1" (click)="removeFormTasks()"><i
           class="bi bi-dash-lg"></i></button>

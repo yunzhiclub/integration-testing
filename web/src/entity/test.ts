@@ -16,5 +16,5 @@ export interface Test {
   testCase: TestCase[],
   /*所属项目*/
   project: Project,
-  status: number
+  status: number;
 }
