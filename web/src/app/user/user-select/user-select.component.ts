@@ -28,7 +28,6 @@ export class UserSelectComponent extends BaseComponent implements OnInit, Contro
   }
 
   ngOnInit(): void {
-    console.log('user ngOnInit')
     this.userService.select(UserService.getAllUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
         if(data !==null) {
@@ -54,7 +53,6 @@ export class UserSelectComponent extends BaseComponent implements OnInit, Contro
   }
 
   writeValue(obj: User): void {
-    console.log('writeValue')
     if (obj === null) return;
     this.userSelects.setValue(obj);
   }
