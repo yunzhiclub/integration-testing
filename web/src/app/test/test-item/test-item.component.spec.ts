@@ -6,6 +6,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ProjectModule} from "../../project/project.module";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 describe('test->TestItemComponent', () => {
   let component: TestItemComponent;
@@ -19,7 +20,8 @@ describe('test->TestItemComponent', () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         RouterTestingModule,
-        ProjectModule
+        ProjectModule,
+        NzSelectModule
       ]
     })
     .compileComponents();

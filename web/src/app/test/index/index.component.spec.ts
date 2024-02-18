@@ -4,6 +4,7 @@ import { IndexComponent } from './index.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {RouterTestingModule} from "@angular/router/testing";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 describe('test->IndexComponent', () => {
   let component: IndexComponent;
@@ -16,7 +17,7 @@ describe('test->IndexComponent', () => {
         HttpClientTestingModule,
         YzPageModule,
         YzSizeModule,
-        RouterTestingModule
+        RouterTestingModule,
       ]
     })
     .compileComponents();
