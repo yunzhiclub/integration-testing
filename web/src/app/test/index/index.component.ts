@@ -22,8 +22,7 @@ export class IndexComponent extends BaseComponent implements OnInit{
 
     pageData = new Page<Test>;
 
-    constructor(private testService: TestService,
-                private userService: UserService) {
+    constructor(private testService: TestService) {
       super();
   }
 

@@ -68,28 +68,55 @@ export class TestApi implements MockApiInterface{
 
           const page = +params.get('page');
           const size = +params.get('size');
+          const currentUserId = +params.get('currentUserId');
 
-          /*根据测试计划的任务分配，多个测试用例分配给一个人就是一个任务*/
-          return generatePage<Test>(page, size, index => {
-            return {
-              id: randomNumber(100),
-              testPlan: this.testPlans[Math.floor(Math.random() * this.testPlans.length)],
-              testUser: this.testUsers[Math.floor(Math.random() * this.testUsers.length)],
-              testCase: [
-                {
-                  name: '测试登录功能111'
-                } as TestCase,
-                {
-                  name: '测试用户管理'
-                } as TestCase,
-                {
-                  name: '测试xxx'
-                } as TestCase,
-              ] as TestCase[],
-              project: this.projects[Math.floor(Math.random() * this.projects.length)],
-              status: randomNumber(3)+1
-            } as Test;
-          });
+          /*根据currentUserId查找登录用户*/
+          const user = this.getCurrentUser(currentUserId);
+
+          if(user.role === 'role_user') {
+            return generatePage<Test>(page, size, index => {
+              return {
+                id: randomNumber(100),
+                testPlan: this.testPlans[Math.floor(Math.random() * this.testPlans.length)],
+                testUser: user,
+                testCase: [
+                  {
+                    name: '测试登录功能111'
+                  } as TestCase,
+                  {
+                    name: '测试用户管理'
+                  } as TestCase,
+                  {
+                    name: '测试xxx'
+                  } as TestCase,
+                ] as TestCase[],
+                project: this.projects[Math.floor(Math.random() * this.projects.length)],
+                status: randomNumber(3)+1
+              } as Test;
+            });
+          } else {
+            /*根据测试计划的任务分配，多个测试用例分配给一个人就是一个任务*/
+            return generatePage<Test>(page, size, index => {
+              return {
+                id: randomNumber(100),
+                testPlan: this.testPlans[Math.floor(Math.random() * this.testPlans.length)],
+                testUser: this.testUsers[Math.floor(Math.random() * this.testUsers.length)],
+                testCase: [
+                  {
+                    name: '测试登录功能111'
+                  } as TestCase,
+                  {
+                    name: '测试用户管理'
+                  } as TestCase,
+                  {
+                    name: '测试xxx'
+                  } as TestCase,
+                ] as TestCase[],
+                project: this.projects[Math.floor(Math.random() * this.projects.length)],
+                status: randomNumber(3)+1
+              } as Test;
+            });
+          }
         }
       },
       {
@@ -149,6 +176,14 @@ export class TestApi implements MockApiInterface{
         }
       }
     ];
+  }
+
+  getCurrentUser(id: number): User{
+    return {
+      id,
+      name: '张三',
+      role: 'role_admin'
+    } as User;
   }
 
 }

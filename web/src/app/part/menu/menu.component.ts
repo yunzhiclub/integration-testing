@@ -25,7 +25,15 @@ export class MenuComponent implements OnInit{
   ) {
   }
   ngOnInit(): void {
-    this.menus = menus;
+    this.menus = [];
+    this.userService.select(UserService.currentUser)
+      .subscribe(user => {
+        if (!user) {
+          this.menus = [];
+        } else {
+          this.menus = menus.filter(menu => menu.role.includes(user.role));
+        }
+      });
   }
 
   /**

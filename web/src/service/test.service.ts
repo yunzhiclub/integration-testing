@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import {Action, Store} from "@tethys/store";
 import {Page} from "@yunzhi/ng-common";
 import {Test} from "../entity/test";
-import {Observable, tap} from "rxjs";
+import {Observable, takeUntil, tap} from "rxjs";
 import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
 import {TestItem} from "../entity/test-item";
+import {User} from "../entity/user";
+import {UserService} from "./user.service";
 
 /**
  * 测试的状态管理
@@ -14,6 +16,7 @@ interface TestState extends Store<Test>{
   pageData: Page<Test>;
   httpParams: { page: number, size: number };
   getById: Test;
+  currentUserId: number
 }
 @Injectable({
   providedIn: 'root'
@@ -22,11 +25,13 @@ export class TestService extends Store<TestState>{
   static pageData(state: TestState): Page<Test> {
     return state.pageData;
   }
-  constructor(private httpClient: HttpClient) {
+
+  constructor(private httpClient: HttpClient,
+              private userService: UserService) {
     super({
       pageData: new Page<Test>(),
       httpParams: {page: 0, size: 0},
-      getById: null
+      getById: null,
     });
   }
 
@@ -37,6 +42,8 @@ export class TestService extends Store<TestState>{
   pageAction(payload: {page: number, size: number}): Observable<Page<Test>> {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
+
+    this.getCurrentUser();
 
     //获取state快照
     const state = this.snapshot;
@@ -68,5 +75,17 @@ export class TestService extends Store<TestState>{
       state.getById = data as Test;
       this.next(state);
     }));
+  }
+
+  /**
+   * 获取当前登录用户
+   */
+  getCurrentUser(){
+    const state = this.snapshot;
+    this.userService.select(UserService.currentUser).subscribe(data => {
+      Assert.isObject(data, 'currentUser不是Object类型');
+
+      state.currentUserId = data.id;
+    })
   }
 }
