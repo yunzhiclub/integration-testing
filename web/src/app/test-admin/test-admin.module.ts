@@ -7,6 +7,9 @@ import {FormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { TestItemComponent } from './test-item/test-item.component';
 import {ProjectModule} from "../project/project.module";
+import {TestPlanModule} from "../test-plan/test-plan.module";
+import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -19,7 +22,11 @@ import {ProjectModule} from "../project/project.module";
         TestAdminRoutingModule,
         FormsModule,
         MatTooltipModule,
-        ProjectModule
+        ProjectModule,
+        TestPlanModule,
+        YzSizeModule,
+        YzPageModule,
+        NzSelectModule
     ]
 })
 export class TestAdminModule { }

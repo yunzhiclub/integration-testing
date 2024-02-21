@@ -6,6 +6,8 @@ import {Test} from "../../../entity/test";
 import {environment} from "../../../environments/environment";
 import {takeUntil} from "rxjs";
 import {Assert} from "@yunzhi/utils";
+import {UserService} from "../../../service/user.service";
+import {User} from "../../../entity/user";
 
 @Component({
   selector: 'app-index',
@@ -19,19 +21,21 @@ export class IndexComponent extends BaseComponent implements OnInit{
     };
 
     pageData = new Page<Test>;
-    constructor(private testService: TestService) {
+
+    constructor(private testService: TestService,
+                private userService: UserService) {
       super();
   }
 
   ngOnInit(): void {
-    this.testService.select(TestService.pageData).pipe(takeUntil(this.ngOnDestroy$))
+      this.testService.select(TestService.pageData).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(data => {
         Assert.isNotNullOrUndefined(data, '数据不能为空或未定义');
 
         this.pageData = data;
       })
 
-    this.reload();
+      this.reload();
   }
 
   reload(): void {

@@ -1,11 +1,16 @@
 <form class="form-inline">
-  <input type="text" class="form-control mr-2 mt-3"  placeholder="状态">
+  <nz-select nzPlaceHolder="状态" nzSize="large" class="mt-3 mr-2">
+    <nz-option nzLabel="待开始"></nz-option>
+    <nz-option nzLabel="已通过"></nz-option>
+    <nz-option nzLabel="未通过"></nz-option>
+    <nz-option nzLabel="待验证"></nz-option>
+  </nz-select>
   <button type="submit" class="btn btn-info mt-3"><i class="fa fas fa-search"></i>查询</button>
 </form>
 
 <div class="row mb-2 mt-2">
   <div class="col-md-6">
-    <!--    <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>-->
+        <yz-size [size]="param.size" (changeSize)="onChangeSize($event)"></yz-size>
   </div>
 </div>
 
@@ -21,54 +26,26 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>1
-      <i matTooltip="查看" (click)="toggleCollapse()"
+  <tr *ngFor="let test of pageData?.content, index as i">
+    <td>{{i + 1}}
+      <i matTooltip="查看" (click)="toggleCollapse(test?.id)"
          class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
     </td>
-    <td>牙科管理系统</td>
-    <td>test1</td>
-    <td>测试登录功能，测试用户管理</td>
-    <td>张三</td>
-    <td>待开始</td>
-  </tr>
-  <ng-container *ngIf="isShow">
-    <tr>
-      <td>xxx-xx名称</td>
-      <td>状态</td>
-      <td>issue</td>
-      <td>失败描述信息</td>
-    </tr>
-  </ng-container>
-  <tr>
-    <td>2
-      <i matTooltip="查看" (click)="toggleCollapse()"
-         class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
+    <td>{{test.project?.name}}</td>
+    <td>{{test.testPlan?.title}}</td>
+    <td >
+      <label *ngFor="let testCase of test?.testCase, let last = last"> {{testCase?.name}}{{last ? '' : '、'}}</label>
     </td>
-    <td>集成测试系统</td>
-    <td>test1</td>
-    <td> 测试xx</td>
-    <td>李四</td>
-    <td>部分完成</td>
-  </tr>
-  <tr>
-    <td>3
-      <i matTooltip="查看" (click)="toggleCollapse()"
-         class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
-    </td>
-    <td>集成测试系统</td>
-    <td>test1</td>
-    <td>测试个人中心</td>
-    <td>王五</td>
-    <td>已完成</td>
+    <td>{{test?.testUser?.name}}</td>
+    <td bind-innerHTML="test?.status | status"></td>
   </tr>
   </tbody>
 </table>
-<!--<yz-page [size]="pageData?.size"-->
-<!--         [page]="pageData?.number"-->
-<!--         [totalElements]="pageData?.totalElements"-->
-<!--         (changePage)="onChangePage($event)"></yz-page>-->
-<!--<router-outlet></router-outlet>-->
+<yz-page [size]="pageData?.size"
+         [page]="pageData?.number"
+         [totalElements]="pageData?.totalElements"
+         (changePage)="onChangePage($event)"></yz-page>
+<router-outlet></router-outlet>
 
 
 

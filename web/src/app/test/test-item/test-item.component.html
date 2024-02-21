@@ -15,7 +15,12 @@
     <app-project-select></app-project-select>
   </div>
   <div class="mt-3 mr-2">
-    <input type="text" class="form-control" [formControl]="" placeholder="状态">
+    <nz-select nzPlaceHolder="状态" nzSize="large">
+      <nz-option nzLabel="待开始"></nz-option>
+      <nz-option nzLabel="已通过"></nz-option>
+      <nz-option nzLabel="未通过"></nz-option>
+      <nz-option nzLabel="待验证"></nz-option>
+    </nz-select>
   </div>
   <button type="submit" class="btn btn-info mt-3"><i class="fa fas fa-search" ></i>查询</button>
 </form>
