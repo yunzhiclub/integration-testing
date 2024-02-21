@@ -28,7 +28,7 @@ export class MenuComponent extends BaseComponent implements OnInit{
     super();
   }
   ngOnInit(): void {
-    this.menus = [];
+    this.menus = []; 
     this.userService.select(UserService.currentUser).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(user => {
         if (!user) {
