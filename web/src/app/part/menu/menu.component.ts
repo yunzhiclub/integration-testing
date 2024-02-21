@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import {Subscription, takeUntil} from "rxjs";
 import {BaseMenu} from "../../../entity/base-menu";
 import {environment} from 'src/environments/environment';
 import {Router} from "@angular/router";
 import {UserService} from "../../../service/user.service";
 import {menus} from 'src/conf/menu.config';
 import {isNotNullOrUndefined} from "@yunzhi/utils";
+import { extend } from 'lodash';
+import { BaseComponent } from 'src/app/share/base-component';
 /**
  * 菜单组件
  */
@@ -14,7 +16,7 @@ import {isNotNullOrUndefined} from "@yunzhi/utils";
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent extends BaseComponent implements OnInit{
   menus = new Array<BaseMenu>();
   environment = environment;
   private subscription: Subscription | undefined;
@@ -23,9 +25,18 @@ export class MenuComponent implements OnInit{
     private router: Router,
     private userService: UserService
   ) {
+    super();
   }
   ngOnInit(): void {
-    this.menus = menus;
+    this.menus = [];
+    this.userService.select(UserService.currentUser).pipe(takeUntil(this.ngOnDestroy$))
+      .subscribe(user => {
+        if (!user) {
+          this.menus = [];
+        } else {
+          this.menus = menus.filter(menu => menu.role.includes(user?.role));
+        }
+      });
   }
 
   /**
