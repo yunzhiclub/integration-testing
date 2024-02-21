@@ -94,6 +94,39 @@ export class TestApi implements MockApiInterface{
       },
       {
         method: 'GET',
+        url: '/test/page/(\\d+)',
+        result: (urlMatcher: any, options: RequestOptions) => {
+          const currentUserId = urlMatcher['currentUserId'] ? +urlMatcher['currentUserId'] : randomNumber(10);
+          const params = options.params as HttpParams;
+
+          const page = +params.get('page');
+          const size = +params.get('size');
+
+          /*根据测试计划的任务分配，多个测试用例分配给一个人就是一个任务*/
+          return generatePage<Test>(page, size, index => {
+            return {
+              id: randomNumber(100),
+              testPlan: this.testPlans[Math.floor(Math.random() * this.testPlans.length)],
+              testUser: this.getCurrentUserById(currentUserId),
+              testCase: [
+                {
+                  name: '测试登录功能111'
+                } as TestCase,
+                {
+                  name: '测试用户管理'
+                } as TestCase,
+                {
+                  name: '测试xxx'
+                } as TestCase,
+              ] as TestCase[],
+              project: this.projects[Math.floor(Math.random() * this.projects.length)],
+              status: randomNumber(3)+1
+            } as Test;
+          });
+        }
+      },
+      {
+        method: 'GET',
         url: '/getTestById/(\\d+)',
         description: '根据id获取测试小项',
         result: (urlMatcher: any) => {
@@ -149,6 +182,14 @@ export class TestApi implements MockApiInterface{
         }
       }
     ];
+  }
+
+  getCurrentUserById(id: number): User{
+    return {
+      id,
+      name: '周周一',
+      username: 'zhouzhouyi'
+    } as User;
   }
 
 }

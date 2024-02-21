@@ -13,4 +13,7 @@ export class BaseMenu {
 
   /** 默认显示: 可选 无论是否有权限都显示 */
   defaultShow?: boolean;
+
+  /**角色 */
+  role: string[];
 }

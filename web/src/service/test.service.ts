@@ -5,7 +5,8 @@ import {Test} from "../entity/test";
 import {Observable, tap} from "rxjs";
 import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
-import {TestItem} from "../entity/test-item";
+import { UserService } from './user.service';
+import { User } from 'src/entity/user';
 
 /**
  * 测试的状态管理
@@ -19,30 +20,39 @@ interface TestState extends Store<Test>{
   providedIn: 'root'
 })
 export class TestService extends Store<TestState>{
+  private currentUser: User;
+
   static pageData(state: TestState): Page<Test> {
     return state.pageData;
   }
-  constructor(private httpClient: HttpClient) {
+
+  constructor(private httpClient: HttpClient,
+              private userService: UserService) {
     super({
       pageData: new Page<Test>(),
       httpParams: {page: 0, size: 0},
       getById: null
     });
+
+    this.getCurrentUser();
   }
 
   /**
    * 分页数据
    */
   @Action()
-  pageAction(payload: {page: number, size: number}): Observable<Page<Test>> {
+  pageAction(payload: {page: number, size: number}): Observable<Page<Test>> | void {
     Assert.isNumber(payload.page, 'page不能为空');
     Assert.isNumber(payload.size, 'size不能为空');
 
-    //获取state快照
+    // 获取state快照
     const state = this.snapshot;
     state.httpParams = payload;
 
-    return this.httpClient.get<Page<Test>>('/test/page', {params: payload})
+    // 根据当前登录用户的角色判断请求接口
+    if(this.currentUser.role === 'role_user') {
+      const currentUserId = this.currentUser.id;
+      return this.httpClient.get<Page<Test>>(`/test/page/${currentUserId}`, {params: payload})
       .pipe(
         tap(data => {
           Assert.isNotNullOrUndefined(data, '返回的数据不能为空或未定义');
@@ -51,6 +61,19 @@ export class TestService extends Store<TestState>{
           this.next(state);
         }),
       );
+    } 
+
+    if(this.currentUser.role === 'role_admin') {
+      return this.httpClient.get<Page<Test>>('/test/page', {params: payload})
+      .pipe(
+        tap(data => {
+          Assert.isNotNullOrUndefined(data, '返回的数据不能为空或未定义');
+
+          state.pageData = data as Page<Test>;
+          this.next(state);
+        }),
+      );
+    } 
   }
 
   /**
@@ -68,5 +91,16 @@ export class TestService extends Store<TestState>{
       state.getById = data as Test;
       this.next(state);
     }));
+  }
+
+  /**
+   * 获取当前登录用户
+   */
+  getCurrentUser(): void{
+    this.userService.select(UserService.currentUser).subscribe(currentUser => {
+      if(currentUser) {
+        this.currentUser = currentUser as User;
+      }
+    })
   }
 }
