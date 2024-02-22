@@ -17,4 +17,7 @@ export interface Test {
   /*所属项目*/
   project: Project,
   status: number;
+
+  /**是否展开 */
+  isShow: boolean;
 }

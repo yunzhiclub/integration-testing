@@ -127,7 +127,7 @@ export class TestCaseApi implements MockApiInterface{
         url: '/testCase/toggleCollapse/(\\d+)',
         method:  'PUT',
         result: (urlMatcher: string[], options: {body: {isShow: boolean}}) => {
-          const isShow = options.body ;
+          const isShow = options.body;
           const id = +urlMatcher[1];
           return {
             id,
