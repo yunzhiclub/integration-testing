@@ -30,13 +30,14 @@ export class IndexComponent extends BaseComponent implements OnInit{
         Assert.isNotNullOrUndefined(data, '数据不能为空或未定义');
 
         this.pageData = data;
+        console.log('pageData', this.pageData.content)
       })
 
     this.reload();
   }
 
   toggleCollapse(testId: number) {
-    this.isShow = !this.isShow;
+    this.testService.toggleCollapse(testId);
   }
 
   reload(): void {

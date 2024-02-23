@@ -10,6 +10,7 @@ import {ProjectModule} from "../project/project.module";
 import {TestPlanModule} from "../test-plan/test-plan.module";
 import {YzPageModule, YzSizeModule} from "@yunzhi/ng-common";
 import {NzSelectModule} from "ng-zorro-antd/select";
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -18,15 +19,15 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     TestItemComponent
   ],
     imports: [
-        CommonModule,
-        TestAdminRoutingModule,
-        FormsModule,
-        MatTooltipModule,
-        ProjectModule,
-        TestPlanModule,
-        YzSizeModule,
-        YzPageModule,
-        NzSelectModule
+      CommonModule,
+      TestAdminRoutingModule,
+      FormsModule,
+      MatTooltipModule,
+      ProjectModule,
+      TestPlanModule,
+      YzSizeModule,
+      YzPageModule,
+      NzSelectModule
     ]
 })
 export class TestAdminModule { }

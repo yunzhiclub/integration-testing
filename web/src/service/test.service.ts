@@ -7,6 +7,7 @@ import {Assert} from "@yunzhi/utils";
 import {HttpClient} from "@angular/common/http";
 import { UserService } from './user.service';
 import { User } from 'src/entity/user';
+import * as _ from 'lodash';
 
 /**
  * 测试的状态管理
@@ -92,6 +93,22 @@ export class TestService extends Store<TestState>{
       this.next(state);
     }));
   }
+
+  @Action()
+  toggleCollapse(id: number): Observable<boolean> {
+    Assert.isNumber(id, 'id不能为空');
+
+    return this.httpClient.get<boolean>(`/test/toggleCollapse/${id}`).pipe(tap(value => {
+      const state = this.getState();
+      const test = _.find(state.pageData.content, {id}) as Test;
+      if (test) {
+        test.isShow = value;
+      }
+      // this.next(state);
+      // this.pageAction(state.httpParams);
+    }));
+  }
+
 
   /**
    * 获取当前登录用户

@@ -77,13 +77,37 @@ export class TestApi implements MockApiInterface{
               testUser: this.testUsers[Math.floor(Math.random() * this.testUsers.length)],
               testCase: [
                 {
-                  name: '测试登录功能111'
+                  name: '测试登录功能111',
+                  testItems: [
+                    {
+                      name: '111',
+                      status: 1,
+                      issueUrl: 'issue',
+                      describe: 'xxx'
+                    } as TestItem
+                  ]
                 } as TestCase,
                 {
-                  name: '测试用户管理'
+                  name: '测试用户管理',
+                  testItems: [
+                    {
+                      name: '222',
+                      status: 1,
+                      issueUrl: 'issue',
+                      describe: 'xxx'
+                    } as TestItem
+                  ]
                 } as TestCase,
                 {
-                  name: '测试xxx'
+                  name: '测试xxx',
+                  testItems: [
+                    {
+                      name: '333',
+                      status: 1,
+                      issueUrl: 'issue',
+                      describe: '描述'
+                    } as TestItem
+                  ]
                 } as TestCase,
               ] as TestCase[],
               project: this.projects[Math.floor(Math.random() * this.projects.length)],
@@ -110,17 +134,42 @@ export class TestApi implements MockApiInterface{
               testUser: this.getCurrentUserById(currentUserId),
               testCase: [
                 {
-                  name: '测试登录功能111'
+                  name: '测试登录功能111',
+                  testItems: [
+                    {
+                      name: '111',
+                      status: 1,
+                      issueUrl: null,
+                      describe: 'xxx'
+                    } as TestItem
+                  ]
                 } as TestCase,
                 {
-                  name: '测试用户管理'
+                  name: '测试用户管理',
+                  testItems: [
+                    {
+                      name: '111',
+                      status: 1,
+                      issueUrl: null,
+                      describe: 'xxx'
+                    } as TestItem
+                  ]
                 } as TestCase,
                 {
-                  name: '测试xxx'
+                  name: '测试xxx',
+                  testItems: [
+                    {
+                      name: '111',
+                      status: 1,
+                      issueUrl: null,
+                      describe: 'xxx'
+                    } as TestItem
+                  ]
                 } as TestCase,
               ] as TestCase[],
               project: this.projects[Math.floor(Math.random() * this.projects.length)],
-              status: randomNumber(3)+1
+              status: randomNumber(3)+1,
+              isShow: false
             } as Test;
           });
         }
@@ -180,7 +229,56 @@ export class TestApi implements MockApiInterface{
             ] as TestCase[],
           } as Test
         }
-      }
+      },
+      {
+        method: 'GET',
+        url: '/test/toggleCollapse/(\\d+)',
+        description: 'admin展开test查看测试状况',
+        result: (urlMatcher: string[]) => {
+          const isShow = false ;
+          const id = +urlMatcher[1];
+          return {
+            id,
+            testCase: [
+              {
+                name: '测试登录功能111',
+                testItems: [
+                  {
+                    name: '111',
+                    status: 1,
+                    issueUrl: null,
+                    describe: 'xxx'
+                  } as TestItem
+                ]
+              } as TestCase,
+              {
+                name: '测试用户管理',
+                testItems: [
+                  {
+                    name: '111',
+                    status: 1,
+                    issueUrl: null,
+                    describe: 'xxx'
+                  } as TestItem
+                ]
+              } as TestCase,
+              {
+                name: '测试xxx',
+                testItems: [
+                  {
+                    name: '111',
+                    status: 1,
+                    issueUrl: null,
+                    describe: 'xxx'
+                  } as TestItem
+                ]
+              } as TestCase,
+            ] as TestCase[],
+            status: randomNumber(3)+1,
+            isShow: !isShow
+          } as Test;
+        }
+     }
     ];
   }
 

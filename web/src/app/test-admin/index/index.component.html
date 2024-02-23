@@ -26,19 +26,32 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let test of pageData?.content, index as i">
-    <td>{{i + 1}}
-      <i matTooltip="查看" (click)="toggleCollapse(test?.id)"
-         class="bi" [ngClass]="{'bi-caret-down-fill': isShow, 'bi bi-caret-right-fill': !isShow}"></i>
-    </td>
-    <td>{{test.project?.name}}</td>
-    <td>{{test.testPlan?.title}}</td>
-    <td >
-      <label *ngFor="let testCase of test?.testCase, let last = last"> {{testCase?.name}}{{last ? '' : '、'}}</label>
-    </td>
-    <td>{{test?.testUser?.name}}</td>
-    <td bind-innerHTML="test?.status | status"></td>
-  </tr>
+    <ng-container *ngFor="let test of pageData?.content, index as i">
+      <tr>
+        <td>{{i + 1}}
+          <i matTooltip="查看" (click)="toggleCollapse(test?.id)"
+             class="bi" [ngClass]="{'bi-caret-down-fill': test?.isShow, 'bi bi-caret-right-fill': !test?.isShow}"></i>
+        </td>
+        <td>{{test.project?.name}}</td>
+        <td>{{test.testPlan?.title}}</td>
+        <td >
+          <label *ngFor="let testCase of test?.testCase, let last = last"> {{testCase?.name}}{{last ? '' : '、'}}</label>
+        </td>
+        <td>{{test?.testUser?.name}}</td>
+        <td bind-innerHTML="test?.status | status"></td>
+      </tr>
+
+      <ng-container *ngIf="test?.isShow">
+        <ng-container *ngFor="let testCase of test?.testCase">
+          <tr *ngFor="let testItem of testCase?.testItems" class="bg-light">
+            <td>{{testCase?.name}}|--{{testItem?.name}}</td>
+            <td bind-innerHTML="testItem?.status | status"></td>
+            <td>{{testItem?.issueUrl}}</td>
+            <td>{{testItem?.describe}}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </tbody>
 </table>
 <yz-page [size]="pageData?.size"
