@@ -35,7 +35,7 @@
     </td>
     <td>{{project?.createTime | date:'yyyy-MM-dd'}}</td>
     <td>
-      <a class="text-info mr-3" matTooltip="查看测试用例" routerLink="../testCase"><i class="fa fa-eye"></i></a>
+      <a class="text-info mr-3" matTooltip="查看测试用例" routerLink="../testCase/{{project?.id}}"><i class="fa fa-eye"></i></a>
       <a class="text-primary mr-3" matTooltip="编辑" routerLink="edit/{{project?.id}}"><i class="fa fas fa-pen"></i></a>
       <a class="text-danger mr-3" matTooltip="删除" (click)="delete(project?.name, project?.id)" ><i class="fa fas fa-trash"></i></a>
     </td>

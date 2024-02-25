@@ -24,7 +24,7 @@ export class ProjectApi implements MockApiInterface {
 
           return generatePage<Project>(page, size, index => {
             return {
-              id: randomNumber(10),
+              id: randomNumber(2) +1,
               name: name ? randomString(name, 2) : randomString(this.names[Math.floor(Math.random() * this.names.length)]),
               projectUrl: ' http://app.mengyunzhi.com:17121',
               repositoryUrl: 'http://gitlab.mengyunzhi.com:2448/yunzhiclub/dentistry',
