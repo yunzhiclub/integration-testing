@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../share/base-component";
 import {Page} from "@yunzhi/ng-common";
 import {environment} from "../../../environments/environment";
-import {takeUntil} from "rxjs";
+import {filter, takeUntil} from "rxjs";
 import {TestCaseService} from "../../../service/test-case.service";
 import {CommonService} from "../../../service/common-service";
 import {TestCase} from "../../../entity/test-case";
@@ -10,6 +10,9 @@ import {TestItemService} from "../../../service/test-item.service";
 import {TestItem} from "../../../entity/test-item";
 import {FormControl} from "@angular/forms";
 import {Project} from "../../../entity/project";
+import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from 'src/service/project.service';
+import { Assert } from '@yunzhi/utils';
 
 /**
  * 测试用例的大项Index组件
@@ -32,17 +35,36 @@ export class IndexComponent extends BaseComponent implements OnInit {
 
   constructor(private testCaseService: TestCaseService,
               private commonService: CommonService,
-              private testItemService: TestItemService) {
+              private testItemService: TestItemService,
+              private route: ActivatedRoute,
+              private projectService: ProjectService) {
     super();
   }
 
   ngOnInit(): void {
+    // 项目操作中点击查看，
+    this.route.params.pipe(filter(v => v.hasOwnProperty('projectId')))
+      .subscribe(v => {
+          const projectId = +v['projectId'];
+          this.param.projectId = projectId;
+          this.projectService.getById(projectId).subscribe(project => {
+            Assert.isObject(project, 'project不是object类型');
+
+            this.project.setValue(project);
+          })
+        }
+      );
+
     this.testCaseService.select(TestCaseService.pageData).pipe(takeUntil(this.ngOnDestroy$))
       .subscribe({
         next: (data) => {
           this.pageData = data;
         }
       });
+
+    if(!this.param.projectId) {
+      this.onQuery();
+    }
     this.reload();
   }
 
@@ -61,7 +83,10 @@ export class IndexComponent extends BaseComponent implements OnInit {
   }
 
   onQuery(): void {
-    this.param.projectId = this.project?.value?.id ? +(this.project?.value?.id) : 0;
+    console.log('test',this.param.projectId)
+    if (!this.param.projectId) {
+      this.param.projectId = this.project?.value?.id ? +(this.project?.value?.id) : 0;
+    }
     this.reload()
   }
 
