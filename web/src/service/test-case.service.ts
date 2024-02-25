@@ -140,7 +140,7 @@ export class TestCaseService extends Store<TestCaseState>{
    * @param id
    * @param testCases
    */
-  addTestCase(id: number, testCases: TestCase[]): Observable<TestCase[]> {
-    return this.httpClient.put<TestCase[]>(`/testCase/addTestCase/${id}`, {testCases});
+  cloneTestCase(id: number, testCases: TestCase[]): Observable<TestCase[]> {
+    return this.httpClient.post<TestCase[]>(`/testCase/cloneTestCase/${id}`, testCases);
   }
 }
