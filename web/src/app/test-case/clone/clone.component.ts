@@ -40,7 +40,7 @@ export class CloneComponent implements OnInit {
   onSubmit() {
     const testCases = this.formGroup.get('testCases').value as TestCase[];
 
-    this.testCaseService.addTestCase(this.projectId, testCases).subscribe({
+    this.testCaseService.cloneTestCase(this.projectId, testCases).subscribe({
       next: () => {
         this.commonService.success(() => {
           this.onClose();

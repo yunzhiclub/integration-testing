@@ -5,6 +5,7 @@ import {Assert, randomNumber, randomString} from "@yunzhi/utils";
 import {TestCase} from "../entity/test-case";
 import {Project} from "../entity/project";
 import {TestItem} from "../entity/test-item";
+import { forEach } from "lodash";
 
 /**
  * 测试用例Mock
@@ -143,6 +144,34 @@ export class TestCaseApi implements MockApiInterface{
           return this.getTestByProjectId(projectId);
         }
       },
+      {
+        method: 'POST',
+        url: '/testCase/cloneTestCase/(\\d+)',
+        description: 'clone 测试用例',
+        result: (urlMatcher: any, options: {testCases: TestCase[]}) => {
+          // 获取url中的projectId
+          const projectId = urlMatcher['id'] ? +urlMatcher['id'] : randomNumber(10);
+
+          // 定义数组
+          const testCases = new Array<TestCase>();
+
+          for (let value of options.testCases) {
+            const testCase = {
+              id: randomNumber(10),
+              name: value.name,
+              testPurpose: value.testPurpose,
+              preconditions: value.preconditions,
+              isShow: value.isShow,
+              testItems: value.testItems,
+              project: this.getProjectById(projectId),
+            } as TestCase;
+
+            testCases.push(testCase);
+          }
+          
+          return testCases; 
+        }
+      }
     ];
   }
 
