@@ -98,14 +98,14 @@ export class TestService extends Store<TestState>{
   toggleCollapse(id: number): Observable<boolean> {
     Assert.isNumber(id, 'id不能为空');
 
-    return this.httpClient.get<boolean>(`/test/toggleCollapse/${id}`).pipe(tap(value => {
-      const state = this.getState();
-      const test = _.find(state.pageData.content, {id}) as Test;
+    const state = this.getState();
+    const test = _.find(state.pageData.content, {id}) as Test;
+    return this.httpClient.put<boolean>(`/test/toggleCollapse/${id}`, {body: test?.isShow}).pipe(tap(value => {
       if (test) {
         test.isShow = value;
       }
-      // this.next(state);
-      // this.pageAction(state.httpParams);
+      this.next(state);
+      this.pageAction(state.httpParams);
     }));
   }
 

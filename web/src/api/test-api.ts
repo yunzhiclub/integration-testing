@@ -231,11 +231,11 @@ export class TestApi implements MockApiInterface{
         }
       },
       {
-        method: 'GET',
+        method: 'PUT',
         url: '/test/toggleCollapse/(\\d+)',
         description: 'admin展开test查看测试状况',
-        result: (urlMatcher: string[]) => {
-          const isShow = false ;
+        result: (urlMatcher: string[], options: {isShow: boolean}) => {
+          const isShow = options.isShow ;
           const id = +urlMatcher[1];
           return {
             id,
